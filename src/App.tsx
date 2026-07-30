@@ -170,6 +170,7 @@ export default function App() {
   const [msg, setMsg]                   = useState('');
   const [mobileMenu, setMobileMenu]     = useState(false);
   const [heroIdx, setHeroIdx]           = useState(0);
+  const [dark, setDark]                 = useState(false);
   const playSound = useHoverSound();
 
   const allBrand     = activeFilter === 'All';
@@ -220,11 +221,32 @@ export default function App() {
         @keyframes tickerImg{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
         @keyframes heroFadeIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
         @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+
+        /* ── Dark mode overrides ── */
+        .dm { background:#0D1117 !important; color:#E6EDF3 !important; }
+        .dm section { background:#0D1117 !important; }
+        .dm .bg-white { background:#161B22 !important; }
+        .dm .bg-slate-50,.dm [class*="bg-\\[#F8F9FF\\]"],.dm [class*="bg-\\[#F0F3FF\\]"] { background:#1C2128 !important; }
+        .dm .bg-blue-50 { background:#1C2A3D !important; }
+        .dm header.sticky { background:rgba(22,27,34,0.97) !important; border-color:#30363D !important; }
+        .dm .border-slate-100,.dm .border-slate-200 { border-color:#30363D !important; }
+        .dm [class*="border-\\[#E8ECF5\\]"],.dm [class*="border-blue-100"] { border-color:#30363D !important; }
+        .dm [class*="text-\\[#0F1E35\\]"],.dm [class*="text-\\[#0A0A14\\]"] { color:#E6EDF3 !important; }
+        .dm .text-slate-600,.dm .text-slate-500 { color:#8B949E !important; }
+        .dm .text-slate-400 { color:#6E7681 !important; }
+        .dm .divide-slate-200 > * + * { border-color:#30363D !important; }
+        .dm [class*="shadow"] { box-shadow:0 4px 24px rgba(0,0,0,0.4) !important; }
+        .dm .rounded-2xl.border { border-color:#30363D !important; }
+        .dm select,.dm textarea { background:#1C2128 !important; border-color:#30363D !important; color:#E6EDF3 !important; }
+        .dm [class*="bg-slate-100"] { background:#21262D !important; }
+        .dm details summary { color:#E6EDF3 !important; }
+        .dm [class*="divide-x"] > * { border-color:#30363D !important; }
+        .dm [class*="divide-y"] > * { border-color:#30363D !important; }
       `}</style>
 
       {splash && <Splash onDone={handleSplashDone}/>}
 
-      <div className="min-h-screen bg-white text-[#0A0A14] antialiased" style={{opacity:splash?0:1,transition:'opacity 0.4s ease'}}>
+      <div className={`min-h-screen bg-white text-[#0A0A14] antialiased${dark?' dm':''}`} style={{opacity:splash?0:1,transition:'opacity 0.4s ease'}}>
 
         {/* ── PRODUCT TICKER ───────────────────────────────────────────── */}
         <ProductTicker />
@@ -278,6 +300,15 @@ export default function App() {
               <button onClick={() => openEnquiry()} onMouseEnter={playSound} className="hidden md:inline-flex items-center gap-2 bg-[#1E3A5F] text-white rounded-xl px-4 py-2.5 text-[13px] font-bold hover:bg-[#0F2340] hover:shadow-[0_8px_24px_rgba(15,30,53,0.25)] transition-all">
                 Get Export Quote →
               </button>
+              {/* Dark mode toggle */}
+              <button onClick={() => setDark(v=>!v)} title={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+                className="w-9 h-9 grid place-items-center rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all shrink-0"
+                style={dark ? {background:'#21262D', color:'#E6EDF3'} : {}}>
+                {dark
+                  ? <svg viewBox="0 0 24 24" fill="currentColor" className="w-4.5 h-4.5 w-[18px] h-[18px]"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
+                  : <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-[18px] h-[18px]"><circle cx="12" cy="12" r="4"/><path strokeLinecap="round" d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                }
+              </button>
               <button onClick={() => setMobileMenu(v=>!v)} className="lg:hidden w-9 h-9 grid place-items-center rounded-lg bg-slate-100 text-[#1E3A5F]">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16"/></svg>
               </button>
@@ -312,16 +343,16 @@ export default function App() {
           <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-[#1E3A5F]/4 blur-[80px] pointer-events-none"/>
           <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-blue-400/6 blur-[60px] pointer-events-none"/>
 
-          <div className="max-w-[1280px] mx-auto px-5 md:px-8 pt-14 pb-0 md:pt-20">
+          <div className="max-w-[1280px] mx-auto px-5 md:px-8 pt-6 pb-0 md:pt-10">
             <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-16 items-center">
 
               {/* Left: text */}
               <div style={{animation:'heroFadeIn .6s ease both'}}>
                 <h1 className="display text-[40px] md:text-[52px] font-[900] leading-[1.05] tracking-tight text-[#0F1E35]">
-                  Trusted Global<br/>
+                  India's Premier<br/>
                   <span className="text-[#1E3A5F]">Pharma</span>{' '}
                   <span className="relative">
-                    Exports
+                    Exporter
                     <svg className="absolute -bottom-1 left-0 w-full" height="6" viewBox="0 0 200 6" fill="none" preserveAspectRatio="none"><path d="M0 5 Q50 0 100 5 Q150 0 200 5" stroke="#60A5FA" strokeWidth="3" fill="none" strokeLinecap="round"/></svg>
                   </span>
                 </h1>
