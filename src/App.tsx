@@ -253,7 +253,7 @@ export default function App() {
 
         {/* ── COUNTRIES BANNER (above navbar) ─────────────────────────── */}
         <div className="bg-[#1E3A5F] py-1.5 text-center" style={{borderBottom:'1px solid rgba(255,255,255,0.08)'}}>
-          <span className="text-[11px] font-semibold text-blue-200/90 tracking-wide">✈️ Serving 25+ Countries Worldwide &nbsp;·&nbsp; B2B Pharma Exports &nbsp;·&nbsp; 24 hr Response</span>
+          <span className="text-[11px] font-semibold text-blue-200/90 tracking-wide">✈️ Serving 25+ Countries Worldwide &nbsp;·&nbsp; B2B Exports &nbsp;·&nbsp; 24 hr Response</span>
         </div>
 
         {/* ── NAVBAR ─────────────────────────────────────────────────── */}
