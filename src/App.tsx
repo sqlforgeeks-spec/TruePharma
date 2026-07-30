@@ -272,7 +272,6 @@ export default function App() {
                   </div>
                 </div>
               ))}
-              <a href="#contact" className="px-3.5 py-2 rounded-lg text-[13px] font-semibold text-slate-600 hover:text-[#1E3A5F] hover:bg-slate-50 transition-all">Contact</a>
             </nav>
 
             <div className="flex items-center gap-2">
@@ -535,52 +534,6 @@ export default function App() {
           </div>
         </section>
 
-        {/* ── ABOUT ────────────────────────────────────────────────────── */}
-        <section className="max-w-[1280px] mx-auto px-5 md:px-8 py-16 grid md:grid-cols-[1fr_1.1fr] gap-12 items-center">
-          <div>
-            <div className="inline-flex items-center gap-1.5 bg-blue-50 text-[#1E3A5F] rounded-full px-3 py-1 text-[11px] font-bold mb-4 border border-blue-100">
-              About TruePharma
-            </div>
-            <h3 className="display text-[24px] md:text-[30px] font-extrabold text-[#0F1E35] leading-tight">India's Premier Men's Wellness Export House</h3>
-            <p className="mt-4 text-[13.5px] leading-6 text-slate-500">
-              TruePharma is a pharmaceutical exporter specialising in men's sexual health and wellness formulations. We supply bulk quantities of Sildenafil, Tadalafil, and Vardenafil-based products to distributors, wholesalers, and healthcare importers across 25+ countries.
-            </p>
-            <p className="mt-3 text-[13.5px] leading-6 text-slate-500">
-              Every shipment comes with a full Certificate of Analysis, regulatory dossier, and dedicated export support — so your customs clearance is seamless, every time.
-            </p>
-            <ul className="mt-6 space-y-3">
-              {['Complete regulatory documentation (COA, MSDS)','Flexible MOQ — starting from 1,000 units','Discreet, secure international packaging','Dedicated export manager for every account','Fast international dispatch within 48 hrs'].map(li => (
-                <li key={li} className="flex gap-3 text-[13px]">
-                  <span className="w-5 h-5 rounded-full bg-blue-50 text-[#1E3A5F] grid place-items-center text-[10px] font-black shrink-0 mt-0.5 border border-blue-100">✔</span>
-                  <span className="text-slate-600">{li}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="flex gap-3 mt-8">
-              <button onClick={() => openEnquiry()} onMouseEnter={playSound}
-                className="inline-flex items-center gap-2 bg-[#1E3A5F] text-white rounded-xl px-5 py-3 text-[13px] font-bold hover:bg-[#0F2340] hover:shadow-[0_8px_24px_rgba(15,30,53,0.25)] transition-all">
-                Request Product List →
-              </button>
-              <a href="#" download className="inline-flex items-center gap-2 border-2 border-slate-200 text-slate-600 rounded-xl px-4 py-3 text-[13px] font-bold hover:border-[#1E3A5F] hover:text-[#1E3A5F] transition-all">
-                <IcoDown/> Catalogue PDF
-              </a>
-            </div>
-          </div>
-
-          <div className="relative">
-            <div className="rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(15,30,53,0.1)] border border-slate-100">
-              <img src="/images/hero3.png" alt="TruePharma Export Products" className="w-full h-[320px] md:h-[400px] object-cover"/>
-            </div>
-            <div className="absolute -bottom-5 left-5 right-5 bg-white rounded-2xl border border-slate-100 shadow-[0_12px_40px_rgba(0,0,0,0.08)] grid grid-cols-3 divide-x divide-slate-100 p-4">
-              {[{k:'🌍 25+',v:'Countries',bg:'#EFF6FF'},{k:'B2B',v:'Specialists',bg:'#F8FAFC'},{k:'48 hr',v:'Dispatch',bg:'#F0FDF4'}].map(b=>(
-                <div key={b.k} className="flex gap-2.5 items-center justify-center px-2">
-                  <div className="w-8 h-8 rounded-xl grid place-items-center text-[14px]" style={{background:b.bg}}>{b.k.includes('🌍')?'🌍':b.k.includes('B2B')?'💼':'⚡'}</div>
-                  <div><div className="text-[12px] font-black leading-none text-[#0F1E35]">{b.k.replace('🌍 ','')}</div><div className="text-[9px] text-slate-400">{b.v}</div></div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* ── CONTACT ──────────────────────────────────────────────────── */}
         <section id="contact" className="bg-slate-50 border-y border-slate-100 py-14">
