@@ -3,40 +3,40 @@ import { useState, useRef, useEffect } from 'react';
 /* ─── Types ─────────────────────────────────────────────────────────── */
 type Product = {
   id: string; name: string; subtitle: string; mg: string;
-  brand: string; desc: string; color: string; tag?: string; popular?: boolean;
+  brand: string; color: string; tag?: string; popular?: boolean;
   img: string;
 };
 
 /* ─── Data ───────────────────────────────────────────────────────────── */
 const PRODUCTS: Product[] = [
   // Vidalista
-  { id:'vidalista5',       name:'VIDALISTA® 5',           subtitle:'Tadalafil Tablets IP 5mg',          mg:'5mg',   brand:'Vidalista', desc:'Low-dose daily tadalafil for consistent, on-demand readiness. Ideal for wellness maintenance across global markets.',            color:'from-[#4D2A16] to-[#8B5A2B]', img:'/images/products/vidalista5.jpg' },
-  { id:'vidalista10',      name:'VIDALISTA® 10',          subtitle:'Tadalafil Tablets IP 10mg',         mg:'10mg',  brand:'Vidalista', desc:'Long-acting tadalafil — up to 36 hrs of performance support for confident, lasting results.',                                color:'from-[#4D2A16] to-[#8B5A2B]', popular:true, tag:'Best Seller', img:'/images/products/vidalista10.jpg' },
-  { id:'vidalista20',      name:'VIDALISTA® 20',          subtitle:'Tadalafil Tablets IP 20mg',         mg:'20mg',  brand:'Vidalista', desc:'Standard clinical dose of tadalafil. Trusted by healthcare distributors across 25+ markets.',                                  color:'from-[#5C3317] to-[#9B6A3B]', img:'/images/products/vidalista20.jpg' },
-  { id:'vidalistact',      name:'VIDALISTA® CT',          subtitle:'Tadalafil Chewable Tablets 20mg',   mg:'20mg',  brand:'Vidalista', desc:'Chewable tadalafil format — faster onset, no water needed. Strong retail and wholesale appeal worldwide.',                  color:'from-[#6B3A1F] to-[#A06030]', img:'/images/products/vidalistact.jpg' },
-  { id:'vidalistapro',     name:'VIDALISTA PROFESSIONAL', subtitle:'Tadalafil Sublingual Tablets 20mg', mg:'20mg',  brand:'Vidalista', desc:'Fast-dissolve sublingual tadalafil — onset in 15 min, premium-grade export formulation.',                                    color:'from-[#3D1F0E] to-[#7A4A28]', tag:'Pro', img:'/images/products/vidalistapro.jpg' },
-  { id:'vidalista60',      name:'VIDALISTA® 60',          subtitle:'Tadalafil Tablets 60mg',            mg:'60mg',  brand:'Vidalista', desc:'Maximum-strength tadalafil. A top export SKU for markets demanding superior potency.',                                         color:'from-[#2D1508] to-[#6A3A18]', img:'/images/products/vidalista60.jpg' },
-  { id:'vidalista80',      name:'VIDALISTA® 80',          subtitle:'Tadalafil Tablets 80mg',            mg:'80mg',  brand:'Vidalista', desc:'Ultra-high potency tadalafil for specialty distributors and markets with premium demand.',                                    color:'from-[#1E0E05] to-[#5A2E10]', img:'/images/products/vidalista80.jpg' },
-  { id:'vidalistablack80', name:'VIDALISTA BLACK® 80',    subtitle:'Tadalafil Tablets 80mg',            mg:'80mg',  brand:'Vidalista', desc:'Premium black-label tadalafil — ultra-potency formulation preferred by top-tier export channels.',                           color:'from-[#0f0f0f] to-[#2a2a2a]', tag:'Premium', img:'/images/products/vidalistablack80.jpg' },
-  { id:'supervidalista',   name:'SUPER VIDALISTA',        subtitle:'Tadalafil 20mg + Dapoxetine 60mg',  mg:'Combo', brand:'Vidalista', desc:'Dual-action formula combining ED relief and premature ejaculation control in a single tablet.',                              color:'from-[#1a1a2e] to-[#3a3a5c]', tag:'Combo', img:'/images/products/supervidalista.jpg' },
+  { id:'vidalista5',       name:'VIDALISTA® 5',           subtitle:'Tadalafil Tablets IP 5mg',          mg:'5mg',   brand:'Vidalista', color:'from-[#4D2A16] to-[#8B5A2B]', img:'/images/products/vidalista5.jpg' },
+  { id:'vidalista10',      name:'VIDALISTA® 10',          subtitle:'Tadalafil Tablets IP 10mg',         mg:'10mg',  brand:'Vidalista', color:'from-[#4D2A16] to-[#8B5A2B]', popular:true, tag:'Best Seller', img:'/images/products/vidalista10.jpg' },
+  { id:'vidalista20',      name:'VIDALISTA® 20',          subtitle:'Tadalafil Tablets IP 20mg',         mg:'20mg',  brand:'Vidalista', color:'from-[#5C3317] to-[#9B6A3B]', img:'/images/products/vidalista20.jpg' },
+  { id:'vidalistact',      name:'VIDALISTA® CT',          subtitle:'Tadalafil Chewable Tablets 20mg',   mg:'20mg',  brand:'Vidalista', color:'from-[#6B3A1F] to-[#A06030]', img:'/images/products/vidalistact.jpg' },
+  { id:'vidalistapro',     name:'VIDALISTA PROFESSIONAL', subtitle:'Tadalafil Sublingual Tablets 20mg', mg:'20mg',  brand:'Vidalista', color:'from-[#3D1F0E] to-[#7A4A28]', tag:'Pro', img:'/images/products/vidalistapro.jpg' },
+  { id:'vidalista60',      name:'VIDALISTA® 60',          subtitle:'Tadalafil Tablets 60mg',            mg:'60mg',  brand:'Vidalista', color:'from-[#2D1508] to-[#6A3A18]', img:'/images/products/vidalista60.jpg' },
+  { id:'vidalista80',      name:'VIDALISTA® 80',          subtitle:'Tadalafil Tablets 80mg',            mg:'80mg',  brand:'Vidalista', color:'from-[#1E0E05] to-[#5A2E10]', img:'/images/products/vidalista80.jpg' },
+  { id:'vidalistablack80', name:'VIDALISTA BLACK® 80',    subtitle:'Tadalafil Tablets 80mg',            mg:'80mg',  brand:'Vidalista', color:'from-[#0f0f0f] to-[#2a2a2a]', tag:'Premium', img:'/images/products/vidalistablack80.jpg' },
+  { id:'supervidalista',   name:'SUPER VIDALISTA',        subtitle:'Tadalafil 20mg + Dapoxetine 60mg',  mg:'Combo', brand:'Vidalista', color:'from-[#1a1a2e] to-[#3a3a5c]', tag:'Combo', img:'/images/products/supervidalista.jpg' },
   // Fildena
-  { id:'fildena100',       name:'FILDENA® 100',           subtitle:'Sildenafil Citrate 100mg',          mg:'100mg', brand:'Fildena',   desc:'The gold-standard sildenafil dose. One of the highest-volume export SKUs globally.',                                          color:'from-[#5B21B6] to-[#7C3AED]', popular:true, tag:'Top Export', img:'/images/products/fildena100.jpg' },
-  { id:'fildena120',       name:'FILDENA® STRONG 120',    subtitle:'Sildenafil Citrate 120mg',          mg:'120mg', brand:'Fildena',   desc:'Super-strength sildenafil for markets demanding higher-potency formulations.',                                                color:'from-[#C81E1E] to-[#8B0000]', img:'/images/products/fildena120.jpg' },
-  { id:'fildenapro',       name:'FILDENA® PROFESSIONAL',  subtitle:'Sildenafil 100mg Sublingual',       mg:'100mg', brand:'Fildena',   desc:'Fast-dissolve sublingual format — onset in 15 min, ideal for premium wellness retail.',                                     color:'from-[#9D174D] to-[#BE185D]', tag:'Pro', img:'/images/products/fildenapro.jpg' },
-  { id:'fildenasa',        name:'FILDENA® SUPER ACTIVE',  subtitle:'Sildenafil Softgel Capsules 100mg', mg:'100mg', brand:'Fildena',   desc:'Softgel capsule format for faster absorption. Premium presentation ideal for specialty retail and export.',                  color:'from-[#1e3a6e] to-[#2563eb]', img:'/images/products/fildenasuperactive.jpg' },
+  { id:'fildena100',       name:'FILDENA® 100',           subtitle:'Sildenafil Citrate 100mg',          mg:'100mg', brand:'Fildena',   color:'from-[#5B21B6] to-[#7C3AED]', popular:true, tag:'Top Export', img:'/images/products/fildena100.jpg' },
+  { id:'fildena120',       name:'FILDENA® STRONG 120',    subtitle:'Sildenafil Citrate 120mg',          mg:'120mg', brand:'Fildena',   color:'from-[#C81E1E] to-[#8B0000]', img:'/images/products/fildena120.jpg' },
+  { id:'fildenapro',       name:'FILDENA® PROFESSIONAL',  subtitle:'Sildenafil 100mg Sublingual',       mg:'100mg', brand:'Fildena',   color:'from-[#9D174D] to-[#BE185D]', tag:'Pro', img:'/images/products/fildenapro.jpg' },
+  { id:'fildenasa',        name:'FILDENA® SUPER ACTIVE',  subtitle:'Sildenafil Softgel Capsules 100mg', mg:'100mg', brand:'Fildena',   color:'from-[#1e3a6e] to-[#2563eb]', img:'/images/products/fildenasuperactive.jpg' },
   // Vilitra
-  { id:'vilitra20',        name:'VILITRA 20',             subtitle:'Vardenafil 20mg',                   mg:'20mg',  brand:'Vilitra',   desc:'Clinically proven vardenafil at the standard therapeutic dose. Competitive B2B pricing available.',                          color:'from-[#B8962E] to-[#D4AF37]', popular:true, img:'/images/products/vilitra20.jpg' },
-  { id:'vilitra40',        name:'VILITRA 40',             subtitle:'Vardenafil 40mg',                   mg:'40mg',  brand:'Vilitra',   desc:'Double-strength vardenafil for markets with high-potency demand. Batch certified.',                                           color:'from-[#92700A] to-[#B8962E]', img:'/images/products/vilitra40.jpg' },
-  { id:'vilitra60',        name:'VILITRA 60',             subtitle:'Vardenafil 60mg',                   mg:'60mg',  brand:'Vilitra',   desc:'Maximum vardenafil potency. Premium grade, ideal for specialty distributors.',                                               color:'from-[#6B5010] to-[#92700A]', img:'/images/products/vilitra60.jpg' },
+  { id:'vilitra20',        name:'VILITRA 20',             subtitle:'Vardenafil 20mg',                   mg:'20mg',  brand:'Vilitra',   color:'from-[#B8962E] to-[#D4AF37]', popular:true, img:'/images/products/vilitra20.jpg' },
+  { id:'vilitra40',        name:'VILITRA 40',             subtitle:'Vardenafil 40mg',                   mg:'40mg',  brand:'Vilitra',   color:'from-[#92700A] to-[#B8962E]', img:'/images/products/vilitra40.jpg' },
+  { id:'vilitra60',        name:'VILITRA 60',             subtitle:'Vardenafil 60mg',                   mg:'60mg',  brand:'Vilitra',   color:'from-[#6B5010] to-[#92700A]', img:'/images/products/vilitra60.jpg' },
   // Cenforce
-  { id:'cenforce50',       name:'CENFORCE 50',            subtitle:'Sildenafil Tablets IP 50mg',        mg:'50mg',  brand:'Cenforce',  desc:'Entry-level sildenafil citrate. Fast absorption, proven reliability — strong demand in starter markets.',                    color:'from-[#1B5E20] to-[#2E7D32]', img:'/images/products/cenforce50.jpg' },
-  { id:'cenforce150',      name:'CENFORCE 150',           subtitle:'Sildenafil Tablets 150mg',          mg:'150mg', brand:'Cenforce',  desc:'High-strength sildenafil for markets requiring intensified treatment protocols.',                                             color:'from-[#145214] to-[#1B5E20]', img:'/images/products/cenforce150.jpg' },
-  { id:'cenforcesoft',     name:'CENFORCE SOFT-100',      subtitle:'Sildenafil Chewable Tablets 100mg', mg:'100mg', brand:'Cenforce',  desc:'Chewable sildenafil — no water required. Discreet, portable, with strong retail and export appeal.',                       color:'from-[#0D3D0D] to-[#145214]', popular:true, tag:'#1 Export', img:'/images/products/cenforcesoft100.jpg' },
+  { id:'cenforce50',       name:'CENFORCE 50',            subtitle:'Sildenafil Tablets IP 50mg',        mg:'50mg',  brand:'Cenforce',  color:'from-[#1B5E20] to-[#2E7D32]', img:'/images/products/cenforce50.jpg' },
+  { id:'cenforce150',      name:'CENFORCE 150',           subtitle:'Sildenafil Tablets 150mg',          mg:'150mg', brand:'Cenforce',  color:'from-[#145214] to-[#1B5E20]', img:'/images/products/cenforce150.jpg' },
+  { id:'cenforcesoft',     name:'CENFORCE SOFT-100',      subtitle:'Sildenafil Chewable Tablets 100mg', mg:'100mg', brand:'Cenforce',  color:'from-[#0D3D0D] to-[#145214]', popular:true, tag:'#1 Export', img:'/images/products/cenforcesoft100.jpg' },
   // Kamagra
-  { id:'kamagra100',       name:'KAMAGRA 100',            subtitle:'Sildenafil Tablets 100mg',          mg:'100mg', brand:'Kamagra',   desc:'Globally recognised sildenafil brand. Available in tablets, jelly & effervescent formats.',                                  color:'from-[#D97706] to-[#F59E0B]', popular:true, tag:'Global Brand', img:'/images/products/kamagra100.jpg' },
-  { id:'kamagraoral',      name:'KAMAGRA ORAL JELLY',     subtitle:'Sildenafil 100mg — 7 Flavours',     mg:'100mg', brand:'Kamagra',   desc:'Fast-absorbing oral jelly in 7 popular flavours. Top retail-friendly export presentation.',                                color:'from-[#B45309] to-[#D97706]', img:'/images/products/kamagraoral.jpg' },
-  { id:'kamagraefferv',    name:'KAMAGRA EFFERVESCENT',   subtitle:'Sildenafil 100mg Effervescent',     mg:'100mg', brand:'Kamagra',   desc:'Dissolve-in-water format. Discreet, portable, and ideal for wellness retail channels.',                                    color:'from-[#92400E] to-[#B45309]', img:'/images/products/kamagraefferv.jpg' },
-  { id:'kamagrapolo',      name:'KAMAGRA POLO',           subtitle:'Sildenafil Chewable 100mg',         mg:'100mg', brand:'Kamagra',   desc:'Mint-flavoured chewable sildenafil — no water required. Strong retail appeal worldwide.',                                  color:'from-[#78350F] to-[#92400E]', img:'/images/products/kamagrapolo.jpg' },
+  { id:'kamagra100',       name:'KAMAGRA 100',            subtitle:'Sildenafil Tablets 100mg',          mg:'100mg', brand:'Kamagra',   color:'from-[#D97706] to-[#F59E0B]', popular:true, tag:'Global Brand', img:'/images/products/kamagra100.jpg' },
+  { id:'kamagraoral',      name:'KAMAGRA ORAL JELLY',     subtitle:'Sildenafil 100mg — 7 Flavours',     mg:'100mg', brand:'Kamagra',   color:'from-[#B45309] to-[#D97706]', img:'/images/products/kamagraoral.jpg' },
+  { id:'kamagraefferv',    name:'KAMAGRA EFFERVESCENT',   subtitle:'Sildenafil 100mg Effervescent',     mg:'100mg', brand:'Kamagra',   color:'from-[#92400E] to-[#B45309]', img:'/images/products/kamagraefferv.jpg' },
+  { id:'kamagrapolo',      name:'KAMAGRA POLO',           subtitle:'Sildenafil Chewable 100mg',         mg:'100mg', brand:'Kamagra',   color:'from-[#78350F] to-[#92400E]', img:'/images/products/kamagrapolo.jpg' },
 ];
 
 const NAV_BRANDS = [
@@ -63,7 +63,7 @@ function useHoverSound() {
       o.frequency.setValueAtTime(600, c.currentTime);
       o.frequency.exponentialRampToValueAtTime(1200, c.currentTime+0.15);
       g.gain.setValueAtTime(0.0001, c.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.08, c.currentTime+0.02);
+      g.gain.exponentialRampToValueAtTime(0.06, c.currentTime+0.02);
       g.gain.exponentialRampToValueAtTime(0.0001, c.currentTime+0.2);
       o.start(); o.stop(c.currentTime+0.21);
     } catch {}
@@ -76,111 +76,76 @@ const IcoTG = () => <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 
 const IcoMail = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-4 h-4" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>;
 const IcoIG = () => <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>;
 const IcoDown = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-3.5 h-3.5" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>;
-const IcoCaret = () => <svg className="w-3 h-3 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7"/></svg>;
+const IcoCaret = () => <svg className="w-3 h-3 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7"/></svg>;
 
-/* ─── Logo SVG ───────────────────────────────────────────────────────── */
-const Logo = ({ size = 38 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="20" cy="20" r="20" fill="url(#lg1)"/>
-    <ellipse cx="20" cy="20" rx="11" ry="11" stroke="rgba(255,255,255,0.35)" strokeWidth="1.2" fill="none"/>
-    <ellipse cx="20" cy="20" rx="6" ry="11" stroke="rgba(255,255,255,0.25)" strokeWidth="1" fill="none"/>
-    <line x1="9" y1="20" x2="31" y2="20" stroke="rgba(255,255,255,0.25)" strokeWidth="1"/>
-    <line x1="11" y1="15" x2="29" y2="15" stroke="rgba(255,255,255,0.2)" strokeWidth="0.8"/>
-    <line x1="11" y1="25" x2="29" y2="25" stroke="rgba(255,255,255,0.2)" strokeWidth="0.8"/>
-    <rect x="17.5" y="12" width="5" height="16" rx="2" fill="white"/>
-    <rect x="12" y="17.5" width="16" height="5" rx="2" fill="white"/>
-    <path d="M27 10 L33 10 L33 16" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" opacity="0.85"/>
-    <line x1="27" y1="16" x2="33" y2="10" stroke="white" strokeWidth="1.8" strokeLinecap="round" opacity="0.85"/>
-    <defs>
-      <linearGradient id="lg1" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-        <stop offset="0%" stopColor="#0d3b9c"/>
-        <stop offset="50%" stopColor="#1a6fdd"/>
-        <stop offset="100%" stopColor="#20c4b0"/>
-      </linearGradient>
-    </defs>
+/* ─── Logo ───────────────────────────────────────────────────────────── */
+const Logo = ({ size = 36 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
+    <rect width="40" height="40" rx="10" fill="#4361EE"/>
+    <ellipse cx="20" cy="20" rx="9" ry="9" stroke="rgba(255,255,255,0.4)" strokeWidth="1.2" fill="none"/>
+    <ellipse cx="20" cy="20" rx="5" ry="9" stroke="rgba(255,255,255,0.25)" strokeWidth="1" fill="none"/>
+    <line x1="11" y1="20" x2="29" y2="20" stroke="rgba(255,255,255,0.3)" strokeWidth="1"/>
+    <rect x="18" y="13" width="4" height="14" rx="2" fill="white"/>
+    <rect x="13" y="18" width="14" height="4" rx="2" fill="white"/>
+    <path d="M26 10.5L31 10.5L31 15.5" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" opacity="0.9"/>
+    <line x1="26" y1="15.5" x2="31" y2="10.5" stroke="white" strokeWidth="1.6" strokeLinecap="round" opacity="0.9"/>
   </svg>
 );
 
-/* ─── Splash Screen ──────────────────────────────────────────────────── */
+/* ─── Splash ─────────────────────────────────────────────────────────── */
 function Splash({ onDone }: { onDone: () => void }) {
   const [phase, setPhase] = useState<'in'|'hold'|'out'>('in');
-
   useEffect(() => {
     const t1 = setTimeout(() => setPhase('hold'), 400);
     const t2 = setTimeout(() => setPhase('out'),  2200);
     const t3 = setTimeout(() => onDone(),          2900);
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, []);
-
   return (
-    <div
-      className="fixed inset-0 z-[999] flex flex-col items-center justify-center"
-      style={{
-        background: 'linear-gradient(135deg,#04091f 0%,#0a1a4a 50%,#051630 100%)',
-        opacity: phase === 'out' ? 0 : 1,
-        transition: phase === 'out' ? 'opacity 0.7s ease' : 'none',
-        pointerEvents: phase === 'out' ? 'none' : 'all',
-      }}
-    >
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-blue-600/10 blur-[80px]"/>
-      <div className="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full bg-cyan-400/10 blur-[60px]"/>
-
-      <div
-        style={{
-          transform: phase === 'in' ? 'scale(0.5) translateY(20px)' : 'scale(1) translateY(0)',
-          opacity: phase === 'in' ? 0 : 1,
-          transition: 'transform 0.6s cubic-bezier(0.34,1.56,0.64,1), opacity 0.5s ease',
-        }}
-        className="flex flex-col items-center gap-5"
-      >
-        <div style={{ filter:'drop-shadow(0 0 40px rgba(29,130,255,0.6))' }}>
-          <Logo size={80}/>
-        </div>
-        <div className="text-center">
-          <div className="text-white font-black text-[32px] tracking-tight leading-none" style={{ fontFamily:'"Plus Jakarta Sans",Inter,sans-serif', letterSpacing:'-1px' }}>
-            AlphaVigor
-          </div>
-          <div className="mt-1 text-[11px] tracking-[0.35em] uppercase text-white/50 font-semibold">
-            Global Wellness Exports
+    <div className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-white"
+      style={{ opacity: phase==='out'?0:1, transition: phase==='out'?'opacity 0.7s ease':'none', pointerEvents: phase==='out'?'none':'all' }}>
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-[#4361EE]/6"/>
+        <div className="absolute -bottom-16 -right-16 w-72 h-72 rounded-full bg-[#F7A614]/8"/>
+      </div>
+      <div style={{ transform: phase==='in'?'scale(0.85) translateY(12px)':'scale(1) translateY(0)', opacity: phase==='in'?0:1, transition:'transform 0.5s cubic-bezier(0.34,1.56,0.64,1),opacity 0.4s ease' }}
+        className="relative flex flex-col items-center gap-4">
+        <div className="flex items-center gap-3">
+          <Logo size={52}/>
+          <div>
+            <div className="text-[26px] font-black text-[#0A0A14] tracking-tight" style={{fontFamily:'"Plus Jakarta Sans",Inter,sans-serif'}}>AlphaVigor</div>
+            <div className="text-[10px] tracking-[0.25em] uppercase text-[#6B7280] font-semibold">Global Wellness Exports</div>
           </div>
         </div>
-        <div className="flex items-center gap-2 bg-white/8 border border-white/15 rounded-full px-4 py-1.5 text-[11px] text-white/60">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#20e3b2]"/>
-          B2B Pharma Exports · Serving 25+ Countries
+        <div className="flex items-center gap-2 bg-[#4361EE]/8 rounded-full px-4 py-1.5 text-[11px] text-[#4361EE] font-semibold">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#4361EE]"/>B2B Pharma Exports · Serving 25+ Countries
         </div>
-        <div className="w-32 h-0.5 bg-white/10 rounded-full overflow-hidden mt-2">
-          <div
-            className="h-full bg-gradient-to-r from-blue-400 to-[#20e3b2] rounded-full"
-            style={{
-              width: phase === 'hold' ? '100%' : '0%',
-              transition: phase === 'hold' ? 'width 1.6s ease' : 'none',
-            }}
-          />
+        <div className="w-28 h-0.5 bg-[#E8ECF5] rounded-full overflow-hidden mt-1">
+          <div className="h-full bg-[#4361EE] rounded-full" style={{ width:phase==='hold'?'100%':'0%', transition:phase==='hold'?'width 1.6s ease':'none' }}/>
         </div>
       </div>
     </div>
   );
 }
 
-/* ─── Product Image Ticker ───────────────────────────────────────────── */
+/* ─── Product Image Ticker (above navbar) ────────────────────────────── */
 function ProductTicker() {
-  const items = PRODUCTS.map(p => ({ img: p.img, name: p.name }));
-  // Double for seamless loop
-  const doubled = [...items, ...items];
+  const doubled = [...PRODUCTS, ...PRODUCTS];
   return (
-    <div className="bg-[#04091f] border-b border-white/8 overflow-hidden py-2 relative">
-      <div
-        className="flex gap-3 w-max"
-        style={{ animation: 'tickerImg 60s linear infinite' }}
-        onMouseEnter={e => (e.currentTarget.style.animationPlayState = 'paused')}
-        onMouseLeave={e => (e.currentTarget.style.animationPlayState = 'running')}
-      >
+    <div className="bg-[#F0F3FF] border-b border-[#DDE4FF] overflow-hidden py-2.5 relative select-none">
+      {/* fade edges */}
+      <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-[#F0F3FF] to-transparent z-10 pointer-events-none"/>
+      <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-[#F0F3FF] to-transparent z-10 pointer-events-none"/>
+      <div className="flex gap-3 w-max" style={{animation:'tickerImg 70s linear infinite'}}
+        onMouseEnter={e=>(e.currentTarget.style.animationPlayState='paused')}
+        onMouseLeave={e=>(e.currentTarget.style.animationPlayState='running')}>
         {doubled.map((item, i) => (
-          <div key={i} className="flex items-center gap-2 shrink-0">
-            <div className="w-[54px] h-[36px] rounded-[6px] overflow-hidden border border-white/10 bg-white/5 shrink-0">
+          <div key={i} className="flex items-center gap-2.5 bg-white rounded-full px-3 py-1 shadow-sm border border-[#E8ECF5] shrink-0">
+            <div className="w-7 h-7 rounded-full overflow-hidden border border-[#E8ECF5] shrink-0 bg-gray-50">
               <img src={item.img} alt={item.name} className="w-full h-full object-cover" loading="lazy"/>
             </div>
-            <span className="text-[10px] font-semibold text-white/50 whitespace-nowrap pr-3">{item.name}</span>
+            <span className="text-[11px] font-bold text-[#0A0A14] whitespace-nowrap pr-1">{item.name}</span>
+            <span className="text-[9px] text-[#6B7280] whitespace-nowrap">{item.subtitle}</span>
           </div>
         ))}
       </div>
@@ -201,11 +166,11 @@ export default function App() {
   const [heroIdx, setHeroIdx]           = useState(0);
   const playSound = useHoverSound();
 
-  const allBrand    = activeFilter === 'All';
+  const allBrand     = activeFilter === 'All';
   const baseFiltered = allBrand ? PRODUCTS : PRODUCTS.filter(p => p.brand === activeFilter);
-  const limit       = allBrand ? (showMore ? baseFiltered.length : ALL_INITIAL) : CAT_LIMIT;
-  const displayed   = baseFiltered.slice(0, limit);
-  const hasMore     = baseFiltered.length > limit;
+  const limit        = allBrand ? (showMore ? baseFiltered.length : ALL_INITIAL) : CAT_LIMIT;
+  const displayed    = baseFiltered.slice(0, limit);
+  const hasMore      = baseFiltered.length > limit;
 
   const handleSplashDone = () => {
     setSplash(false);
@@ -218,7 +183,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = enquiryOpen ? 'hidden' : 'auto';
+    document.body.style.overflow = enquiryOpen ? 'hidden' : '';
   }, [enquiryOpen]);
 
   const openEnquiry = (p?: Product) => { if(p) setSelectedProduct(p); setEnquiryOpen(true); };
@@ -228,7 +193,6 @@ export default function App() {
     return `Hello AlphaVigor Export Team 👋,%0A%0AI am interested in bulk supply of:%0A📦 Product: ${prod}%0A🔢 Quantity: ${quantity}%0A%0A💬 ${msg || 'Please share your best export price, MOQ, lead time and full product catalogue.'}%0A%0A✉️ Sent via AlphaVigor Export Portal`;
   };
   const buildPlain = () => decodeURIComponent(buildMsg().replace(/%0A/g,'\n'));
-
   const doWA    = () => window.open(`https://wa.me/917622068016?text=${buildMsg()}`,'_blank');
   const doTG    = () => window.open(`https://t.me/AlphaVigor?text=${buildMsg()}`,'_blank');
   const doEmail = () => { window.location.href=`mailto:export@truepharma.co.in?subject=${encodeURIComponent(`Export Enquiry – ${selectedProduct?.name||'Pharma Products'} | Qty: ${quantity}`)}&body=${encodeURIComponent(buildPlain())}`; };
@@ -237,216 +201,282 @@ export default function App() {
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap');
-        *{font-family:Inter,sans-serif} .display{font-family:"Plus Jakarta Sans",Inter,sans-serif}
-        ::-webkit-scrollbar{height:5px;width:5px} ::-webkit-scrollbar-thumb{background:#c1cee8;border-radius:8px}
-        .scrollbar-none::-webkit-scrollbar{display:none} .scrollbar-none{-ms-overflow-style:none;scrollbar-width:none}
+        *{font-family:Inter,sans-serif}
+        .display{font-family:"Plus Jakarta Sans",Inter,sans-serif}
+        ::-webkit-scrollbar{height:4px;width:4px}
+        ::-webkit-scrollbar-thumb{background:#d1d9f0;border-radius:8px}
+        .scrollbar-none::-webkit-scrollbar{display:none}
+        .scrollbar-none{-ms-overflow-style:none;scrollbar-width:none}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-        @keyframes slideUp{from{transform:translateY(24px);opacity:0}to{transform:translateY(0);opacity:1}}
-        @keyframes pulse-ring{0%{transform:scale(1);opacity:.7}70%{transform:scale(1.5);opacity:0}100%{transform:scale(1.5);opacity:0}}
-        @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-        @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(200%)}}
-        @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+        @keyframes slideUp{from{transform:translateY(28px);opacity:0}to{transform:translateY(0);opacity:1}}
+        @keyframes pulse-ring{0%{transform:scale(1);opacity:.6}70%{transform:scale(1.5);opacity:0}100%{transform:scale(1.5);opacity:0}}
+        @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
         @keyframes tickerImg{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+        @keyframes heroFadeIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
       `}</style>
 
-      {/* ── SPLASH ───────────────────────────────────────────────────── */}
       {splash && <Splash onDone={handleSplashDone}/>}
 
-      <div className="min-h-screen bg-[#f5f7ff] text-[#0f204a] antialiased selection:bg-[#0d3b9c] selection:text-white" style={{opacity: splash?0:1, transition:'opacity 0.4s ease'}}>
+      <div className="min-h-screen bg-white text-[#0A0A14] antialiased" style={{opacity:splash?0:1,transition:'opacity 0.4s ease'}}>
 
-        {/* ── PRODUCT IMAGE TICKER (above navbar) ──────────────────────── */}
+        {/* ── PRODUCT TICKER ───────────────────────────────────────────── */}
         <ProductTicker />
 
         {/* ── NAVBAR ─────────────────────────────────────────────────── */}
-        <header className="sticky top-0 z-40 backdrop-blur-xl bg-white/92 border-b border-[#e4ecff] shadow-[0_2px_24px_rgba(13,59,156,0.07)]">
-          <div className="max-w-[1440px] mx-auto flex items-center justify-between px-4 md:px-8 h-[68px]">
+        <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-[#F0F3FF]" style={{boxShadow:'0 1px 0 #E8ECF5'}}>
+          <div className="max-w-[1280px] mx-auto flex items-center justify-between px-5 md:px-8 h-[66px]">
 
             {/* Logo */}
-            <div className="flex items-center gap-3 shrink-0">
-              <Logo size={40}/>
+            <div className="flex items-center gap-2.5 shrink-0">
+              <Logo size={36}/>
               <div className="leading-tight">
-                <div className="font-black tracking-tight text-[17px] display text-[#0a1a3d]">AlphaVigor</div>
-                <div className="text-[9px] tracking-[0.22em] uppercase text-[#6a82b8] font-semibold -mt-0.5">Global Wellness Exports</div>
+                <div className="font-black text-[17px] display text-[#0A0A14] tracking-tight">AlphaVigor</div>
+                <div className="text-[8.5px] tracking-[0.2em] uppercase text-[#6B7280] font-semibold -mt-0.5">Global Wellness Exports</div>
               </div>
             </div>
 
-            {/* Desktop brand nav */}
-            <nav className="hidden lg:flex items-center gap-0.5 text-[13px] font-medium">
+            {/* Desktop nav */}
+            <nav className="hidden lg:flex items-center gap-1">
               {NAV_BRANDS.map(brand => (
                 <div key={brand.label} className="relative group">
-                  <button className="flex items-center gap-1.5 px-3.5 py-2 rounded-full hover:bg-[#eef2ff] text-[#3a4a71] hover:text-[#0d3b9c] transition-all font-semibold" onMouseEnter={playSound}>
-                    {brand.label} <IcoCaret/>
+                  <button className="flex items-center gap-1 px-3.5 py-2 rounded-lg text-[13px] font-semibold text-[#374151] hover:text-[#4361EE] hover:bg-[#F0F3FF] transition-all" onMouseEnter={playSound}>
+                    {brand.label}<IcoCaret/>
                   </button>
-                  <div className="absolute top-full left-0 pt-2 hidden group-hover:block z-50 min-w-[240px]">
-                    <div className="bg-white rounded-[16px] shadow-[0_24px_60px_rgba(0,0,0,0.16)] border border-[#eef2ff] p-2">
+                  <div className="absolute top-full left-0 pt-2 hidden group-hover:block z-50 min-w-[256px]">
+                    <div className="bg-white rounded-2xl shadow-[0_8px_40px_rgba(67,97,238,0.12)] border border-[#E8ECF5] p-1.5">
                       {brand.products.map(p => (
-                        <div key={p.id} onClick={() => openEnquiry(p)} className="flex items-center gap-3 px-3 py-2.5 rounded-[10px] hover:bg-[#f3f6ff] cursor-pointer group/item">
-                          <div className="w-9 h-6 rounded-[4px] overflow-hidden shrink-0 border border-[#e8edf8]">
+                        <div key={p.id} onClick={() => openEnquiry(p)} className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-[#F0F3FF] cursor-pointer group/item transition-colors">
+                          <div className="w-10 h-7 rounded-lg overflow-hidden shrink-0 border border-[#E8ECF5] bg-gray-50">
                             <img src={p.img} alt={p.name} className="w-full h-full object-cover"/>
                           </div>
-                          <div>
-                            <div className="text-[12px] font-bold text-[#0f204a] group-hover/item:text-[#0d3b9c] leading-none">{p.name}</div>
-                            <div className="text-[10px] text-[#8a9ac0] mt-0.5">{p.subtitle}</div>
+                          <div className="flex-1 min-w-0">
+                            <div className="text-[12px] font-bold text-[#0A0A14] group-hover/item:text-[#4361EE] leading-none truncate">{p.name}</div>
+                            <div className="text-[10px] text-[#9CA3AF] mt-0.5 truncate">{p.subtitle}</div>
                           </div>
-                          {p.tag && <span className="ml-auto text-[9px] font-bold bg-[#eef3ff] text-[#0d3b9c] px-1.5 py-0.5 rounded-full shrink-0">{p.tag}</span>}
+                          {p.tag && <span className="text-[9px] font-bold bg-[#EEF2FF] text-[#4361EE] px-2 py-0.5 rounded-full shrink-0">{p.tag}</span>}
                         </div>
                       ))}
                     </div>
                   </div>
                 </div>
               ))}
+              <a href="#contact" className="px-3.5 py-2 rounded-lg text-[13px] font-semibold text-[#374151] hover:text-[#4361EE] hover:bg-[#F0F3FF] transition-all">Contact</a>
             </nav>
 
-            <div className="flex items-center gap-2.5">
-              <a href="#contact" className="hidden md:inline-flex text-[#3a4a71] text-[12px] font-semibold hover:text-[#0d3b9c] transition px-2">Contact</a>
-              <button onClick={() => openEnquiry()} onMouseEnter={playSound} className="hidden md:inline-flex items-center gap-2 bg-[#0d3b9c] text-white rounded-full px-4 py-2 text-[12px] font-bold shadow-[0_8px_20px_rgba(13,59,156,0.35)] hover:shadow-[0_12px_28px_rgba(13,59,156,0.45)] hover:scale-[1.02] active:scale-[0.98] transition-all">
+            <div className="flex items-center gap-2">
+              <button onClick={() => openEnquiry()} onMouseEnter={playSound} className="hidden md:inline-flex items-center gap-2 bg-[#4361EE] text-white rounded-xl px-4 py-2.5 text-[13px] font-bold hover:bg-[#3451D1] hover:shadow-[0_8px_24px_rgba(67,97,238,0.3)] transition-all">
                 Get Export Quote →
               </button>
-              <button onClick={() => setMobileMenu(v=>!v)} className="lg:hidden w-9 h-9 grid place-items-center rounded-full bg-[#eef2ff] text-[#0d3b9c]">
+              <button onClick={() => setMobileMenu(v=>!v)} className="lg:hidden w-9 h-9 grid place-items-center rounded-lg bg-[#F0F3FF] text-[#4361EE]">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16"/></svg>
               </button>
             </div>
           </div>
 
           {mobileMenu && (
-            <div className="lg:hidden border-t border-[#eaf0ff] bg-white px-4 py-4 space-y-1 text-[14px]">
+            <div className="lg:hidden border-t border-[#F0F3FF] bg-white px-4 py-3 space-y-0.5">
               {NAV_BRANDS.map(brand => (
                 <details key={brand.label} className="group/m">
-                  <summary className="flex items-center justify-between py-2 font-bold cursor-pointer list-none text-[#0f204a]">
+                  <summary className="flex items-center justify-between py-2.5 font-bold cursor-pointer list-none text-[#0A0A14] text-[14px]">
                     {brand.label}
                     <svg className="w-4 h-4 opacity-40 group-open/m:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"/></svg>
                   </summary>
                   <div className="pl-3 pb-2 space-y-1">
                     {brand.products.map(p => (
-                      <div key={p.id} onClick={() => { openEnquiry(p); setMobileMenu(false); }} className="py-1.5 text-[12px] text-[#5a6a90] cursor-pointer hover:text-[#0d3b9c]">
+                      <div key={p.id} onClick={() => { openEnquiry(p); setMobileMenu(false); }} className="py-1.5 text-[12px] text-[#6B7280] cursor-pointer hover:text-[#4361EE]">
                         {p.name} — {p.subtitle}
                       </div>
                     ))}
                   </div>
                 </details>
               ))}
-              <button onClick={() => openEnquiry()} className="w-full mt-3 bg-[#0d3b9c] text-white rounded-full py-3 font-bold text-[13px]">Get Export Quote →</button>
+              <button onClick={() => { openEnquiry(); setMobileMenu(false); }} className="w-full mt-2 bg-[#4361EE] text-white rounded-xl py-3 font-bold text-[13px]">Get Export Quote →</button>
             </div>
           )}
         </header>
 
         {/* ── HERO ─────────────────────────────────────────────────────── */}
-        <section className="relative overflow-hidden" style={{ minHeight: 540 }}>
-          {HERO_IMAGES.map((src,i) => (
-            <img key={src} src={src} alt="AlphaVigor Export Pharma" className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000" style={{opacity: i===heroIdx ? 1 : 0}}/>
-          ))}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#04091f]/92 via-[#0d3b9c]/70 to-transparent"/>
-          <div className="absolute inset-0 opacity-5" style={{backgroundImage:'radial-gradient(circle,white 1px,transparent 1px)',backgroundSize:'28px 28px'}}/>
+        <section className="relative overflow-hidden bg-white">
+          {/* Background blobs */}
+          <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-[#4361EE]/5 blur-[80px] pointer-events-none"/>
+          <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-[#F7A614]/8 blur-[60px] pointer-events-none"/>
 
-          <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 py-16 md:py-24 flex flex-col justify-center" style={{minHeight:540}}>
-            {/* Badge */}
-            <div className="flex flex-wrap gap-2 mb-5">
-              <span className="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-white/80 rounded-full px-3 py-1 text-[11px] font-semibold">
-                ✈️ Serving 25+ Countries
-              </span>
-            </div>
+          <div className="max-w-[1280px] mx-auto px-5 md:px-8 pt-14 pb-0 md:pt-20">
+            <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-16 items-center">
 
-            <h1 className="display text-[38px] md:text-[58px] font-[900] leading-[1.0] tracking-tight text-white max-w-[640px]">
-              Premium Men's<br/>
-              <span className="bg-gradient-to-r from-[#4db8ff] to-[#20e3b2] bg-clip-text text-transparent">Wellness Exports</span>
-            </h1>
-            <p className="mt-5 text-[14px] md:text-[16px] leading-7 text-white/75 max-w-[500px]">
-              Your trusted B2B source for <strong className="text-white">Sildenafil, Tadalafil & Vardenafil</strong> formulations. Bulk supply, competitive pricing, global shipping.
-            </p>
-
-            {/* Trust metrics */}
-            <div className="mt-6 flex flex-wrap gap-4">
-              {[['🌍 25+','Countries'],['Fast','Shipping'],['B2B','Specialists'],['24 hr','Response']].map(([k,v])=>(
-                <div key={k} className="flex items-center gap-2">
-                  <div className="text-[18px] font-black text-white leading-none">{k}</div>
-                  <div className="text-[10px] text-white/50 leading-tight">{v}</div>
+              {/* Left: text */}
+              <div style={{animation:'heroFadeIn .6s ease both'}}>
+                <div className="inline-flex items-center gap-2 bg-[#EEF2FF] text-[#4361EE] rounded-full px-4 py-1.5 text-[11.5px] font-bold mb-5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#4361EE] animate-pulse"/>
+                  ✈️ Serving 25+ Countries Worldwide
                 </div>
-              ))}
+
+                <h1 className="display text-[40px] md:text-[52px] font-[900] leading-[1.05] tracking-tight text-[#0A0A14]">
+                  Premium Men's<br/>
+                  <span className="text-[#4361EE]">Wellness</span>{' '}
+                  <span className="relative">
+                    Exports
+                    <svg className="absolute -bottom-1 left-0 w-full" height="6" viewBox="0 0 200 6" fill="none" preserveAspectRatio="none"><path d="M0 5 Q50 0 100 5 Q150 0 200 5" stroke="#F7A614" strokeWidth="3" fill="none" strokeLinecap="round"/></svg>
+                  </span>
+                </h1>
+
+                <p className="mt-5 text-[15px] leading-7 text-[#6B7280] max-w-[440px]">
+                  Your trusted B2B source for <span className="text-[#0A0A14] font-semibold">Sildenafil, Tadalafil & Vardenafil</span> formulations. Bulk supply, competitive pricing, global shipping.
+                </p>
+
+                {/* Feature pills — inspired by Figma's icon cards */}
+                <div className="mt-7 grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-w-[440px]">
+                  {[
+                    {i:'🌍', t:'25+ Countries'},
+                    {i:'💊', t:'23 Products'},
+                    {i:'💰', t:'Bulk Pricing'},
+                    {i:'⚡', t:'48h Dispatch'},
+                    {i:'📋', t:'Full Docs'},
+                    {i:'🔬', t:'Genuine Molecules'},
+                  ].map(f=>(
+                    <div key={f.t} className="flex items-center gap-2 bg-[#F8F9FF] border border-[#E8ECF5] rounded-xl px-3 py-2.5 hover:border-[#4361EE]/30 hover:bg-[#EEF2FF] transition-colors group">
+                      <span className="text-[16px] shrink-0">{f.i}</span>
+                      <span className="text-[11.5px] font-semibold text-[#374151] group-hover:text-[#4361EE] transition-colors">{f.t}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTAs */}
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <button onClick={() => document.getElementById('products')?.scrollIntoView({behavior:'smooth'})} onMouseEnter={playSound}
+                    className="inline-flex items-center gap-2 bg-[#4361EE] text-white rounded-xl px-6 py-3.5 text-[14px] font-bold shadow-[0_8px_24px_rgba(67,97,238,0.3)] hover:bg-[#3451D1] hover:shadow-[0_12px_32px_rgba(67,97,238,0.38)] hover:-translate-y-0.5 transition-all">
+                    View Product Catalogue →
+                  </button>
+                  <button onClick={doWA} onMouseEnter={playSound}
+                    className="inline-flex items-center gap-2 bg-white border-2 border-[#E8ECF5] text-[#0A0A14] rounded-xl px-5 py-3.5 text-[14px] font-bold hover:border-[#25D366] hover:text-[#25D366] hover:-translate-y-0.5 transition-all">
+                    <IcoWA/> WhatsApp
+                  </button>
+                </div>
+
+                {/* Social proof row */}
+                <div className="mt-7 flex items-center gap-4">
+                  <div className="flex -space-x-2">
+                    {['#4361EE','#F7A614','#10B981','#EF4444','#8B5CF6'].map(c=>(
+                      <div key={c} className="w-8 h-8 rounded-full border-2 border-white" style={{background:c}}/>
+                    ))}
+                  </div>
+                  <div>
+                    <div className="text-[12px] font-bold text-[#0A0A14]">Trusted by global distributors</div>
+                    <div className="text-[11px] text-[#9CA3AF]">24 hr response · Genuine products</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right: hero image carousel */}
+              <div className="relative" style={{animation:'heroFadeIn .7s .15s ease both'}}>
+                <div className="relative rounded-[20px] overflow-hidden shadow-[0_24px_60px_rgba(67,97,238,0.14)] border border-[#E8ECF5]" style={{height:420}}>
+                  {HERO_IMAGES.map((src,i)=>(
+                    <img key={src} src={src} alt="AlphaVigor products" className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000" style={{opacity:i===heroIdx?1:0}}/>
+                  ))}
+                  {/* Dots */}
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5">
+                    {HERO_IMAGES.map((_,i)=>(
+                      <button key={i} onClick={()=>setHeroIdx(i)} className={`h-1.5 rounded-full transition-all ${i===heroIdx?'bg-white w-6':'bg-white/50 w-1.5'}`}/>
+                    ))}
+                  </div>
+                </div>
+                {/* Floating stat card */}
+                <div className="absolute -bottom-5 -left-5 bg-white rounded-2xl border border-[#E8ECF5] shadow-[0_8px_32px_rgba(0,0,0,0.08)] p-3.5 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-[#EEF2FF] grid place-items-center text-[20px]">🌍</div>
+                  <div>
+                    <div className="text-[18px] font-black text-[#0A0A14] leading-none">25+</div>
+                    <div className="text-[10px] text-[#6B7280]">Countries</div>
+                  </div>
+                </div>
+                <div className="absolute -top-4 -right-4 bg-white rounded-2xl border border-[#E8ECF5] shadow-[0_8px_32px_rgba(0,0,0,0.08)] p-3.5 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-[#FFF7ED] grid place-items-center text-[20px]">⚡</div>
+                  <div>
+                    <div className="text-[18px] font-black text-[#0A0A14] leading-none">48hr</div>
+                    <div className="text-[10px] text-[#6B7280]">Dispatch</div>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <button onClick={() => document.getElementById('products')?.scrollIntoView({behavior:'smooth'})} onMouseEnter={playSound} className="inline-flex items-center gap-2 bg-white text-[#0d3b9c] rounded-full px-6 py-3 text-[13px] font-black shadow-[0_12px_30px_rgba(0,0,0,0.22)] hover:-translate-y-0.5 transition-all">
-                View Product Catalogue →
-              </button>
-              <button onClick={doWA} onMouseEnter={playSound} className="inline-flex items-center gap-2 bg-[#25D366] text-white rounded-full px-6 py-3 text-[13px] font-black shadow-[0_12px_30px_rgba(37,211,102,0.4)] hover:-translate-y-0.5 transition-all">
-                <IcoWA/> WhatsApp Enquiry
-              </button>
-            </div>
-
-            {/* Dot indicators */}
-            <div className="flex gap-2 mt-8">
-              {HERO_IMAGES.map((_,i)=>(
-                <button key={i} onClick={()=>setHeroIdx(i)} className={`h-1.5 rounded-full transition-all ${i===heroIdx?'bg-white w-8':'bg-white/35 w-1.5'}`}/>
+            {/* Stats bar — directly from Figma design language */}
+            <div className="mt-14 mb-0 grid grid-cols-2 md:grid-cols-4 gap-0 border border-[#E8ECF5] rounded-2xl overflow-hidden divide-x divide-y divide-[#E8ECF5]">
+              {[
+                {k:'23+',  v:'Export Products'},
+                {k:'25+',  v:'Countries Served'},
+                {k:'48 hr',v:'Order Dispatch'},
+                {k:'24 hr',v:'Response Time'},
+              ].map(s=>(
+                <div key={s.k} className="flex flex-col items-center justify-center py-5 bg-white hover:bg-[#F8F9FF] transition-colors">
+                  <div className="text-[26px] md:text-[30px] font-black display text-[#0A0A14]">{s.k}</div>
+                  <div className="text-[11px] text-[#9CA3AF] mt-0.5 font-medium">{s.v}</div>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
         {/* ── PRODUCTS ─────────────────────────────────────────────────── */}
-        <section id="products" className="max-w-[1440px] mx-auto px-4 md:px-8 py-14">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-7">
+        <section id="products" className="max-w-[1280px] mx-auto px-5 md:px-8 py-16">
+          {/* Section header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-8">
             <div>
-              <div className="text-[10px] tracking-[0.25em] font-bold text-[#0d3b9c] uppercase mb-1">Export Product Catalogue</div>
-              <h2 className="display text-[24px] md:text-[30px] font-extrabold leading-tight">Men's Wellness Export Range</h2>
-              <p className="mt-1.5 text-[13px] text-[#6b7a9f] max-w-[480px]">Wholesale & bulk supply available. Contact us for MOQ, pricing, and regulatory documentation.</p>
+              <div className="inline-flex items-center gap-1.5 bg-[#EEF2FF] text-[#4361EE] rounded-full px-3 py-1 text-[11px] font-bold mb-2">
+                💊 Export Product Catalogue
+              </div>
+              <h2 className="display text-[26px] md:text-[32px] font-extrabold leading-tight text-[#0A0A14]">Men's Wellness Export Range</h2>
+              <p className="mt-1.5 text-[13px] text-[#6B7280]">Wholesale & bulk supply. Contact us for MOQ, pricing, and regulatory documentation.</p>
             </div>
-            <a href="#" download onMouseEnter={playSound} className="hidden md:inline-flex shrink-0 items-center gap-2 bg-gradient-to-r from-[#0d3b9c] to-[#2563eb] text-white rounded-full px-5 py-2.5 text-[12px] font-bold shadow-[0_6px_20px_rgba(13,59,156,0.3)] hover:shadow-[0_10px_28px_rgba(13,59,156,0.4)] hover:scale-[1.02] transition-all">
-              <IcoDown/> Download Full Catalogue
+            <a href="#" download onMouseEnter={playSound}
+              className="hidden md:inline-flex shrink-0 items-center gap-2 border-2 border-[#4361EE] text-[#4361EE] rounded-xl px-5 py-2.5 text-[13px] font-bold hover:bg-[#4361EE] hover:text-white transition-all">
+              <IcoDown/> Download Catalogue
             </a>
           </div>
 
-          {/* Filter bar */}
-          <div className="flex flex-wrap gap-2 mb-2">
+          {/* Filter chips */}
+          <div className="flex flex-wrap gap-2 mb-6">
             {FILTER_BRANDS.map(f => (
               <button key={f} onClick={() => { setActiveFilter(f); setShowMore(false); }} onMouseEnter={playSound}
-                className={`whitespace-nowrap inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-[12px] font-bold border transition-all
-                  ${activeFilter===f ? 'bg-[#0d3b9c] text-white border-[#0d3b9c] shadow-[0_6px_18px_rgba(13,59,156,0.3)]' : 'bg-white border-[#e0e8f7] text-[#5a6a90] hover:bg-[#f3f6ff] hover:border-[#c0cef0]'}`}>
+                className={`whitespace-nowrap rounded-full px-4 py-1.5 text-[12px] font-bold border-2 transition-all
+                  ${activeFilter===f ? 'bg-[#4361EE] text-white border-[#4361EE] shadow-[0_4px_14px_rgba(67,97,238,0.25)]' : 'bg-white border-[#E8ECF5] text-[#6B7280] hover:border-[#4361EE] hover:text-[#4361EE]'}`}>
                 {f}
               </button>
             ))}
-            <a href="#" download className="md:hidden ml-auto inline-flex items-center gap-1.5 bg-[#0d3b9c] text-white rounded-full px-3 py-1.5 text-[11px] font-bold">
+            <a href="#" download className="md:hidden ml-auto inline-flex items-center gap-1 bg-[#EEF2FF] text-[#4361EE] rounded-full px-3 py-1.5 text-[11px] font-bold">
               <IcoDown/> Catalogue
             </a>
           </div>
 
-          {/* Category sub-heading */}
           {activeFilter !== 'All' && (
-            <p className="mb-4 text-[12px] text-[#6b7a9f]">
+            <p className="mb-5 text-[12px] text-[#9CA3AF]">
               Showing {Math.min(CAT_LIMIT, baseFiltered.length)} of {baseFiltered.length} {activeFilter} products
-              {baseFiltered.length > CAT_LIMIT && <button onClick={()=>{}} className="ml-2 text-[#0d3b9c] font-semibold hover:underline">— view all via enquiry</button>}
             </p>
           )}
 
-          {/* Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 mt-2">
+          {/* Product grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
             {displayed.map(product => (
-              <div key={product.id} onMouseEnter={playSound} className="group relative bg-white rounded-[18px] border border-[#e8edf8] shadow-[0_6px_20px_rgba(0,0,0,0.04)] p-3.5 flex flex-col hover:shadow-[0_18px_44px_rgba(13,59,156,0.13)] hover:-translate-y-1.5 transition-all duration-300">
+              <div key={product.id} onMouseEnter={playSound}
+                className="group relative bg-white rounded-2xl border border-[#E8ECF5] overflow-hidden hover:shadow-[0_12px_40px_rgba(67,97,238,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col">
+
                 {product.tag && (
-                  <div className="absolute top-3 right-3 bg-[#0d3b9c] text-white text-[9px] font-black px-2 py-0.5 rounded-full z-10">{product.tag}</div>
+                  <div className="absolute top-2.5 left-2.5 z-10 bg-[#4361EE] text-white text-[9px] font-black px-2 py-0.5 rounded-full">{product.tag}</div>
                 )}
+
                 {/* Product image */}
-                <div className="h-[140px] rounded-[12px] overflow-hidden relative bg-[#f8f9ff] border border-[#eef2ff]">
-                  <img
-                    src={product.img}
-                    alt={product.name}
+                <div className="relative overflow-hidden bg-[#F8F9FF]" style={{aspectRatio:'4/3'}}>
+                  <img src={product.img} alt={product.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                  {/* Shimmer on hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-[300%] transition-all duration-700 pointer-events-none"/>
+                    loading="lazy"/>
                 </div>
 
-                <div className="mt-3 flex-1 flex flex-col">
-                  <div className="text-[11.5px] font-extrabold tracking-wide text-[#0a1a3d] leading-snug">{product.name}</div>
-                  <div className="text-[10px] text-[#7481a8] mt-0.5">{product.subtitle}</div>
-                  <div className="mt-2 text-[11px] leading-4 text-[#6b7a9f] flex-1">{product.desc}</div>
-
-                  <div className="mt-3 flex gap-1.5">
-                    <span className="text-[9px] px-2 py-0.5 rounded-full bg-[#e8f5e9] text-[#1a7a2a] font-semibold border border-[#c8e6c9]">✓ In Stock</span>
-                    <span className="text-[9px] px-2 py-0.5 rounded-full bg-[#eef3ff] text-[#0d3b9c] font-semibold border border-[#dde7ff]">Bulk Available</span>
+                {/* Card body */}
+                <div className="p-3.5 flex flex-col gap-2.5 flex-1">
+                  <div>
+                    <div className="text-[12px] font-extrabold text-[#0A0A14] leading-snug">{product.name}</div>
+                    <div className="text-[10.5px] text-[#9CA3AF] mt-0.5">{product.subtitle}</div>
                   </div>
-
-                  <button onClick={() => openEnquiry(product)} className="mt-2.5 w-full bg-gradient-to-r from-[#0d3b9c] to-[#1a5ee8] text-white rounded-full py-2 text-[11.5px] font-bold inline-flex items-center justify-center gap-1.5 hover:shadow-[0_6px_18px_rgba(13,59,156,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all">
+                  <button onClick={() => openEnquiry(product)}
+                    className="mt-auto w-full bg-[#F0F3FF] text-[#4361EE] rounded-xl py-2 text-[11.5px] font-bold hover:bg-[#4361EE] hover:text-white transition-all">
                     Get Export Price →
                   </button>
                 </div>
@@ -454,16 +484,18 @@ export default function App() {
             ))}
           </div>
 
-          {/* Show More / Show Less for All */}
+          {/* Show More / Less */}
           {allBrand && (
-            <div className="flex justify-center mt-8">
+            <div className="flex justify-center mt-10">
               {hasMore ? (
-                <button onClick={() => setShowMore(true)} onMouseEnter={playSound} className="inline-flex items-center gap-2 bg-white border-2 border-[#0d3b9c] text-[#0d3b9c] rounded-full px-7 py-3 text-[13px] font-bold hover:bg-[#0d3b9c] hover:text-white transition-all shadow-[0_6px_20px_rgba(13,59,156,0.12)]">
+                <button onClick={() => setShowMore(true)} onMouseEnter={playSound}
+                  className="inline-flex items-center gap-2 border-2 border-[#4361EE] text-[#4361EE] rounded-xl px-7 py-3 text-[13px] font-bold hover:bg-[#4361EE] hover:text-white transition-all">
                   Show More Products ({baseFiltered.length - ALL_INITIAL} more)
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-4 h-4" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7"/></svg>
                 </button>
               ) : showMore ? (
-                <button onClick={() => { setShowMore(false); document.getElementById('products')?.scrollIntoView({behavior:'smooth'}); }} className="inline-flex items-center gap-2 bg-white border border-[#e0e8f7] text-[#5a6a90] rounded-full px-7 py-3 text-[13px] font-bold hover:bg-[#f3f6ff] transition-all">
+                <button onClick={() => { setShowMore(false); document.getElementById('products')?.scrollIntoView({behavior:'smooth'}); }}
+                  className="inline-flex items-center gap-2 border border-[#E8ECF5] text-[#6B7280] rounded-xl px-7 py-3 text-[13px] font-bold hover:border-[#4361EE] hover:text-[#4361EE] transition-all">
                   Show Less
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-4 h-4" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7"/></svg>
                 </button>
@@ -473,67 +505,74 @@ export default function App() {
         </section>
 
         {/* ── WHY CHOOSE ───────────────────────────────────────────────── */}
-        <section className="bg-white border-y border-[#edf2ff] py-12">
-          <div className="max-w-[1440px] mx-auto px-4 md:px-8">
-            <div className="text-center mb-8">
-              <div className="text-[10px] tracking-[0.25em] font-bold text-[#0d3b9c] uppercase mb-1">Why Partner With Us</div>
-              <h3 className="display text-[22px] md:text-[26px] font-extrabold">The Preferred Export Partner for Global Distributors</h3>
+        <section className="bg-[#F8F9FF] border-y border-[#E8ECF5] py-14">
+          <div className="max-w-[1280px] mx-auto px-5 md:px-8">
+            <div className="text-center mb-10">
+              <div className="inline-flex items-center gap-1.5 bg-white border border-[#E8ECF5] rounded-full px-3 py-1 text-[11px] font-bold text-[#6B7280] mb-3">
+                🤝 Why Partner With Us
+              </div>
+              <h3 className="display text-[24px] md:text-[28px] font-extrabold text-[#0A0A14]">The Preferred Export Partner for Global Distributors</h3>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {[
-                { t:'Global Export',    d:'Shipping to 25+ countries with full documentation',                i:'✈️' },
-                { t:'Bulk Pricing',     d:'Competitive MOQ & tiered pricing for all order sizes',             i:'💰' },
-                { t:'Genuine Molecules',d:'100% authentic branded formulations — no counterfeits',            i:'🔬' },
-                { t:'Fast Dispatch',    d:'Orders processed within 48 hours of confirmation',                 i:'⚡' },
-                { t:'Regulatory Docs',  d:'COA, MSDS, product dossiers provided with every order',            i:'📋' },
+                {i:'✈️', t:'Global Export',     d:'Shipping to 25+ countries with full documentation'},
+                {i:'💰', t:'Bulk Pricing',       d:'Competitive MOQ & tiered pricing for all order sizes'},
+                {i:'🔬', t:'Genuine Molecules',  d:'100% authentic branded formulations — no counterfeits'},
+                {i:'⚡', t:'Fast Dispatch',      d:'Orders processed within 48 hours of confirmation'},
+                {i:'📋', t:'Regulatory Docs',    d:'COA, MSDS, product dossiers with every order'},
               ].map(c => (
-                <div key={c.t} onMouseEnter={playSound} className="bg-[#fbfcff] border border-[#eef2ff] rounded-[14px] p-4 text-center hover:shadow-[0_10px_28px_rgba(13,59,156,0.1)] hover:-translate-y-1 transition-all group">
-                  <div className="w-10 h-10 mx-auto rounded-xl bg-[#eef3ff] group-hover:bg-[#0d3b9c] group-hover:text-white grid place-items-center text-[20px] transition">{c.i}</div>
-                  <div className="mt-2.5 text-[12px] font-bold">{c.t}</div>
-                  <div className="mt-1 text-[10px] leading-4 text-[#7a8ab0]">{c.d}</div>
+                <div key={c.t} onMouseEnter={playSound}
+                  className="bg-white border border-[#E8ECF5] rounded-2xl p-5 text-center hover:border-[#4361EE]/40 hover:shadow-[0_8px_28px_rgba(67,97,238,0.08)] hover:-translate-y-1 transition-all group">
+                  <div className="w-11 h-11 mx-auto rounded-xl bg-[#EEF2FF] group-hover:bg-[#4361EE] grid place-items-center text-[22px] transition-colors mb-3">{c.i}</div>
+                  <div className="text-[12.5px] font-bold text-[#0A0A14]">{c.t}</div>
+                  <div className="mt-1 text-[10.5px] leading-[1.5] text-[#9CA3AF]">{c.d}</div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ── ABOUT / WHO WE ARE ───────────────────────────────────────── */}
-        <section className="max-w-[1440px] mx-auto px-4 md:px-8 py-14 grid md:grid-cols-[1fr_1.2fr] gap-10 items-center">
+        {/* ── ABOUT ────────────────────────────────────────────────────── */}
+        <section className="max-w-[1280px] mx-auto px-5 md:px-8 py-16 grid md:grid-cols-[1fr_1.1fr] gap-12 items-center">
           <div>
-            <div className="text-[10px] tracking-[0.25em] font-bold text-[#0d3b9c] uppercase mb-2">About AlphaVigor</div>
-            <h3 className="display text-[22px] md:text-[28px] font-extrabold leading-tight">India's Premier Men's Wellness Export House</h3>
-            <p className="mt-4 text-[13px] leading-6 text-[#6b7a9f]">
+            <div className="inline-flex items-center gap-1.5 bg-[#EEF2FF] text-[#4361EE] rounded-full px-3 py-1 text-[11px] font-bold mb-4">
+              About AlphaVigor
+            </div>
+            <h3 className="display text-[24px] md:text-[30px] font-extrabold text-[#0A0A14] leading-tight">India's Premier Men's Wellness Export House</h3>
+            <p className="mt-4 text-[13.5px] leading-6 text-[#6B7280]">
               AlphaVigor, powered by TruePharma, is a pharmaceutical exporter specialising in men's sexual health and wellness formulations. We supply bulk quantities of Sildenafil, Tadalafil, and Vardenafil-based products to distributors, wholesalers, and healthcare importers across 25+ countries.
             </p>
-            <p className="mt-3 text-[13px] leading-6 text-[#6b7a9f]">
+            <p className="mt-3 text-[13.5px] leading-6 text-[#6B7280]">
               Every shipment comes with a full Certificate of Analysis, regulatory dossier, and dedicated export support — so your customs clearance is seamless, every time.
             </p>
-            <ul className="mt-5 space-y-2.5">
+            <ul className="mt-6 space-y-3">
               {['Complete regulatory documentation (COA, MSDS)','Flexible MOQ — starting from 1,000 units','Discreet, secure international packaging','Dedicated export manager for every account','Fast international dispatch within 48 hrs'].map(li => (
-                <li key={li} className="flex gap-2.5 text-[12.5px]">
-                  <span className="w-4 h-4 rounded-full bg-[#e6fbe6] text-[#1a9a1a] grid place-items-center text-[10px] shrink-0 mt-0.5">✔</span>
-                  <span className="text-[#3a4a71]">{li}</span>
+                <li key={li} className="flex gap-3 text-[13px]">
+                  <span className="w-5 h-5 rounded-full bg-[#EEF2FF] text-[#4361EE] grid place-items-center text-[10px] font-black shrink-0 mt-0.5">✔</span>
+                  <span className="text-[#374151]">{li}</span>
                 </li>
               ))}
             </ul>
-            <div className="flex gap-3 mt-7">
-              <button onClick={() => openEnquiry()} onMouseEnter={playSound} className="inline-flex items-center gap-2 bg-[#0d3b9c] text-white rounded-full px-5 py-2.5 text-[12px] font-bold hover:bg-[#0a2f7e] hover:shadow-[0_8px_20px_rgba(13,59,156,0.4)] transition-all">
+            <div className="flex gap-3 mt-8">
+              <button onClick={() => openEnquiry()} onMouseEnter={playSound}
+                className="inline-flex items-center gap-2 bg-[#4361EE] text-white rounded-xl px-5 py-3 text-[13px] font-bold hover:bg-[#3451D1] hover:shadow-[0_8px_24px_rgba(67,97,238,0.3)] transition-all">
                 Request Product List →
               </button>
-              <a href="#" download className="inline-flex items-center gap-2 bg-white border border-[#cdd9f5] text-[#0d3b9c] rounded-full px-4 py-2.5 text-[12px] font-bold hover:bg-[#f3f6ff] transition">
+              <a href="#" download className="inline-flex items-center gap-2 border-2 border-[#E8ECF5] text-[#374151] rounded-xl px-4 py-3 text-[13px] font-bold hover:border-[#4361EE] hover:text-[#4361EE] transition-all">
                 <IcoDown/> Catalogue PDF
               </a>
             </div>
           </div>
 
-          <div className="relative mt-8 md:mt-0">
-            <img src="/images/hero3.png" alt="AlphaVigor Export Products" className="w-full h-[300px] md:h-[380px] object-cover rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.18)]"/>
-            {/* Floating stat cards */}
-            <div className="absolute -bottom-5 left-4 right-4 bg-white rounded-[14px] border border-[#eef2ff] shadow-[0_16px_40px_rgba(0,0,0,0.12)] grid grid-cols-3 divide-x divide-[#eef2ff] p-3">
-              {[{k:'🌍 25+',v:'Countries',i:'🌍'},{k:'B2B',v:'Specialists',i:'💼'},{k:'48 hr',v:'Dispatch',i:'⚡'}].map(b=>(
-                <div key={b.k} className="flex gap-2 items-center px-2 py-1">
-                  <div className="w-7 h-7 rounded-full bg-[#eef3ff] grid place-items-center text-[14px]">{b.i}</div>
-                  <div><div className="text-[11px] font-black leading-none text-[#0a1a3d]">{b.k}</div><div className="text-[9px] text-[#7a8ab0]">{b.v}</div></div>
+          <div className="relative">
+            <div className="rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(67,97,238,0.1)] border border-[#E8ECF5]">
+              <img src="/images/hero3.png" alt="AlphaVigor Export Products" className="w-full h-[320px] md:h-[400px] object-cover"/>
+            </div>
+            <div className="absolute -bottom-5 left-5 right-5 bg-white rounded-2xl border border-[#E8ECF5] shadow-[0_12px_40px_rgba(0,0,0,0.08)] grid grid-cols-3 divide-x divide-[#E8ECF5] p-4">
+              {[{k:'🌍 25+',v:'Countries',bg:'#EEF2FF'},{k:'B2B',v:'Specialists',bg:'#FFF7ED'},{k:'48 hr',v:'Dispatch',bg:'#F0FDF4'}].map(b=>(
+                <div key={b.k} className="flex gap-2.5 items-center justify-center px-2">
+                  <div className="w-8 h-8 rounded-xl grid place-items-center text-[14px]" style={{background:b.bg}}>{b.k.includes('🌍')?'🌍':b.k.includes('B2B')?'💼':'⚡'}</div>
+                  <div><div className="text-[12px] font-black leading-none text-[#0A0A14]">{b.k.replace('🌍 ','')}</div><div className="text-[9px] text-[#9CA3AF]">{b.v}</div></div>
                 </div>
               ))}
             </div>
@@ -541,110 +580,125 @@ export default function App() {
         </section>
 
         {/* ── CONTACT ──────────────────────────────────────────────────── */}
-        <section id="contact" className="bg-white border-y border-[#edf2ff] py-14">
-          <div className="max-w-[1440px] mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-10">
+        <section id="contact" className="bg-[#F8F9FF] border-y border-[#E8ECF5] py-14">
+          <div className="max-w-[1280px] mx-auto px-5 md:px-8 grid md:grid-cols-2 gap-10">
             <div>
-              <div className="text-[10px] tracking-[0.25em] font-bold text-[#0d3b9c] uppercase mb-2">Export Enquiries</div>
-              <h3 className="display text-[22px] md:text-[26px] font-extrabold">Talk to Our Export Team</h3>
-              <p className="mt-2 text-[13px] text-[#6b7a9f]">Our dedicated export managers are available 6 days a week. We respond to all enquiries within 24 hours.</p>
+              <div className="inline-flex items-center gap-1.5 bg-white border border-[#E8ECF5] rounded-full px-3 py-1 text-[11px] font-bold text-[#6B7280] mb-4">
+                📬 Export Enquiries
+              </div>
+              <h3 className="display text-[24px] md:text-[28px] font-extrabold text-[#0A0A14]">Talk to Our Export Team</h3>
+              <p className="mt-2 text-[13px] text-[#6B7280]">Our dedicated export managers are available 6 days a week. We respond to all enquiries within 24 hours.</p>
               <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
-                  { i:'📍', t:'Manufacturing & Export HQ', d:'G-5 & G-6, Industrial Estate\nGorwa, Vadodara – 390016\nGujarat, India' },
-                  { i:'📞', t:'Export Hotline', d:'+91 76220 68016\n+91 98795 53225' },
-                  { i:'✉️', t:'Export Email', d:'export@truepharma.co.in\ninfo@truepharma.co.in' },
-                  { i:'🕒', t:'Business Hours', d:'Mon – Sat: 9:00 AM – 6:30 PM IST\nSunday: Closed' },
+                  {i:'📍', t:'Manufacturing & Export HQ', d:'G-5 & G-6, Industrial Estate\nGorwa, Vadodara – 390016\nGujarat, India'},
+                  {i:'📞', t:'Export Hotline', d:'+91 76220 68016\n+91 98795 53225'},
+                  {i:'✉️', t:'Export Email', d:'export@truepharma.co.in\ninfo@truepharma.co.in'},
+                  {i:'🕒', t:'Business Hours', d:'Mon – Sat: 9:00 AM – 6:30 PM IST\nSunday: Closed'},
                 ].map(c => (
-                  <div key={c.t} className="bg-[#fbfcff] border border-[#eef2ff] rounded-[12px] p-3.5 flex gap-3 hover:shadow-[0_6px_18px_rgba(0,0,0,0.06)] transition">
-                    <div className="w-8 h-8 rounded-full bg-[#eef3ff] grid place-items-center text-[14px] shrink-0">{c.i}</div>
+                  <div key={c.t} className="bg-white border border-[#E8ECF5] rounded-xl p-4 flex gap-3 hover:border-[#4361EE]/30 hover:shadow-[0_4px_16px_rgba(67,97,238,0.06)] transition">
+                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] grid place-items-center text-[16px] shrink-0">{c.i}</div>
                     <div>
-                      <div className="text-[11px] font-bold text-[#0a1a3d]">{c.t}</div>
-                      <div className="text-[10px] text-[#6b7a9f] leading-4 mt-0.5 whitespace-pre-line">{c.d}</div>
+                      <div className="text-[11.5px] font-bold text-[#0A0A14]">{c.t}</div>
+                      <div className="text-[10.5px] text-[#6B7280] leading-4 mt-0.5 whitespace-pre-line">{c.d}</div>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* CTA panel */}
-            <div className="bg-gradient-to-br from-[#061230] to-[#0d3b9c] rounded-[20px] p-8 flex flex-col items-center justify-center text-center text-white relative overflow-hidden">
-              <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-white/5"/>
-              <div className="absolute -bottom-8 -left-8 w-40 h-40 rounded-full bg-[#20e3b2]/10"/>
-              <div className="relative z-10 flex flex-col items-center">
-                <div className="w-14 h-14 rounded-2xl bg-white/15 grid place-items-center text-[28px] mb-4 border border-white/20">💊</div>
+            <div className="bg-[#4361EE] rounded-2xl p-8 flex flex-col items-center justify-center text-center text-white relative overflow-hidden">
+              <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-white/5"/>
+              <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-white/5"/>
+              <div className="relative flex flex-col items-center">
+                <div className="w-14 h-14 rounded-2xl bg-white/15 border border-white/20 grid place-items-center text-[28px] mb-5">💊</div>
                 <h4 className="display text-[22px] font-extrabold">Ready to Order?</h4>
-                <p className="mt-2 text-[13px] text-white/70 max-w-[280px] leading-6">
-                  Send us your product list and required quantities. We'll respond with pricing, lead time and full documentation within 24 hours.
+                <p className="mt-2 text-[13px] text-white/75 max-w-[280px] leading-6">
+                  Send us your product list and required quantities. We'll respond with pricing, lead time and documentation within 24 hours.
                 </p>
                 <div className="mt-6 flex flex-col sm:flex-row gap-3 w-full justify-center">
-                  <button onClick={doWA} onMouseEnter={playSound} className="inline-flex items-center justify-center gap-2 bg-[#25D366] text-white rounded-full px-5 py-3 text-[13px] font-bold shadow-[0_8px_24px_rgba(37,211,102,0.4)] hover:scale-[1.02] transition">
+                  <button onClick={doWA} onMouseEnter={playSound}
+                    className="inline-flex items-center justify-center gap-2 bg-[#25D366] text-white rounded-xl px-5 py-3 text-[13px] font-bold shadow-[0_8px_24px_rgba(37,211,102,0.4)] hover:scale-[1.02] transition">
                     <IcoWA/> WhatsApp
                   </button>
-                  <button onClick={doTG} onMouseEnter={playSound} className="inline-flex items-center justify-center gap-2 bg-[#229ED9] text-white rounded-full px-5 py-3 text-[13px] font-bold shadow-[0_8px_24px_rgba(34,158,217,0.4)] hover:scale-[1.02] transition">
+                  <button onClick={doTG} onMouseEnter={playSound}
+                    className="inline-flex items-center justify-center gap-2 bg-white/15 border border-white/30 text-white rounded-xl px-5 py-3 text-[13px] font-bold hover:bg-white/25 hover:scale-[1.02] transition">
                     <IcoTG/> Telegram
                   </button>
                 </div>
-                <p className="mt-4 text-[10px] text-white/40">Average response time: under 30 minutes</p>
+                <p className="mt-4 text-[10px] text-white/50">Average response time: under 30 minutes</p>
               </div>
             </div>
           </div>
         </section>
 
         {/* ── PAYMENTS ─────────────────────────────────────────────────── */}
-        <section className="max-w-[1440px] mx-auto px-4 md:px-8 py-12">
-          <div className="text-center mb-7">
-            <div className="text-[10px] tracking-[0.25em] font-bold text-[#0d3b9c] uppercase mb-1">Secure Payments</div>
-            <div className="display text-[20px] font-extrabold">We Accept International Payments</div>
-            <p className="mt-1 text-[12px] text-[#6b7a9f]">All transactions are 100% secure and confidential.</p>
+        <section className="max-w-[1280px] mx-auto px-5 md:px-8 py-14">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-1.5 bg-[#EEF2FF] text-[#4361EE] rounded-full px-3 py-1 text-[11px] font-bold mb-3">
+              🔒 Secure Payments
+            </div>
+            <div className="display text-[22px] font-extrabold text-[#0A0A14]">We Accept International Payments</div>
+            <p className="mt-1.5 text-[12.5px] text-[#6B7280]">All transactions are 100% secure and confidential.</p>
           </div>
-          <div className="flex flex-wrap justify-center gap-4 max-w-[700px] mx-auto">
+          <div className="flex flex-wrap justify-center gap-4 max-w-[680px] mx-auto">
             {[
-              { name:'PayPal',        icon:'🅿',  col:'text-[#003087]', bg:'bg-[#f0f5ff] border-[#ccd9f7]', note:'Business accounts' },
-              { name:'USDT (TRC-20)', icon:'₮',  col:'text-[#26A17B]', bg:'bg-[#f0fff8] border-[#b6ede0]', note:'Tether stablecoin' },
-              { name:'Bitcoin',       icon:'₿',  col:'text-[#F7931A]', bg:'bg-[#fff8f0] border-[#f7d9a8]', note:'BTC accepted' },
-              { name:'Bank Transfer', icon:'🏦', col:'text-[#0d3b9c]', bg:'bg-[#f3f6ff] border-[#ccd9f7]', note:'SWIFT / Wire' },
+              {name:'PayPal',        icon:'🅿',  col:'#003087', bg:'#EFF6FF', note:'Business accounts'},
+              {name:'USDT (TRC-20)', icon:'₮',  col:'#26A17B', bg:'#F0FDF4', note:'Tether stablecoin'},
+              {name:'Bitcoin',       icon:'₿',  col:'#F7931A', bg:'#FFFBEB', note:'BTC accepted'},
+              {name:'Bank Transfer', icon:'🏦', col:'#4361EE', bg:'#EEF2FF', note:'SWIFT / Wire'},
             ].map(p => (
-              <div key={p.name} className={`${p.bg} border rounded-[16px] px-6 py-4 flex flex-col items-center gap-1 shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all min-w-[150px]`}>
-                <span className={`text-[28px] ${p.col}`}>{p.icon}</span>
-                <span className={`text-[14px] font-black ${p.col}`}>{p.name}</span>
-                <span className="text-[9px] text-[#9aabcf]">{p.note}</span>
+              <div key={p.name} className="rounded-2xl border border-[#E8ECF5] px-6 py-5 flex flex-col items-center gap-1.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:-translate-y-0.5 transition-all min-w-[150px] bg-white">
+                <span className="text-[30px]" style={{color:p.col}}>{p.icon}</span>
+                <span className="text-[14px] font-black" style={{color:p.col}}>{p.name}</span>
+                <span className="text-[9.5px] text-[#9CA3AF]">{p.note}</span>
               </div>
             ))}
           </div>
         </section>
 
         {/* ── FOOTER ───────────────────────────────────────────────────── */}
-        <footer className="bg-[#05102e] text-[#8a9ac0] pt-12 pb-0">
-          <div className="max-w-[1440px] mx-auto px-4 md:px-8">
-            <div className="grid md:grid-cols-[1.8fr_1fr_1fr_1.2fr] gap-10 pb-10">
+        <footer className="bg-[#0A0A14] text-[#9CA3AF]">
+          <div className="max-w-[1280px] mx-auto px-5 md:px-8">
+            {/* Main footer grid */}
+            <div className="grid md:grid-cols-[1.6fr_1fr_1fr_1.2fr] gap-10 pt-12 pb-10">
 
-              {/* Brand col */}
+              {/* Brand */}
               <div>
-                <div className="flex items-center gap-3 text-white mb-4">
+                <div className="flex items-center gap-3 mb-5">
                   <Logo size={36}/>
                   <div>
-                    <div className="font-black text-[16px] display leading-none">AlphaVigor</div>
-                    <div className="text-[9px] opacity-50 tracking-[0.22em] uppercase mt-0.5">Global Wellness Exports</div>
+                    <div className="font-black text-[17px] display leading-none text-white">AlphaVigor</div>
+                    <div className="text-[9px] opacity-40 tracking-[0.22em] uppercase mt-0.5">Global Wellness Exports</div>
                   </div>
                 </div>
-                <p className="text-[12px] leading-5 max-w-[280px]">
+                <p className="text-[12.5px] leading-[1.6] max-w-[260px]">
                   India's premier export house for men's wellness pharmaceuticals. Serving global distributors with genuine, high-quality formulations since 2009.
                 </p>
-
-                {/* Socials */}
-                <div className="mt-5 flex gap-2.5">
-                  <a href="https://t.me/AlphaVigor" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-[#229ED9] text-white grid place-items-center hover:scale-110 transition shadow-md" title="Telegram"><IcoTG/></a>
-                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-gradient-to-br from-[#f09433] via-[#dc2743] to-[#bc1888] text-white grid place-items-center hover:scale-110 transition shadow-md" title="Instagram"><IcoIG/></a>
-                  <a href="https://wa.me/917622068016" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-[#25D366] text-white grid place-items-center hover:scale-110 transition shadow-md" title="WhatsApp"><IcoWA/></a>
-                  <a href="mailto:export@truepharma.co.in" className="w-9 h-9 rounded-full bg-[#0d3b9c] text-white grid place-items-center hover:scale-110 transition shadow-md" title="Email"><IcoMail/></a>
+                <div className="mt-5 flex gap-2">
+                  {[
+                    {href:'https://t.me/AlphaVigor', bg:'#229ED9', icon:<IcoTG/>, title:'Telegram'},
+                    {href:'https://instagram.com', bg:'linear-gradient(135deg,#f09433,#dc2743,#bc1888)', icon:<IcoIG/>, title:'Instagram'},
+                    {href:'https://wa.me/917622068016', bg:'#25D366', icon:<IcoWA/>, title:'WhatsApp'},
+                    {href:'mailto:export@truepharma.co.in', bg:'#4361EE', icon:<IcoMail/>, title:'Email'},
+                  ].map(s=>(
+                    <a key={s.title} href={s.href} target={s.href.startsWith('http')?'_blank':undefined} rel="noopener noreferrer" title={s.title}
+                      className="w-9 h-9 rounded-xl text-white grid place-items-center hover:scale-110 transition shadow-lg"
+                      style={{background:s.bg}}>{s.icon}</a>
+                  ))}
                 </div>
               </div>
 
               {/* Quick Links */}
               <div>
                 <div className="text-white text-[12px] font-bold mb-4 uppercase tracking-wider">Quick Links</div>
-                <ul className="space-y-2.5 text-[12px]">
+                <ul className="space-y-2.5 text-[12.5px]">
                   {[['Products','#products'],['About Us','#'],['Contact','#contact'],['Download Catalogue','#'],['Wholesale Enquiry','#']].map(([l,h])=>(
-                    <li key={l}><a href={h} className="hover:text-white transition flex items-center gap-1.5"><span className="text-[#0d3b9c]">›</span>{l}</a></li>
+                    <li key={l}>
+                      <a href={h} className="hover:text-white transition flex items-center gap-2">
+                        <span className="w-1 h-1 rounded-full bg-[#4361EE]"/>
+                        {l}
+                      </a>
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -652,101 +706,99 @@ export default function App() {
               {/* Top Products */}
               <div>
                 <div className="text-white text-[12px] font-bold mb-4 uppercase tracking-wider">Top Products</div>
-                <ul className="space-y-2.5 text-[12px]">
+                <ul className="space-y-2.5 text-[12.5px]">
                   {PRODUCTS.filter(p=>p.popular).map(p=>(
-                    <li key={p.id} onClick={()=>openEnquiry(p)} className="hover:text-white cursor-pointer transition flex items-center gap-1.5">
-                      <span className="text-[#0d3b9c]">›</span>{p.name}
+                    <li key={p.id} onClick={()=>openEnquiry(p)} className="hover:text-white cursor-pointer transition flex items-center gap-2">
+                      <span className="w-1 h-1 rounded-full bg-[#4361EE]"/>
+                      {p.name}
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* Contact col */}
+              {/* Contact */}
               <div>
                 <div className="text-white text-[12px] font-bold mb-4 uppercase tracking-wider">Export Contact</div>
-                <div className="space-y-3 text-[12px]">
+                <div className="space-y-3 text-[12.5px]">
                   <div className="flex gap-2.5 items-start">
-                    <span className="mt-0.5 shrink-0 text-[#0d3b9c]">📍</span>
+                    <span className="shrink-0 text-[#4361EE] mt-0.5">📍</span>
                     <span>Gorwa Industrial Estate, Vadodara 390016, Gujarat, India</span>
                   </div>
                   <div className="flex gap-2.5">
-                    <span className="text-[#0d3b9c]">📞</span>
+                    <span className="text-[#4361EE]">📞</span>
                     <a href="tel:+917622068016" className="hover:text-white transition">+91 76220 68016</a>
                   </div>
                   <div className="flex gap-2.5">
-                    <span className="text-[#0d3b9c]">✉️</span>
+                    <span className="text-[#4361EE]">✉️</span>
                     <a href="mailto:export@truepharma.co.in" className="hover:text-white transition break-all">export@truepharma.co.in</a>
                   </div>
                   <div className="flex gap-2.5">
-                    <span className="text-[#0d3b9c]">🕒</span>
+                    <span className="text-[#4361EE]">🕒</span>
                     <span>Mon – Sat, 9 AM – 6:30 PM IST</span>
                   </div>
                 </div>
-
-                {/* Quick CTA */}
-                <button onClick={()=>openEnquiry()} onMouseEnter={playSound} className="mt-5 w-full bg-[#0d3b9c] text-white rounded-[10px] py-2.5 text-[12px] font-bold inline-flex items-center justify-center gap-2 hover:bg-[#1a5ee8] transition">
+                <button onClick={()=>openEnquiry()} onMouseEnter={playSound}
+                  className="mt-5 w-full bg-[#4361EE] text-white rounded-xl py-2.5 text-[12px] font-bold inline-flex items-center justify-center gap-2 hover:bg-[#3451D1] transition">
                   Get Export Quote →
                 </button>
               </div>
             </div>
 
             {/* Bottom bar */}
-            <div className="border-t border-white/8 py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-[10px]">
-              <div className="text-white/30">© {new Date().getFullYear()} AlphaVigor / TruePharma. All Rights Reserved.</div>
-              <div className="flex gap-4 text-white/30">
-                <span className="cursor-pointer hover:text-white/60 transition">Privacy Policy</span>
-                <span className="cursor-pointer hover:text-white/60 transition">Terms & Conditions</span>
-                <span className="cursor-pointer hover:text-white/60 transition">Export Policy</span>
+            <div className="border-t border-white/8 py-5 flex flex-col md:flex-row items-center justify-between gap-2 text-[11px]">
+              <div className="text-[#6B7280]">© {new Date().getFullYear()} AlphaVigor / TruePharma. All Rights Reserved.</div>
+              <div className="flex gap-5 text-[#6B7280]">
+                {['Privacy Policy','Terms & Conditions','Export Policy'].map(t=>(
+                  <span key={t} className="cursor-pointer hover:text-white transition">{t}</span>
+                ))}
               </div>
-              <div className="text-white/25 flex items-center gap-1">Made with <span className="text-red-400/60 mx-0.5">❤</span> in India, for the world</div>
+              <div className="text-[#4D5562] flex items-center gap-1">Made with <span className="text-[#F7A614] mx-0.5">❤</span> in India, for the world</div>
             </div>
           </div>
         </footer>
 
         {/* ── FLOATING BUTTONS ─────────────────────────────────────────── */}
-        <div className="fixed bottom-20 right-4 z-50 flex flex-col items-center gap-1">
+        <div className="fixed bottom-[72px] right-4 z-50 flex flex-col items-center gap-1">
           <div className="relative">
             <div className="absolute inset-0 rounded-full bg-[#25D366] animate-[pulse-ring_2.2s_ease-out_infinite]"/>
-            <button onClick={doWA} className="relative w-12 h-12 rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_rgba(37,211,102,0.55)] grid place-items-center hover:scale-110 active:scale-95 transition-all animate-[bob_2.5s_ease-in-out_infinite]" title="WhatsApp">
+            <button onClick={doWA} className="relative w-12 h-12 rounded-full bg-[#25D366] text-white shadow-[0_8px_24px_rgba(37,211,102,0.5)] grid place-items-center hover:scale-110 active:scale-95 transition-all animate-[bob_2.5s_ease-in-out_infinite]" title="WhatsApp">
               <IcoWA/>
             </button>
           </div>
-          <span className="text-[8px] font-black text-[#25D366] bg-white rounded-full px-2 py-0.5 shadow-sm">WhatsApp</span>
+          <span className="text-[8px] font-black text-[#25D366] bg-white rounded-full px-2 py-0.5 shadow-sm border border-[#E8ECF5]">WhatsApp</span>
         </div>
-
         <div className="fixed bottom-2 right-4 z-50 flex flex-col items-center gap-1">
           <div className="relative">
             <div className="absolute inset-0 rounded-full bg-[#229ED9] animate-[pulse-ring_2.2s_ease-out_infinite_0.6s]"/>
-            <button onClick={doTG} className="relative w-12 h-12 rounded-full bg-[#229ED9] text-white shadow-[0_10px_30px_rgba(34,158,217,0.55)] grid place-items-center hover:scale-110 active:scale-95 transition-all animate-[bob_2.8s_ease-in-out_infinite_0.6s]" title="Telegram">
+            <button onClick={doTG} className="relative w-12 h-12 rounded-full bg-[#229ED9] text-white shadow-[0_8px_24px_rgba(34,158,217,0.5)] grid place-items-center hover:scale-110 active:scale-95 transition-all animate-[bob_2.8s_ease-in-out_infinite_0.6s]" title="Telegram">
               <IcoTG/>
             </button>
           </div>
-          <span className="text-[8px] font-black text-[#229ED9] bg-white rounded-full px-2 py-0.5 shadow-sm">Telegram</span>
+          <span className="text-[8px] font-black text-[#229ED9] bg-white rounded-full px-2 py-0.5 shadow-sm border border-[#E8ECF5]">Telegram</span>
         </div>
 
         {/* ── ENQUIRY MODAL ─────────────────────────────────────────────── */}
         {enquiryOpen && (
           <div className="fixed inset-0 z-[200] flex items-end md:items-center justify-center p-0 md:p-4">
-            <div className="absolute inset-0 bg-[#04091f]/70 backdrop-blur-[8px]" onClick={()=>setEnquiryOpen(false)} style={{animation:'fadeIn .2s ease'}}/>
-            <div className="relative w-full md:max-w-[540px] bg-white rounded-t-[22px] md:rounded-[22px] shadow-[0_30px_90px_rgba(0,0,0,0.4)] overflow-hidden" style={{animation:'slideUp .35s cubic-bezier(0.16,1,0.3,1)'}}>
-              {/* Header */}
-              <div className="bg-gradient-to-r from-[#04091f] to-[#0d3b9c] p-4 text-white flex items-center justify-between">
+            <div className="absolute inset-0 bg-[#0A0A14]/60 backdrop-blur-sm" onClick={()=>setEnquiryOpen(false)} style={{animation:'fadeIn .2s ease'}}/>
+            <div className="relative w-full md:max-w-[520px] bg-white rounded-t-[24px] md:rounded-[24px] shadow-[0_32px_80px_rgba(0,0,0,0.3)] overflow-hidden" style={{animation:'slideUp .3s cubic-bezier(0.16,1,0.3,1)'}}>
+              <div className="bg-[#4361EE] p-5 text-white flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Logo size={36}/>
+                  <Logo size={34}/>
                   <div>
-                    <div className="font-black text-[14px] leading-tight">Request Export Price</div>
-                    <div className="text-[10px] opacity-60 mt-0.5">Best price · Fast reply · Bulk supply</div>
+                    <div className="font-black text-[15px] leading-tight">Request Export Price</div>
+                    <div className="text-[10.5px] opacity-60 mt-0.5">Best price · Fast reply · Bulk supply</div>
                   </div>
                 </div>
-                <button onClick={()=>setEnquiryOpen(false)} className="w-8 h-8 rounded-full bg-white/12 grid place-items-center hover:bg-white/20 text-[14px] transition">✕</button>
+                <button onClick={()=>setEnquiryOpen(false)} className="w-8 h-8 rounded-xl bg-white/15 grid place-items-center hover:bg-white/25 text-[14px] transition">✕</button>
               </div>
 
               <div className="p-5 space-y-4 max-h-[78vh] overflow-auto">
-                {/* Product & Qty */}
                 <div className="grid grid-cols-1 md:grid-cols-[1.3fr_.7fr] gap-3">
                   <div>
-                    <label className="text-[11px] font-bold text-[#3a4a71]">Select Product</label>
-                    <select value={selectedProduct?.id||''} onChange={e=>setSelectedProduct(PRODUCTS.find(p=>p.id===e.target.value)||null)} className="mt-1 w-full rounded-[10px] border border-[#dde6f7] bg-[#fbfcff] px-3 py-2.5 text-[12px] font-medium outline-none focus:border-[#0d3b9c]">
+                    <label className="text-[11px] font-bold text-[#374151]">Select Product</label>
+                    <select value={selectedProduct?.id||''} onChange={e=>setSelectedProduct(PRODUCTS.find(p=>p.id===e.target.value)||null)}
+                      className="mt-1 w-full rounded-xl border border-[#E8ECF5] bg-[#F8F9FF] px-3 py-2.5 text-[12px] font-medium outline-none focus:border-[#4361EE] transition">
                       <option value="">Choose product…</option>
                       {['Vidalista','Fildena','Vilitra','Cenforce','Kamagra'].map(brand=>(
                         <optgroup key={brand} label={`── ${brand} ──`}>
@@ -756,46 +808,46 @@ export default function App() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-[11px] font-bold text-[#3a4a71]">Order Quantity</label>
-                    <select value={quantity} onChange={e=>setQuantity(e.target.value)} className="mt-1 w-full rounded-[10px] border border-[#dde6f7] bg-[#fbfcff] px-3 py-2.5 text-[12px] outline-none focus:border-[#0d3b9c]">
+                    <label className="text-[11px] font-bold text-[#374151]">Order Quantity</label>
+                    <select value={quantity} onChange={e=>setQuantity(e.target.value)}
+                      className="mt-1 w-full rounded-xl border border-[#E8ECF5] bg-[#F8F9FF] px-3 py-2.5 text-[12px] outline-none focus:border-[#4361EE] transition">
                       {['500 Units','1,000 Units','2,000 Units','5,000 Units','10,000+ Units','Custom Qty'].map(q=><option key={q}>{q}</option>)}
                     </select>
                   </div>
                 </div>
 
-                {/* Product preview */}
                 {selectedProduct && (
-                  <div className="flex items-center gap-3 bg-[#f5f8ff] border border-[#dde7ff] rounded-[12px] p-3">
-                    <div className="w-16 h-10 rounded-[7px] overflow-hidden shrink-0 border border-[#dde7ff]">
+                  <div className="flex items-center gap-3 bg-[#F0F3FF] border border-[#DDE4FF] rounded-xl p-3">
+                    <div className="w-14 h-9 rounded-lg overflow-hidden shrink-0 border border-[#DDE4FF]">
                       <img src={selectedProduct.img} alt={selectedProduct.name} className="w-full h-full object-cover"/>
                     </div>
                     <div className="flex-1">
-                      <div className="text-[13px] font-black text-[#0a1a3d]">{selectedProduct.name}</div>
-                      <div className="text-[10px] text-[#6b7a9f]">{selectedProduct.subtitle} · {quantity}</div>
+                      <div className="text-[13px] font-black text-[#0A0A14]">{selectedProduct.name}</div>
+                      <div className="text-[10px] text-[#6B7280]">{selectedProduct.subtitle} · {quantity}</div>
                     </div>
-                    <div className="text-[10px] px-2.5 py-1 rounded-full bg-[#e8f5e9] text-[#1a7a2a] font-bold shrink-0">✅ In Stock</div>
+                    <div className="text-[10px] px-2.5 py-1 rounded-full bg-[#D1FAE5] text-[#065F46] font-bold shrink-0">✅ In Stock</div>
                   </div>
                 )}
 
-                {/* Message */}
                 <div>
-                  <label className="text-[11px] font-bold text-[#3a4a71]">Message / Requirements</label>
-                  <textarea value={msg} onChange={e=>setMsg(e.target.value)} placeholder="e.g. Need CIF pricing for export to UK, share product dossier and COA. Also interested in Fildena range…" rows={3} className="mt-1 w-full rounded-[10px] border border-[#dde6f7] px-3 py-2.5 text-[12px] outline-none focus:border-[#0d3b9c] resize-none"/>
+                  <label className="text-[11px] font-bold text-[#374151]">Message / Requirements</label>
+                  <textarea value={msg} onChange={e=>setMsg(e.target.value)}
+                    placeholder="e.g. Need CIF pricing for export to UK, share product dossier and COA. Also interested in Fildena range…"
+                    rows={3} className="mt-1 w-full rounded-xl border border-[#E8ECF5] px-3 py-2.5 text-[12px] outline-none focus:border-[#4361EE] resize-none transition"/>
                 </div>
 
-                {/* Send buttons */}
                 <div className="grid grid-cols-3 gap-2 pt-1">
-                  <button onClick={doWA} className="inline-flex items-center justify-center gap-1.5 bg-[#25D366] text-white rounded-full py-3 text-[12px] font-bold shadow-[0_8px_20px_rgba(37,211,102,0.35)] hover:scale-[1.02] active:scale-[0.98] transition">
+                  <button onClick={doWA} className="inline-flex items-center justify-center gap-1.5 bg-[#25D366] text-white rounded-xl py-3 text-[12px] font-bold hover:scale-[1.02] active:scale-[0.98] transition">
                     <IcoWA/> WhatsApp
                   </button>
-                  <button onClick={doTG} className="inline-flex items-center justify-center gap-1.5 bg-[#229ED9] text-white rounded-full py-3 text-[12px] font-bold shadow-[0_8px_20px_rgba(34,158,217,0.35)] hover:scale-[1.02] active:scale-[0.98] transition">
+                  <button onClick={doTG} className="inline-flex items-center justify-center gap-1.5 bg-[#229ED9] text-white rounded-xl py-3 text-[12px] font-bold hover:scale-[1.02] active:scale-[0.98] transition">
                     <IcoTG/> Telegram
                   </button>
-                  <button onClick={doEmail} className="inline-flex items-center justify-center gap-1.5 bg-[#0d3b9c] text-white rounded-full py-3 text-[12px] font-bold shadow-[0_8px_20px_rgba(13,59,156,0.35)] hover:scale-[1.02] active:scale-[0.98] transition">
+                  <button onClick={doEmail} className="inline-flex items-center justify-center gap-1.5 bg-[#4361EE] text-white rounded-xl py-3 text-[12px] font-bold hover:scale-[1.02] active:scale-[0.98] transition">
                     <IcoMail/> Email
                   </button>
                 </div>
-                <p className="text-center text-[10px] text-[#9aabcf]">🔒 Confidential · Reply within 30 min · Genuine products</p>
+                <p className="text-center text-[10px] text-[#9CA3AF]">🔒 Confidential · Reply within 30 min · Genuine products</p>
               </div>
             </div>
           </div>
