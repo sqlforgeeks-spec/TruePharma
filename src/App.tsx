@@ -8,38 +8,39 @@ type Product = {
 };
 
 /* ─── Data ───────────────────────────────────────────────────────────── */
+const B = import.meta.env.BASE_URL;
 const PRODUCTS: Product[] = [
   // Vidalista
-  { id:'vidalista5',       name:'VIDALISTA® 5',           subtitle:'Tadalafil Tablets IP 5mg',          mg:'5mg',   brand:'Vidalista', color:'from-[#4D2A16] to-[#8B5A2B]', img:'/images/products/vidalista5.jpg' },
-  { id:'vidalista10',      name:'VIDALISTA® 10',          subtitle:'Tadalafil Tablets IP 10mg',         mg:'10mg',  brand:'Vidalista', color:'from-[#4D2A16] to-[#8B5A2B]', popular:true, tag:'Best Seller', img:'/images/products/vidalista10.jpg' },
-  { id:'vidalista20',      name:'VIDALISTA® 20',          subtitle:'Tadalafil Tablets IP 20mg',         mg:'20mg',  brand:'Vidalista', color:'from-[#5C3317] to-[#9B6A3B]', img:'/images/products/vidalista20.jpg' },
-  { id:'vidalistact',      name:'VIDALISTA® CT',          subtitle:'Tadalafil Chewable Tablets 20mg',   mg:'20mg',  brand:'Vidalista', color:'from-[#6B3A1F] to-[#A06030]', img:'/images/products/vidalistact.jpg' },
-  { id:'vidalistapro',     name:'VIDALISTA PROFESSIONAL', subtitle:'Tadalafil Sublingual Tablets 20mg', mg:'20mg',  brand:'Vidalista', color:'from-[#3D1F0E] to-[#7A4A28]', tag:'Pro', img:'/images/products/vidalistapro.jpg' },
-  { id:'vidalista60',      name:'VIDALISTA® 60',          subtitle:'Tadalafil Tablets 60mg',            mg:'60mg',  brand:'Vidalista', color:'from-[#2D1508] to-[#6A3A18]', img:'/images/products/vidalista60.jpg' },
-  { id:'vidalista80',      name:'VIDALISTA® 80',          subtitle:'Tadalafil Tablets 80mg',            mg:'80mg',  brand:'Vidalista', color:'from-[#1E0E05] to-[#5A2E10]', img:'/images/products/vidalista80.jpg' },
-  { id:'vidalistablack80', name:'VIDALISTA BLACK® 80',    subtitle:'Tadalafil Tablets 80mg',            mg:'80mg',  brand:'Vidalista', color:'from-[#0f0f0f] to-[#2a2a2a]', tag:'Premium', img:'/images/products/vidalistablack80.jpg' },
-  { id:'supervidalista',   name:'SUPER VIDALISTA',        subtitle:'Tadalafil 20mg + Dapoxetine 60mg',  mg:'Combo', brand:'Vidalista', color:'from-[#1a1a2e] to-[#3a3a5c]', tag:'Combo', img:'/images/products/supervidalista.jpg' },
+  { id:'vidalista5',       name:'VIDALISTA® 5',           subtitle:'Tadalafil Tablets IP 5mg',          mg:'5mg',   brand:'Vidalista', color:'from-[#4D2A16] to-[#8B5A2B]', img:`${B}images/products/vidalista5.jpg` },
+  { id:'vidalista10',      name:'VIDALISTA® 10',          subtitle:'Tadalafil Tablets IP 10mg',         mg:'10mg',  brand:'Vidalista', color:'from-[#4D2A16] to-[#8B5A2B]', popular:true, tag:'Best Seller', img:`${B}images/products/vidalista10.jpg` },
+  { id:'vidalista20',      name:'VIDALISTA® 20',          subtitle:'Tadalafil Tablets IP 20mg',         mg:'20mg',  brand:'Vidalista', color:'from-[#5C3317] to-[#9B6A3B]', img:`${B}images/products/vidalista20.jpg` },
+  { id:'vidalistact',      name:'VIDALISTA® CT',          subtitle:'Tadalafil Chewable Tablets 20mg',   mg:'20mg',  brand:'Vidalista', color:'from-[#6B3A1F] to-[#A06030]', img:`${B}images/products/vidalistact.jpg` },
+  { id:'vidalistapro',     name:'VIDALISTA PROFESSIONAL', subtitle:'Tadalafil Sublingual Tablets 20mg', mg:'20mg',  brand:'Vidalista', color:'from-[#3D1F0E] to-[#7A4A28]', tag:'Pro', img:`${B}images/products/vidalistapro.jpg` },
+  { id:'vidalista60',      name:'VIDALISTA® 60',          subtitle:'Tadalafil Tablets 60mg',            mg:'60mg',  brand:'Vidalista', color:'from-[#2D1508] to-[#6A3A18]', img:`${B}images/products/vidalista60.jpg` },
+  { id:'vidalista80',      name:'VIDALISTA® 80',          subtitle:'Tadalafil Tablets 80mg',            mg:'80mg',  brand:'Vidalista', color:'from-[#1E0E05] to-[#5A2E10]', img:`${B}images/products/vidalista80.jpg` },
+  { id:'vidalistablack80', name:'VIDALISTA BLACK® 80',    subtitle:'Tadalafil Tablets 80mg',            mg:'80mg',  brand:'Vidalista', color:'from-[#0f0f0f] to-[#2a2a2a]', tag:'Premium', img:`${B}images/products/vidalistablack80.jpg` },
+  { id:'supervidalista',   name:'SUPER VIDALISTA',        subtitle:'Tadalafil 20mg + Dapoxetine 60mg',  mg:'Combo', brand:'Vidalista', color:'from-[#1a1a2e] to-[#3a3a5c]', tag:'Combo', img:`${B}images/products/supervidalista.jpg` },
   // Fildena
-  { id:'fildena100',       name:'FILDENA® 100',           subtitle:'Sildenafil Citrate 100mg',          mg:'100mg', brand:'Fildena',   color:'from-[#5B21B6] to-[#7C3AED]', popular:true, tag:'Top Export', img:'/images/products/fildena100.jpg' },
-  { id:'fildena120',       name:'FILDENA® STRONG 120',    subtitle:'Sildenafil Citrate 120mg',          mg:'120mg', brand:'Fildena',   color:'from-[#C81E1E] to-[#8B0000]', img:'/images/products/fildena120.jpg' },
-  { id:'fildenapro',       name:'FILDENA® PROFESSIONAL',  subtitle:'Sildenafil 100mg Sublingual',       mg:'100mg', brand:'Fildena',   color:'from-[#9D174D] to-[#BE185D]', tag:'Pro', img:'/images/products/fildenapro100.jpg' },
-  { id:'fildenasa',        name:'FILDENA® SUPER ACTIVE',  subtitle:'Sildenafil Softgel Capsules 100mg', mg:'100mg', brand:'Fildena',   color:'from-[#1e3a6e] to-[#2563eb]', img:'/images/products/fildenasuperactive.jpg' },
+  { id:'fildena100',       name:'FILDENA® 100',           subtitle:'Sildenafil Citrate 100mg',          mg:'100mg', brand:'Fildena',   color:'from-[#5B21B6] to-[#7C3AED]', popular:true, tag:'Top Export', img:`${B}images/products/fildena100.jpg` },
+  { id:'fildena120',       name:'FILDENA® STRONG 120',    subtitle:'Sildenafil Citrate 120mg',          mg:'120mg', brand:'Fildena',   color:'from-[#C81E1E] to-[#8B0000]', img:`${B}images/products/fildena120.jpg` },
+  { id:'fildenapro',       name:'FILDENA® PROFESSIONAL',  subtitle:'Sildenafil 100mg Sublingual',       mg:'100mg', brand:'Fildena',   color:'from-[#9D174D] to-[#BE185D]', tag:'Pro', img:`${B}images/products/fildenapro100.jpg` },
+  { id:'fildenasa',        name:'FILDENA® SUPER ACTIVE',  subtitle:'Sildenafil Softgel Capsules 100mg', mg:'100mg', brand:'Fildena',   color:'from-[#1e3a6e] to-[#2563eb]', img:`${B}images/products/fildenasuperactive.jpg` },
   // Vilitra
-  { id:'vilitra20',        name:'VILITRA 20',             subtitle:'Vardenafil 20mg',                   mg:'20mg',  brand:'Vilitra',   color:'from-[#B8962E] to-[#D4AF37]', popular:true, img:'/images/products/vilitra20.jpg' },
-  { id:'vilitra40',        name:'VILITRA 40',             subtitle:'Vardenafil 40mg',                   mg:'40mg',  brand:'Vilitra',   color:'from-[#92700A] to-[#B8962E]', img:'/images/products/vilitra40.jpg' },
-  { id:'vilitra60',        name:'VILITRA 60',             subtitle:'Vardenafil 60mg',                   mg:'60mg',  brand:'Vilitra',   color:'from-[#6B5010] to-[#92700A]', img:'/images/products/vilitra60.jpg' },
+  { id:'vilitra20',        name:'VILITRA 20',             subtitle:'Vardenafil 20mg',                   mg:'20mg',  brand:'Vilitra',   color:'from-[#B8962E] to-[#D4AF37]', popular:true, img:`${B}images/products/vilitra20.jpg` },
+  { id:'vilitra40',        name:'VILITRA 40',             subtitle:'Vardenafil 40mg',                   mg:'40mg',  brand:'Vilitra',   color:'from-[#92700A] to-[#B8962E]', img:`${B}images/products/vilitra40.jpg` },
+  { id:'vilitra60',        name:'VILITRA 60',             subtitle:'Vardenafil 60mg',                   mg:'60mg',  brand:'Vilitra',   color:'from-[#6B5010] to-[#92700A]', img:`${B}images/products/vilitra60.jpg` },
   // Cenforce
-  { id:'cenforce25',       name:'CENFORCE 25',            subtitle:'Sildenafil Citrate Tablets IP 25mg', mg:'25mg', brand:'Cenforce',  color:'from-[#065F46] to-[#059669]', img:'/images/products/cenforce25.jpg' },
-  { id:'cenforce50',       name:'CENFORCE 50',            subtitle:'Sildenafil Tablets IP 50mg',        mg:'50mg',  brand:'Cenforce',  color:'from-[#1B5E20] to-[#2E7D32]', img:'/images/products/cenforce50.jpg' },
-  { id:'cenforce100',      name:'CENFORCE 100',           subtitle:'Sildenafil Citrate Tablets IP 100mg', mg:'100mg', brand:'Cenforce', color:'from-[#14532D] to-[#166534]', popular:true, tag:'Popular', img:'/images/products/cenforce100.jpg' },
-  { id:'cenforce150',      name:'CENFORCE 150',           subtitle:'Sildenafil Tablets 150mg',          mg:'150mg', brand:'Cenforce',  color:'from-[#145214] to-[#1B5E20]', img:'/images/products/cenforce150.jpg' },
-  { id:'cenforce200',      name:'CENFORCE 200',           subtitle:'Sildenafil Tablets BP 200mg',       mg:'200mg', brand:'Cenforce',  color:'from-[#7C2D12] to-[#B45309]', tag:'High Dose', img:'/images/products/cenforce200.jpg' },
-  { id:'cenforcesoft',     name:'CENFORCE SOFT-100',      subtitle:'Sildenafil Chewable Tablets 100mg', mg:'100mg', brand:'Cenforce',  color:'from-[#0D3D0D] to-[#145214]', popular:true, tag:'#1 Export', img:'/images/products/cenforcesoft100.jpg' },
+  { id:'cenforce25',       name:'CENFORCE 25',            subtitle:'Sildenafil Citrate Tablets IP 25mg', mg:'25mg', brand:'Cenforce',  color:'from-[#065F46] to-[#059669]', img:`${B}images/products/cenforce25.jpg` },
+  { id:'cenforce50',       name:'CENFORCE 50',            subtitle:'Sildenafil Tablets IP 50mg',        mg:'50mg',  brand:'Cenforce',  color:'from-[#1B5E20] to-[#2E7D32]', img:`${B}images/products/cenforce50.jpg` },
+  { id:'cenforce100',      name:'CENFORCE 100',           subtitle:'Sildenafil Citrate Tablets IP 100mg', mg:'100mg', brand:'Cenforce', color:'from-[#14532D] to-[#166534]', popular:true, tag:'Popular', img:`${B}images/products/cenforce100.jpg` },
+  { id:'cenforce150',      name:'CENFORCE 150',           subtitle:'Sildenafil Tablets 150mg',          mg:'150mg', brand:'Cenforce',  color:'from-[#145214] to-[#1B5E20]', img:`${B}images/products/cenforce150.jpg` },
+  { id:'cenforce200',      name:'CENFORCE 200',           subtitle:'Sildenafil Tablets BP 200mg',       mg:'200mg', brand:'Cenforce',  color:'from-[#7C2D12] to-[#B45309]', tag:'High Dose', img:`${B}images/products/cenforce200.jpg` },
+  { id:'cenforcesoft',     name:'CENFORCE SOFT-100',      subtitle:'Sildenafil Chewable Tablets 100mg', mg:'100mg', brand:'Cenforce',  color:'from-[#0D3D0D] to-[#145214]', popular:true, tag:'#1 Export', img:`${B}images/products/cenforcesoft100.jpg` },
   // Kamagra
-  { id:'kamagra100',       name:'KAMAGRA 100',            subtitle:'Sildenafil Tablets 100mg',          mg:'100mg', brand:'Kamagra',   color:'from-[#D97706] to-[#F59E0B]', popular:true, tag:'Global Brand', img:'/images/products/kamagra100.jpg' },
-  { id:'kamagraoral',      name:'KAMAGRA ORAL JELLY',     subtitle:'Sildenafil 100mg — 7 Flavours',     mg:'100mg', brand:'Kamagra',   color:'from-[#B45309] to-[#D97706]', img:'/images/products/kamagraoral.jpg' },
-  { id:'kamagraefferv',    name:'KAMAGRA EFFERVESCENT',   subtitle:'Sildenafil 100mg Effervescent',     mg:'100mg', brand:'Kamagra',   color:'from-[#92400E] to-[#B45309]', img:'/images/products/kamagraefferv.jpg' },
-  { id:'kamagrapolo',      name:'KAMAGRA POLO',           subtitle:'Sildenafil Chewable 100mg',         mg:'100mg', brand:'Kamagra',   color:'from-[#78350F] to-[#92400E]', img:'/images/products/kamagrapolo.jpg' },
+  { id:'kamagra100',       name:'KAMAGRA 100',            subtitle:'Sildenafil Tablets 100mg',          mg:'100mg', brand:'Kamagra',   color:'from-[#D97706] to-[#F59E0B]', popular:true, tag:'Global Brand', img:`${B}images/products/kamagra100.jpg` },
+  { id:'kamagraoral',      name:'KAMAGRA ORAL JELLY',     subtitle:'Sildenafil 100mg — 7 Flavours',     mg:'100mg', brand:'Kamagra',   color:'from-[#B45309] to-[#D97706]', img:`${B}images/products/kamagraoral.jpg` },
+  { id:'kamagraefferv',    name:'KAMAGRA EFFERVESCENT',   subtitle:'Sildenafil 100mg Effervescent',     mg:'100mg', brand:'Kamagra',   color:'from-[#92400E] to-[#B45309]', img:`${B}images/products/kamagraefferv.jpg` },
+  { id:'kamagrapolo',      name:'KAMAGRA POLO',           subtitle:'Sildenafil Chewable 100mg',         mg:'100mg', brand:'Kamagra',   color:'from-[#78350F] to-[#92400E]', img:`${B}images/products/kamagrapolo.jpg` },
 ];
 
 const NAV_BRANDS = [
@@ -51,7 +52,7 @@ const NAV_BRANDS = [
 ];
 
 const FILTER_BRANDS = ['All','Vidalista','Fildena','Vilitra','Cenforce','Kamagra'] as const;
-const HERO_IMAGES   = ['/images/hero1.png','/images/hero2.png','/images/hero3.png','/images/hero4.png'];
+const HERO_IMAGES   = [`${import.meta.env.BASE_URL}images/hero1.png`,`${import.meta.env.BASE_URL}images/hero2.png`,`${import.meta.env.BASE_URL}images/hero3.png`,`${import.meta.env.BASE_URL}images/hero4.png`];
 const ALL_INITIAL   = 8;
 const CAT_LIMIT     = 4;
 
