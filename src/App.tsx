@@ -4,34 +4,39 @@ import { useState, useRef, useEffect } from 'react';
 type Product = {
   id: string; name: string; subtitle: string; mg: string;
   brand: string; desc: string; color: string; tag?: string; popular?: boolean;
+  img: string;
 };
 
 /* ─── Data ───────────────────────────────────────────────────────────── */
 const PRODUCTS: Product[] = [
   // Vidalista
-  { id:'vidalista10', name:'VIDALISTA® 10', subtitle:'Tadalafil Tablets IP 10mg', mg:'10mg', brand:'Vidalista', desc:'Long-acting tadalafil — up to 36 hrs of performance support for confident, lasting results.', color:'from-[#4D2A16] to-[#8B5A2B]', popular:true, tag:'Best Seller' },
-  { id:'vidalista20', name:'VIDALISTA® 20', subtitle:'Tadalafil Tablets IP 20mg', mg:'20mg', brand:'Vidalista', desc:'Standard clinical dose of tadalafil. Trusted by healthcare distributors across 40+ markets.', color:'from-[#5C3317] to-[#9B6A3B]' },
-  { id:'vidalista40', name:'VIDALISTA® 40', subtitle:'Tadalafil Tablets IP 40mg', mg:'40mg', brand:'Vidalista', desc:'High-potency tadalafil tablet for wholesale buyers seeking premium-grade ED solutions.', color:'from-[#3D1F0E] to-[#7A4A28]' },
-  { id:'vidalista60', name:'VIDALISTA® 60', subtitle:'Tadalafil Tablets IP 60mg', mg:'60mg', brand:'Vidalista', desc:'Maximum-strength tadalafil. A top export SKU for markets demanding superior potency.', color:'from-[#2D1508] to-[#6A3A18]' },
-  { id:'supervidalista', name:'SUPER VIDALISTA', subtitle:'Tadalafil 20mg + Dapoxetine 60mg', mg:'Combo', brand:'Vidalista', desc:'Dual-action formula combining ED relief and premature ejaculation control in a single tablet.', color:'from-[#1a1a2e] to-[#3a3a5c]', tag:'Combo' },
+  { id:'vidalista5',       name:'VIDALISTA® 5',           subtitle:'Tadalafil Tablets IP 5mg',          mg:'5mg',   brand:'Vidalista', desc:'Low-dose daily tadalafil for consistent, on-demand readiness. Ideal for wellness maintenance across global markets.',            color:'from-[#4D2A16] to-[#8B5A2B]', img:'/images/products/vidalista5.jpg' },
+  { id:'vidalista10',      name:'VIDALISTA® 10',          subtitle:'Tadalafil Tablets IP 10mg',         mg:'10mg',  brand:'Vidalista', desc:'Long-acting tadalafil — up to 36 hrs of performance support for confident, lasting results.',                                color:'from-[#4D2A16] to-[#8B5A2B]', popular:true, tag:'Best Seller', img:'/images/products/vidalista10.jpg' },
+  { id:'vidalista20',      name:'VIDALISTA® 20',          subtitle:'Tadalafil Tablets IP 20mg',         mg:'20mg',  brand:'Vidalista', desc:'Standard clinical dose of tadalafil. Trusted by healthcare distributors across 25+ markets.',                                  color:'from-[#5C3317] to-[#9B6A3B]', img:'/images/products/vidalista20.jpg' },
+  { id:'vidalistact',      name:'VIDALISTA® CT',          subtitle:'Tadalafil Chewable Tablets 20mg',   mg:'20mg',  brand:'Vidalista', desc:'Chewable tadalafil format — faster onset, no water needed. Strong retail and wholesale appeal worldwide.',                  color:'from-[#6B3A1F] to-[#A06030]', img:'/images/products/vidalistact.jpg' },
+  { id:'vidalistapro',     name:'VIDALISTA PROFESSIONAL', subtitle:'Tadalafil Sublingual Tablets 20mg', mg:'20mg',  brand:'Vidalista', desc:'Fast-dissolve sublingual tadalafil — onset in 15 min, premium-grade export formulation.',                                    color:'from-[#3D1F0E] to-[#7A4A28]', tag:'Pro', img:'/images/products/vidalistapro.jpg' },
+  { id:'vidalista60',      name:'VIDALISTA® 60',          subtitle:'Tadalafil Tablets 60mg',            mg:'60mg',  brand:'Vidalista', desc:'Maximum-strength tadalafil. A top export SKU for markets demanding superior potency.',                                         color:'from-[#2D1508] to-[#6A3A18]', img:'/images/products/vidalista60.jpg' },
+  { id:'vidalista80',      name:'VIDALISTA® 80',          subtitle:'Tadalafil Tablets 80mg',            mg:'80mg',  brand:'Vidalista', desc:'Ultra-high potency tadalafil for specialty distributors and markets with premium demand.',                                    color:'from-[#1E0E05] to-[#5A2E10]', img:'/images/products/vidalista80.jpg' },
+  { id:'vidalistablack80', name:'VIDALISTA BLACK® 80',    subtitle:'Tadalafil Tablets 80mg',            mg:'80mg',  brand:'Vidalista', desc:'Premium black-label tadalafil — ultra-potency formulation preferred by top-tier export channels.',                           color:'from-[#0f0f0f] to-[#2a2a2a]', tag:'Premium', img:'/images/products/vidalistablack80.jpg' },
+  { id:'supervidalista',   name:'SUPER VIDALISTA',        subtitle:'Tadalafil 20mg + Dapoxetine 60mg',  mg:'Combo', brand:'Vidalista', desc:'Dual-action formula combining ED relief and premature ejaculation control in a single tablet.',                              color:'from-[#1a1a2e] to-[#3a3a5c]', tag:'Combo', img:'/images/products/supervidalista.jpg' },
   // Fildena
-  { id:'fildena50',  name:'FILDENA® 50',  subtitle:'Sildenafil Citrate 50mg', mg:'50mg', brand:'Fildena', desc:'Entry-level sildenafil for everyday ED management. Fast absorption, proven reliability.', color:'from-[#7B2D8B] to-[#A855B8]' },
-  { id:'fildena100', name:'FILDENA® 100', subtitle:'Sildenafil Citrate 100mg', mg:'100mg', brand:'Fildena', desc:'The gold-standard sildenafil dose. One of the highest-volume export SKUs globally.', color:'from-[#5B21B6] to-[#7C3AED]', popular:true, tag:'Top Export' },
-  { id:'fildena120', name:'FILDENA® STRONG 120', subtitle:'Sildenafil Citrate 120mg', mg:'120mg', brand:'Fildena', desc:'Super-strength sildenafil for markets demanding higher-potency formulations.', color:'from-[#C81E1E] to-[#8B0000]' },
-  { id:'fildenapro', name:'FILDENA® PROFESSIONAL', subtitle:'Sildenafil 100mg Sublingual', mg:'100mg', brand:'Fildena', desc:'Fast-dissolve sublingual format — onset in 15 min, ideal for premium wellness retail.', color:'from-[#9D174D] to-[#BE185D]', tag:'Pro' },
+  { id:'fildena100',       name:'FILDENA® 100',           subtitle:'Sildenafil Citrate 100mg',          mg:'100mg', brand:'Fildena',   desc:'The gold-standard sildenafil dose. One of the highest-volume export SKUs globally.',                                          color:'from-[#5B21B6] to-[#7C3AED]', popular:true, tag:'Top Export', img:'/images/products/fildena100.jpg' },
+  { id:'fildena120',       name:'FILDENA® STRONG 120',    subtitle:'Sildenafil Citrate 120mg',          mg:'120mg', brand:'Fildena',   desc:'Super-strength sildenafil for markets demanding higher-potency formulations.',                                                color:'from-[#C81E1E] to-[#8B0000]', img:'/images/products/fildena120.jpg' },
+  { id:'fildenapro',       name:'FILDENA® PROFESSIONAL',  subtitle:'Sildenafil 100mg Sublingual',       mg:'100mg', brand:'Fildena',   desc:'Fast-dissolve sublingual format — onset in 15 min, ideal for premium wellness retail.',                                     color:'from-[#9D174D] to-[#BE185D]', tag:'Pro', img:'/images/products/fildenapro.jpg' },
+  { id:'fildenasa',        name:'FILDENA® SUPER ACTIVE',  subtitle:'Sildenafil Softgel Capsules 100mg', mg:'100mg', brand:'Fildena',   desc:'Softgel capsule format for faster absorption. Premium presentation ideal for specialty retail and export.',                  color:'from-[#1e3a6e] to-[#2563eb]', img:'/images/products/fildenasuperactive.jpg' },
   // Vilitra
-  { id:'vilitra20', name:'VILITRA 20', subtitle:'Vardenafil 20mg', mg:'20mg', brand:'Vilitra', desc:'Clinically proven vardenafil at the standard therapeutic dose. Competitive B2B pricing available.', color:'from-[#B8962E] to-[#D4AF37]', popular:true },
-  { id:'vilitra40', name:'VILITRA 40', subtitle:'Vardenafil 40mg', mg:'40mg', brand:'Vilitra', desc:'Double-strength vardenafil for markets with high-potency demand. WHO-GMP batch certified.', color:'from-[#92700A] to-[#B8962E]' },
-  { id:'vilitra60', name:'VILITRA 60', subtitle:'Vardenafil 60mg', mg:'60mg', brand:'Vilitra', desc:'Maximum vardenafil potency. Premium grade, ideal for specialty distributors.', color:'from-[#6B5010] to-[#92700A]' },
+  { id:'vilitra20',        name:'VILITRA 20',             subtitle:'Vardenafil 20mg',                   mg:'20mg',  brand:'Vilitra',   desc:'Clinically proven vardenafil at the standard therapeutic dose. Competitive B2B pricing available.',                          color:'from-[#B8962E] to-[#D4AF37]', popular:true, img:'/images/products/vilitra20.jpg' },
+  { id:'vilitra40',        name:'VILITRA 40',             subtitle:'Vardenafil 40mg',                   mg:'40mg',  brand:'Vilitra',   desc:'Double-strength vardenafil for markets with high-potency demand. Batch certified.',                                           color:'from-[#92700A] to-[#B8962E]', img:'/images/products/vilitra40.jpg' },
+  { id:'vilitra60',        name:'VILITRA 60',             subtitle:'Vardenafil 60mg',                   mg:'60mg',  brand:'Vilitra',   desc:'Maximum vardenafil potency. Premium grade, ideal for specialty distributors.',                                               color:'from-[#6B5010] to-[#92700A]', img:'/images/products/vilitra60.jpg' },
   // Cenforce
-  { id:'cenforce100', name:'CENFORCE 100', subtitle:'Sildenafil Tablets 100mg', mg:'100mg', brand:'Cenforce', desc:'World-renowned sildenafil tablet — consistently one of the highest-demanded export SKUs.', color:'from-[#1B5E20] to-[#2E7D32]', popular:true, tag:'#1 Export' },
-  { id:'cenforce150', name:'CENFORCE 150', subtitle:'Sildenafil Tablets 150mg', mg:'150mg', brand:'Cenforce', desc:'High-strength sildenafil for markets requiring intensified ED treatment protocols.', color:'from-[#145214] to-[#1B5E20]' },
-  { id:'cenforce200', name:'CENFORCE 200', subtitle:'Sildenafil Tablets 200mg', mg:'200mg', brand:'Cenforce', desc:'Ultra-strength sildenafil. Premium bulk export with full regulatory documentation.', color:'from-[#0D3D0D] to-[#145214]' },
+  { id:'cenforce50',       name:'CENFORCE 50',            subtitle:'Sildenafil Tablets IP 50mg',        mg:'50mg',  brand:'Cenforce',  desc:'Entry-level sildenafil citrate. Fast absorption, proven reliability — strong demand in starter markets.',                    color:'from-[#1B5E20] to-[#2E7D32]', img:'/images/products/cenforce50.jpg' },
+  { id:'cenforce150',      name:'CENFORCE 150',           subtitle:'Sildenafil Tablets 150mg',          mg:'150mg', brand:'Cenforce',  desc:'High-strength sildenafil for markets requiring intensified treatment protocols.',                                             color:'from-[#145214] to-[#1B5E20]', img:'/images/products/cenforce150.jpg' },
+  { id:'cenforcesoft',     name:'CENFORCE SOFT-100',      subtitle:'Sildenafil Chewable Tablets 100mg', mg:'100mg', brand:'Cenforce',  desc:'Chewable sildenafil — no water required. Discreet, portable, with strong retail and export appeal.',                       color:'from-[#0D3D0D] to-[#145214]', popular:true, tag:'#1 Export', img:'/images/products/cenforcesoft100.jpg' },
   // Kamagra
-  { id:'kamagra100',  name:'KAMAGRA 100',  subtitle:'Sildenafil Tablets 100mg', mg:'100mg', brand:'Kamagra', desc:'Globally recognised sildenafil brand. Available in tablets, jelly & effervescent formats.', color:'from-[#D97706] to-[#F59E0B]', popular:true, tag:'Global Brand' },
-  { id:'kamagraoral', name:'KAMAGRA ORAL JELLY', subtitle:'Sildenafil 100mg — 7 Flavours', mg:'100mg', brand:'Kamagra', desc:'Fast-absorbing oral jelly in 7 popular flavours. Top retail-friendly export presentation.', color:'from-[#B45309] to-[#D97706]' },
-  { id:'kamagraefferv', name:'KAMAGRA EFFERVESCENT', subtitle:'Sildenafil 100mg Effervescent', mg:'100mg', brand:'Kamagra', desc:'Dissolve-in-water format. Discreet, portable, and ideal for wellness retail channels.', color:'from-[#92400E] to-[#B45309]' },
-  { id:'kamagrapolo', name:'KAMAGRA POLO', subtitle:'Sildenafil Chewable 100mg', mg:'100mg', brand:'Kamagra', desc:'Mint-flavoured chewable sildenafil — no water required. Strong retail appeal worldwide.', color:'from-[#78350F] to-[#92400E]' },
+  { id:'kamagra100',       name:'KAMAGRA 100',            subtitle:'Sildenafil Tablets 100mg',          mg:'100mg', brand:'Kamagra',   desc:'Globally recognised sildenafil brand. Available in tablets, jelly & effervescent formats.',                                  color:'from-[#D97706] to-[#F59E0B]', popular:true, tag:'Global Brand', img:'/images/products/kamagra100.jpg' },
+  { id:'kamagraoral',      name:'KAMAGRA ORAL JELLY',     subtitle:'Sildenafil 100mg — 7 Flavours',     mg:'100mg', brand:'Kamagra',   desc:'Fast-absorbing oral jelly in 7 popular flavours. Top retail-friendly export presentation.',                                color:'from-[#B45309] to-[#D97706]', img:'/images/products/kamagraoral.jpg' },
+  { id:'kamagraefferv',    name:'KAMAGRA EFFERVESCENT',   subtitle:'Sildenafil 100mg Effervescent',     mg:'100mg', brand:'Kamagra',   desc:'Dissolve-in-water format. Discreet, portable, and ideal for wellness retail channels.',                                    color:'from-[#92400E] to-[#B45309]', img:'/images/products/kamagraefferv.jpg' },
+  { id:'kamagrapolo',      name:'KAMAGRA POLO',           subtitle:'Sildenafil Chewable 100mg',         mg:'100mg', brand:'Kamagra',   desc:'Mint-flavoured chewable sildenafil — no water required. Strong retail appeal worldwide.',                                  color:'from-[#78350F] to-[#92400E]', img:'/images/products/kamagrapolo.jpg' },
 ];
 
 const NAV_BRANDS = [
@@ -44,8 +49,8 @@ const NAV_BRANDS = [
 
 const FILTER_BRANDS = ['All','Vidalista','Fildena','Vilitra','Cenforce','Kamagra'] as const;
 const HERO_IMAGES   = ['/images/hero1.png','/images/hero2.png','/images/hero3.png','/images/hero4.png'];
-const ALL_INITIAL   = 8;   // cards shown in "All" before Show More
-const CAT_LIMIT     = 4;   // cards per brand filter
+const ALL_INITIAL   = 8;
+const CAT_LIMIT     = 4;
 
 /* ─── Sound hook ─────────────────────────────────────────────────────── */
 function useHoverSound() {
@@ -77,16 +82,13 @@ const IcoCaret = () => <svg className="w-3 h-3 opacity-50" fill="none" stroke="c
 const Logo = ({ size = 38 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="20" cy="20" r="20" fill="url(#lg1)"/>
-    {/* Globe lines */}
     <ellipse cx="20" cy="20" rx="11" ry="11" stroke="rgba(255,255,255,0.35)" strokeWidth="1.2" fill="none"/>
     <ellipse cx="20" cy="20" rx="6" ry="11" stroke="rgba(255,255,255,0.25)" strokeWidth="1" fill="none"/>
     <line x1="9" y1="20" x2="31" y2="20" stroke="rgba(255,255,255,0.25)" strokeWidth="1"/>
     <line x1="11" y1="15" x2="29" y2="15" stroke="rgba(255,255,255,0.2)" strokeWidth="0.8"/>
     <line x1="11" y1="25" x2="29" y2="25" stroke="rgba(255,255,255,0.2)" strokeWidth="0.8"/>
-    {/* Cross */}
     <rect x="17.5" y="12" width="5" height="16" rx="2" fill="white"/>
     <rect x="12" y="17.5" width="16" height="5" rx="2" fill="white"/>
-    {/* Export arrow */}
     <path d="M27 10 L33 10 L33 16" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" opacity="0.85"/>
     <line x1="27" y1="16" x2="33" y2="10" stroke="white" strokeWidth="1.8" strokeLinecap="round" opacity="0.85"/>
     <defs>
@@ -120,7 +122,6 @@ function Splash({ onDone }: { onDone: () => void }) {
         pointerEvents: phase === 'out' ? 'none' : 'all',
       }}
     >
-      {/* Background glow orbs */}
       <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-blue-600/10 blur-[80px]"/>
       <div className="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full bg-cyan-400/10 blur-[60px]"/>
 
@@ -132,12 +133,9 @@ function Splash({ onDone }: { onDone: () => void }) {
         }}
         className="flex flex-col items-center gap-5"
       >
-        {/* Logo mark large */}
         <div style={{ filter:'drop-shadow(0 0 40px rgba(29,130,255,0.6))' }}>
           <Logo size={80}/>
         </div>
-
-        {/* Brand name */}
         <div className="text-center">
           <div className="text-white font-black text-[32px] tracking-tight leading-none" style={{ fontFamily:'"Plus Jakarta Sans",Inter,sans-serif', letterSpacing:'-1px' }}>
             AlphaVigor
@@ -146,14 +144,10 @@ function Splash({ onDone }: { onDone: () => void }) {
             Global Wellness Exports
           </div>
         </div>
-
-        {/* Tagline chip */}
         <div className="flex items-center gap-2 bg-white/8 border border-white/15 rounded-full px-4 py-1.5 text-[11px] text-white/60">
           <span className="w-1.5 h-1.5 rounded-full bg-[#20e3b2]"/>
-          WHO-GMP Certified · Serving 50+ Countries
+          B2B Pharma Exports · Serving 25+ Countries
         </div>
-
-        {/* Progress bar */}
         <div className="w-32 h-0.5 bg-white/10 rounded-full overflow-hidden mt-2">
           <div
             className="h-full bg-gradient-to-r from-blue-400 to-[#20e3b2] rounded-full"
@@ -168,6 +162,32 @@ function Splash({ onDone }: { onDone: () => void }) {
   );
 }
 
+/* ─── Product Image Ticker ───────────────────────────────────────────── */
+function ProductTicker() {
+  const items = PRODUCTS.map(p => ({ img: p.img, name: p.name }));
+  // Double for seamless loop
+  const doubled = [...items, ...items];
+  return (
+    <div className="bg-[#04091f] border-b border-white/8 overflow-hidden py-2 relative">
+      <div
+        className="flex gap-3 w-max"
+        style={{ animation: 'tickerImg 60s linear infinite' }}
+        onMouseEnter={e => (e.currentTarget.style.animationPlayState = 'paused')}
+        onMouseLeave={e => (e.currentTarget.style.animationPlayState = 'running')}
+      >
+        {doubled.map((item, i) => (
+          <div key={i} className="flex items-center gap-2 shrink-0">
+            <div className="w-[54px] h-[36px] rounded-[6px] overflow-hidden border border-white/10 bg-white/5 shrink-0">
+              <img src={item.img} alt={item.name} className="w-full h-full object-cover" loading="lazy"/>
+            </div>
+            <span className="text-[10px] font-semibold text-white/50 whitespace-nowrap pr-3">{item.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ─── Main App ───────────────────────────────────────────────────────── */
 export default function App() {
   const [splash, setSplash]           = useState(true);
@@ -175,32 +195,28 @@ export default function App() {
   const [showMore, setShowMore]         = useState(false);
   const [enquiryOpen, setEnquiryOpen]   = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product|null>(null);
-  const [quantity, setQuantity]         = useState('100 Boxes');
+  const [quantity, setQuantity]         = useState('1,000 Units');
   const [msg, setMsg]                   = useState('');
   const [mobileMenu, setMobileMenu]     = useState(false);
   const [heroIdx, setHeroIdx]           = useState(0);
   const playSound = useHoverSound();
 
-  /* Filtered products with Show More logic */
   const allBrand    = activeFilter === 'All';
   const baseFiltered = allBrand ? PRODUCTS : PRODUCTS.filter(p => p.brand === activeFilter);
   const limit       = allBrand ? (showMore ? baseFiltered.length : ALL_INITIAL) : CAT_LIMIT;
   const displayed   = baseFiltered.slice(0, limit);
   const hasMore     = baseFiltered.length > limit;
 
-  /* Auto-scroll to products after splash */
   const handleSplashDone = () => {
     setSplash(false);
     setTimeout(() => document.getElementById('products')?.scrollIntoView({ behavior:'smooth' }), 200);
   };
 
-  /* Hero slideshow */
   useEffect(() => {
     const t = setInterval(() => setHeroIdx(i => (i+1) % HERO_IMAGES.length), 4200);
     return () => clearInterval(t);
   }, []);
 
-  /* Lock scroll on modal */
   useEffect(() => {
     document.body.style.overflow = enquiryOpen ? 'hidden' : 'auto';
   }, [enquiryOpen]);
@@ -213,9 +229,9 @@ export default function App() {
   };
   const buildPlain = () => decodeURIComponent(buildMsg().replace(/%0A/g,'\n'));
 
-  const doWA       = () => window.open(`https://wa.me/917622068016?text=${buildMsg()}`,'_blank');
-  const doTG       = () => window.open(`https://t.me/AlphaVigor?text=${buildMsg()}`,'_blank');
-  const doEmail    = () => { window.location.href=`mailto:export@truepharma.co.in?subject=${encodeURIComponent(`Export Enquiry – ${selectedProduct?.name||'Pharma Products'} | Qty: ${quantity}`)}&body=${encodeURIComponent(buildPlain())}`; };
+  const doWA    = () => window.open(`https://wa.me/917622068016?text=${buildMsg()}`,'_blank');
+  const doTG    = () => window.open(`https://t.me/AlphaVigor?text=${buildMsg()}`,'_blank');
+  const doEmail = () => { window.location.href=`mailto:export@truepharma.co.in?subject=${encodeURIComponent(`Export Enquiry – ${selectedProduct?.name||'Pharma Products'} | Qty: ${quantity}`)}&body=${encodeURIComponent(buildPlain())}`; };
 
   return (
     <>
@@ -230,6 +246,7 @@ export default function App() {
         @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
         @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(200%)}}
         @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+        @keyframes tickerImg{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
       `}</style>
 
       {/* ── SPLASH ───────────────────────────────────────────────────── */}
@@ -237,18 +254,8 @@ export default function App() {
 
       <div className="min-h-screen bg-[#f5f7ff] text-[#0f204a] antialiased selection:bg-[#0d3b9c] selection:text-white" style={{opacity: splash?0:1, transition:'opacity 0.4s ease'}}>
 
-        {/* ── EXPORT TICKER ──────────────────────────────────────────── */}
-        <div className="bg-[#0d3b9c] text-white overflow-hidden py-2">
-          <div className="flex w-max animate-[ticker_35s_linear_infinite] hover:[animation-play-state:paused]">
-            {[...Array(2)].map((_,ri) => (
-              <div key={ri} className="flex items-center gap-8 px-6">
-                {['🌍 Exporting to 50+ Countries','✈️ Fast International Shipping','🛡️ WHO-GMP & FDA Compliant','📦 Bulk Supply Available','💼 B2B Export Specialists','🔬 Genuine Branded Molecules','💊 Full Product Catalogue on Request','🤝 Trusted by 1000+ Distributors'].map(t=>(
-                  <span key={t} className="text-[11px] font-medium whitespace-nowrap text-white/90">{t}</span>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* ── PRODUCT IMAGE TICKER (above navbar) ──────────────────────── */}
+        <ProductTicker />
 
         {/* ── NAVBAR ─────────────────────────────────────────────────── */}
         <header className="sticky top-0 z-40 backdrop-blur-xl bg-white/92 border-b border-[#e4ecff] shadow-[0_2px_24px_rgba(13,59,156,0.07)]">
@@ -274,7 +281,9 @@ export default function App() {
                     <div className="bg-white rounded-[16px] shadow-[0_24px_60px_rgba(0,0,0,0.16)] border border-[#eef2ff] p-2">
                       {brand.products.map(p => (
                         <div key={p.id} onClick={() => openEnquiry(p)} className="flex items-center gap-3 px-3 py-2.5 rounded-[10px] hover:bg-[#f3f6ff] cursor-pointer group/item">
-                          <div className={`w-9 h-6 rounded-[4px] bg-gradient-to-br ${p.color} shrink-0`}/>
+                          <div className="w-9 h-6 rounded-[4px] overflow-hidden shrink-0 border border-[#e8edf8]">
+                            <img src={p.img} alt={p.name} className="w-full h-full object-cover"/>
+                          </div>
                           <div>
                             <div className="text-[12px] font-bold text-[#0f204a] group-hover/item:text-[#0d3b9c] leading-none">{p.name}</div>
                             <div className="text-[10px] text-[#8a9ac0] mt-0.5">{p.subtitle}</div>
@@ -327,17 +336,13 @@ export default function App() {
             <img key={src} src={src} alt="AlphaVigor Export Pharma" className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000" style={{opacity: i===heroIdx ? 1 : 0}}/>
           ))}
           <div className="absolute inset-0 bg-gradient-to-r from-[#04091f]/92 via-[#0d3b9c]/70 to-transparent"/>
-          {/* Subtle pattern overlay */}
           <div className="absolute inset-0 opacity-5" style={{backgroundImage:'radial-gradient(circle,white 1px,transparent 1px)',backgroundSize:'28px 28px'}}/>
 
           <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 py-16 md:py-24 flex flex-col justify-center" style={{minHeight:540}}>
-            {/* Export badge */}
+            {/* Badge */}
             <div className="flex flex-wrap gap-2 mb-5">
-              <span className="inline-flex items-center gap-1.5 bg-[#20e3b2]/15 border border-[#20e3b2]/30 text-[#20e3b2] rounded-full px-3 py-1 text-[11px] font-semibold">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#20e3b2]"/>WHO-GMP Certified Exporter
-              </span>
               <span className="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-white/80 rounded-full px-3 py-1 text-[11px] font-semibold">
-                ✈️ Serving 50+ Countries
+                ✈️ Serving 25+ Countries
               </span>
             </div>
 
@@ -346,12 +351,12 @@ export default function App() {
               <span className="bg-gradient-to-r from-[#4db8ff] to-[#20e3b2] bg-clip-text text-transparent">Wellness Exports</span>
             </h1>
             <p className="mt-5 text-[14px] md:text-[16px] leading-7 text-white/75 max-w-[500px]">
-              Your trusted B2B source for <strong className="text-white">Sildenafil, Tadalafil & Vardenafil</strong> formulations. WHO-GMP certified, bulk supply, competitive pricing, global shipping.
+              Your trusted B2B source for <strong className="text-white">Sildenafil, Tadalafil & Vardenafil</strong> formulations. Bulk supply, competitive pricing, global shipping.
             </p>
 
             {/* Trust metrics */}
             <div className="mt-6 flex flex-wrap gap-4">
-              {[['50+','Countries'],['1000+','Distributors'],['WHO-GMP','Certified'],['24 hr','Response']].map(([k,v])=>(
+              {[['🌍 25+','Countries'],['Fast','Shipping'],['B2B','Specialists'],['24 hr','Response']].map(([k,v])=>(
                 <div key={k} className="flex items-center gap-2">
                   <div className="text-[18px] font-black text-white leading-none">{k}</div>
                   <div className="text-[10px] text-white/50 leading-tight">{v}</div>
@@ -382,7 +387,7 @@ export default function App() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-7">
             <div>
               <div className="text-[10px] tracking-[0.25em] font-bold text-[#0d3b9c] uppercase mb-1">Export Product Catalogue</div>
-              <h2 className="display text-[24px] md:text-[30px] font-extrabold leading-tight">WHO-GMP Certified Men's Wellness Range</h2>
+              <h2 className="display text-[24px] md:text-[30px] font-extrabold leading-tight">Men's Wellness Export Range</h2>
               <p className="mt-1.5 text-[13px] text-[#6b7a9f] max-w-[480px]">Wholesale & bulk supply available. Contact us for MOQ, pricing, and regulatory documentation.</p>
             </div>
             <a href="#" download onMouseEnter={playSound} className="hidden md:inline-flex shrink-0 items-center gap-2 bg-gradient-to-r from-[#0d3b9c] to-[#2563eb] text-white rounded-full px-5 py-2.5 text-[12px] font-bold shadow-[0_6px_20px_rgba(13,59,156,0.3)] hover:shadow-[0_10px_28px_rgba(13,59,156,0.4)] hover:scale-[1.02] transition-all">
@@ -417,16 +422,18 @@ export default function App() {
             {displayed.map(product => (
               <div key={product.id} onMouseEnter={playSound} className="group relative bg-white rounded-[18px] border border-[#e8edf8] shadow-[0_6px_20px_rgba(0,0,0,0.04)] p-3.5 flex flex-col hover:shadow-[0_18px_44px_rgba(13,59,156,0.13)] hover:-translate-y-1.5 transition-all duration-300">
                 {product.tag && (
-                  <div className="absolute top-3 right-3 bg-[#0d3b9c] text-white text-[9px] font-black px-2 py-0.5 rounded-full">{product.tag}</div>
+                  <div className="absolute top-3 right-3 bg-[#0d3b9c] text-white text-[9px] font-black px-2 py-0.5 rounded-full z-10">{product.tag}</div>
                 )}
-                {/* Product box visual */}
-                <div className="h-[120px] rounded-[12px] bg-gradient-to-br from-[#f8f9ff] to-[#eef2ff] border border-[#eef2ff] grid place-items-center relative overflow-hidden">
-                  <div className={`w-[100px] h-[64px] rounded-[8px] bg-gradient-to-br ${product.color} shadow-[0_8px_24px_rgba(0,0,0,0.3)] grid place-items-center text-white font-black text-[11px] text-center leading-tight p-2 relative`}>
-                    <span className="text-[9px] opacity-75 block leading-none mb-0.5">{product.brand}</span>
-                    {product.mg}
-                  </div>
+                {/* Product image */}
+                <div className="h-[140px] rounded-[12px] overflow-hidden relative bg-[#f8f9ff] border border-[#eef2ff]">
+                  <img
+                    src={product.img}
+                    alt={product.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
                   {/* Shimmer on hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-transparent via-white/50 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-[300%] transition-all duration-700"/>
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-[300%] transition-all duration-700 pointer-events-none"/>
                 </div>
 
                 <div className="mt-3 flex-1 flex flex-col">
@@ -472,14 +479,13 @@ export default function App() {
               <div className="text-[10px] tracking-[0.25em] font-bold text-[#0d3b9c] uppercase mb-1">Why Partner With Us</div>
               <h3 className="display text-[22px] md:text-[26px] font-extrabold">The Preferred Export Partner for Global Distributors</h3>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
               {[
-                { t:'WHO-GMP Certified', d:'All products manufactured under international quality standards', i:'🛡️' },
-                { t:'Global Export', d:'Shipping to 50+ countries with full documentation', i:'✈️' },
-                { t:'Bulk Pricing', d:'Competitive MOQ & tiered pricing for all order sizes', i:'💰' },
-                { t:'Genuine Molecules', d:'100% authentic branded formulations — no counterfeits', i:'🔬' },
-                { t:'Fast Dispatch', d:'Orders processed within 48 hours of confirmation', i:'⚡' },
-                { t:'Regulatory Docs', d:'COA, MSDS, product dossiers provided with every order', i:'📋' },
+                { t:'Global Export',    d:'Shipping to 25+ countries with full documentation',                i:'✈️' },
+                { t:'Bulk Pricing',     d:'Competitive MOQ & tiered pricing for all order sizes',             i:'💰' },
+                { t:'Genuine Molecules',d:'100% authentic branded formulations — no counterfeits',            i:'🔬' },
+                { t:'Fast Dispatch',    d:'Orders processed within 48 hours of confirmation',                 i:'⚡' },
+                { t:'Regulatory Docs',  d:'COA, MSDS, product dossiers provided with every order',            i:'📋' },
               ].map(c => (
                 <div key={c.t} onMouseEnter={playSound} className="bg-[#fbfcff] border border-[#eef2ff] rounded-[14px] p-4 text-center hover:shadow-[0_10px_28px_rgba(13,59,156,0.1)] hover:-translate-y-1 transition-all group">
                   <div className="w-10 h-10 mx-auto rounded-xl bg-[#eef3ff] group-hover:bg-[#0d3b9c] group-hover:text-white grid place-items-center text-[20px] transition">{c.i}</div>
@@ -497,13 +503,13 @@ export default function App() {
             <div className="text-[10px] tracking-[0.25em] font-bold text-[#0d3b9c] uppercase mb-2">About AlphaVigor</div>
             <h3 className="display text-[22px] md:text-[28px] font-extrabold leading-tight">India's Premier Men's Wellness Export House</h3>
             <p className="mt-4 text-[13px] leading-6 text-[#6b7a9f]">
-              AlphaVigor, powered by TruePharma, is a WHO-GMP certified pharmaceutical exporter specialising in men's sexual health and wellness formulations. We supply bulk quantities of Sildenafil, Tadalafil, and Vardenafil-based products to distributors, wholesalers, and healthcare importers across 50+ countries.
+              AlphaVigor, powered by TruePharma, is a pharmaceutical exporter specialising in men's sexual health and wellness formulations. We supply bulk quantities of Sildenafil, Tadalafil, and Vardenafil-based products to distributors, wholesalers, and healthcare importers across 25+ countries.
             </p>
             <p className="mt-3 text-[13px] leading-6 text-[#6b7a9f]">
               Every shipment comes with a full Certificate of Analysis, regulatory dossier, and dedicated export support — so your customs clearance is seamless, every time.
             </p>
             <ul className="mt-5 space-y-2.5">
-              {['WHO-GMP certified manufacturing facility','Complete regulatory documentation (COA, MSDS, GMP cert)','Flexible MOQ — starting from 1,000 units','Discreet, secure international packaging','Dedicated export manager for every account'].map(li => (
+              {['Complete regulatory documentation (COA, MSDS)','Flexible MOQ — starting from 1,000 units','Discreet, secure international packaging','Dedicated export manager for every account','Fast international dispatch within 48 hrs'].map(li => (
                 <li key={li} className="flex gap-2.5 text-[12.5px]">
                   <span className="w-4 h-4 rounded-full bg-[#e6fbe6] text-[#1a9a1a] grid place-items-center text-[10px] shrink-0 mt-0.5">✔</span>
                   <span className="text-[#3a4a71]">{li}</span>
@@ -524,7 +530,7 @@ export default function App() {
             <img src="/images/hero3.png" alt="AlphaVigor Export Products" className="w-full h-[300px] md:h-[380px] object-cover rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.18)]"/>
             {/* Floating stat cards */}
             <div className="absolute -bottom-5 left-4 right-4 bg-white rounded-[14px] border border-[#eef2ff] shadow-[0_16px_40px_rgba(0,0,0,0.12)] grid grid-cols-3 divide-x divide-[#eef2ff] p-3">
-              {[{k:'50+',v:'Countries',i:'🌍'},{k:'WHO-GMP',v:'Certified',i:'🛡️'},{k:'48 hr',v:'Dispatch',i:'⚡'}].map(b=>(
+              {[{k:'🌍 25+',v:'Countries',i:'🌍'},{k:'B2B',v:'Specialists',i:'💼'},{k:'48 hr',v:'Dispatch',i:'⚡'}].map(b=>(
                 <div key={b.k} className="flex gap-2 items-center px-2 py-1">
                   <div className="w-7 h-7 rounded-full bg-[#eef3ff] grid place-items-center text-[14px]">{b.i}</div>
                   <div><div className="text-[11px] font-black leading-none text-[#0a1a3d]">{b.k}</div><div className="text-[9px] text-[#7a8ab0]">{b.v}</div></div>
@@ -621,15 +627,8 @@ export default function App() {
                   </div>
                 </div>
                 <p className="text-[12px] leading-5 max-w-[280px]">
-                  India's premier export house for men's wellness pharmaceuticals. WHO-GMP certified. Serving global distributors with genuine, high-quality formulations since 2009.
+                  India's premier export house for men's wellness pharmaceuticals. Serving global distributors with genuine, high-quality formulations since 2009.
                 </p>
-
-                {/* Certifications */}
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {['WHO-GMP','ISO 9001','FDA Reg.'].map(c=>(
-                    <span key={c} className="text-[9px] font-bold bg-white/8 border border-white/12 text-white/60 px-2.5 py-1 rounded-full">{c}</span>
-                  ))}
-                </div>
 
                 {/* Socials */}
                 <div className="mt-5 flex gap-2.5">
@@ -691,17 +690,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Countries strip */}
-            <div className="border-t border-white/8 py-4">
-              <div className="text-[10px] text-white/30 text-center mb-2 uppercase tracking-widest">We Export To</div>
-              <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-[10px] text-white/30">
-                {['USA','UK','Australia','Canada','Germany','France','Netherlands','UAE','South Africa','Brazil','Mexico','Thailand','Malaysia','Philippines','New Zealand','Ireland','Spain','Italy','Poland','Czech Republic'].map(c=>(
-                  <span key={c}>{c}</span>
-                ))}
-                <span className="text-[#0d3b9c]">+ 30 more countries</span>
-              </div>
-            </div>
-
             {/* Bottom bar */}
             <div className="border-t border-white/8 py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-[10px]">
               <div className="text-white/30">© {new Date().getFullYear()} AlphaVigor / TruePharma. All Rights Reserved.</div>
@@ -719,7 +707,7 @@ export default function App() {
         <div className="fixed bottom-20 right-4 z-50 flex flex-col items-center gap-1">
           <div className="relative">
             <div className="absolute inset-0 rounded-full bg-[#25D366] animate-[pulse-ring_2.2s_ease-out_infinite]"/>
-            <button onClick={doWA} className="relative w-13 h-13 w-12 h-12 rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_rgba(37,211,102,0.55)] grid place-items-center hover:scale-110 active:scale-95 transition-all animate-[bob_2.5s_ease-in-out_infinite]" title="WhatsApp">
+            <button onClick={doWA} className="relative w-12 h-12 rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_rgba(37,211,102,0.55)] grid place-items-center hover:scale-110 active:scale-95 transition-all animate-[bob_2.5s_ease-in-out_infinite]" title="WhatsApp">
               <IcoWA/>
             </button>
           </div>
@@ -747,7 +735,7 @@ export default function App() {
                   <Logo size={36}/>
                   <div>
                     <div className="font-black text-[14px] leading-tight">Request Export Price</div>
-                    <div className="text-[10px] opacity-60 mt-0.5">Best price · WHO-GMP · Fast reply · Bulk supply</div>
+                    <div className="text-[10px] opacity-60 mt-0.5">Best price · Fast reply · Bulk supply</div>
                   </div>
                 </div>
                 <button onClick={()=>setEnquiryOpen(false)} className="w-8 h-8 rounded-full bg-white/12 grid place-items-center hover:bg-white/20 text-[14px] transition">✕</button>
@@ -778,7 +766,9 @@ export default function App() {
                 {/* Product preview */}
                 {selectedProduct && (
                   <div className="flex items-center gap-3 bg-[#f5f8ff] border border-[#dde7ff] rounded-[12px] p-3">
-                    <div className={`w-16 h-10 rounded-[7px] bg-gradient-to-br ${selectedProduct.color} grid place-items-center text-white text-[9px] font-black shrink-0`}>{selectedProduct.mg}</div>
+                    <div className="w-16 h-10 rounded-[7px] overflow-hidden shrink-0 border border-[#dde7ff]">
+                      <img src={selectedProduct.img} alt={selectedProduct.name} className="w-full h-full object-cover"/>
+                    </div>
                     <div className="flex-1">
                       <div className="text-[13px] font-black text-[#0a1a3d]">{selectedProduct.name}</div>
                       <div className="text-[10px] text-[#6b7a9f]">{selectedProduct.subtitle} · {quantity}</div>
@@ -805,7 +795,7 @@ export default function App() {
                     <IcoMail/> Email
                   </button>
                 </div>
-                <p className="text-center text-[10px] text-[#9aabcf]">🔒 Confidential · Reply within 30 min · Genuine WHO-GMP products</p>
+                <p className="text-center text-[10px] text-[#9aabcf]">🔒 Confidential · Reply within 30 min · Genuine products</p>
               </div>
             </div>
           </div>
