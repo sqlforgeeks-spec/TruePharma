@@ -22,15 +22,18 @@ const PRODUCTS: Product[] = [
   // Fildena
   { id:'fildena100',       name:'FILDENA® 100',           subtitle:'Sildenafil Citrate 100mg',          mg:'100mg', brand:'Fildena',   color:'from-[#5B21B6] to-[#7C3AED]', popular:true, tag:'Top Export', img:'/images/products/fildena100.jpg' },
   { id:'fildena120',       name:'FILDENA® STRONG 120',    subtitle:'Sildenafil Citrate 120mg',          mg:'120mg', brand:'Fildena',   color:'from-[#C81E1E] to-[#8B0000]', img:'/images/products/fildena120.jpg' },
-  { id:'fildenapro',       name:'FILDENA® PROFESSIONAL',  subtitle:'Sildenafil 100mg Sublingual',       mg:'100mg', brand:'Fildena',   color:'from-[#9D174D] to-[#BE185D]', tag:'Pro', img:'/images/products/fildenapro.jpg' },
+  { id:'fildenapro',       name:'FILDENA® PROFESSIONAL',  subtitle:'Sildenafil 100mg Sublingual',       mg:'100mg', brand:'Fildena',   color:'from-[#9D174D] to-[#BE185D]', tag:'Pro', img:'/images/products/fildenapro100.jpg' },
   { id:'fildenasa',        name:'FILDENA® SUPER ACTIVE',  subtitle:'Sildenafil Softgel Capsules 100mg', mg:'100mg', brand:'Fildena',   color:'from-[#1e3a6e] to-[#2563eb]', img:'/images/products/fildenasuperactive.jpg' },
   // Vilitra
   { id:'vilitra20',        name:'VILITRA 20',             subtitle:'Vardenafil 20mg',                   mg:'20mg',  brand:'Vilitra',   color:'from-[#B8962E] to-[#D4AF37]', popular:true, img:'/images/products/vilitra20.jpg' },
   { id:'vilitra40',        name:'VILITRA 40',             subtitle:'Vardenafil 40mg',                   mg:'40mg',  brand:'Vilitra',   color:'from-[#92700A] to-[#B8962E]', img:'/images/products/vilitra40.jpg' },
   { id:'vilitra60',        name:'VILITRA 60',             subtitle:'Vardenafil 60mg',                   mg:'60mg',  brand:'Vilitra',   color:'from-[#6B5010] to-[#92700A]', img:'/images/products/vilitra60.jpg' },
   // Cenforce
+  { id:'cenforce25',       name:'CENFORCE 25',            subtitle:'Sildenafil Citrate Tablets IP 25mg', mg:'25mg', brand:'Cenforce',  color:'from-[#065F46] to-[#059669]', img:'/images/products/cenforce25.jpg' },
   { id:'cenforce50',       name:'CENFORCE 50',            subtitle:'Sildenafil Tablets IP 50mg',        mg:'50mg',  brand:'Cenforce',  color:'from-[#1B5E20] to-[#2E7D32]', img:'/images/products/cenforce50.jpg' },
+  { id:'cenforce100',      name:'CENFORCE 100',           subtitle:'Sildenafil Citrate Tablets IP 100mg', mg:'100mg', brand:'Cenforce', color:'from-[#14532D] to-[#166534]', popular:true, tag:'Popular', img:'/images/products/cenforce100.jpg' },
   { id:'cenforce150',      name:'CENFORCE 150',           subtitle:'Sildenafil Tablets 150mg',          mg:'150mg', brand:'Cenforce',  color:'from-[#145214] to-[#1B5E20]', img:'/images/products/cenforce150.jpg' },
+  { id:'cenforce200',      name:'CENFORCE 200',           subtitle:'Sildenafil Tablets BP 200mg',       mg:'200mg', brand:'Cenforce',  color:'from-[#7C2D12] to-[#B45309]', tag:'High Dose', img:'/images/products/cenforce200.jpg' },
   { id:'cenforcesoft',     name:'CENFORCE SOFT-100',      subtitle:'Sildenafil Chewable Tablets 100mg', mg:'100mg', brand:'Cenforce',  color:'from-[#0D3D0D] to-[#145214]', popular:true, tag:'#1 Export', img:'/images/products/cenforcesoft100.jpg' },
   // Kamagra
   { id:'kamagra100',       name:'KAMAGRA 100',            subtitle:'Sildenafil Tablets 100mg',          mg:'100mg', brand:'Kamagra',   color:'from-[#D97706] to-[#F59E0B]', popular:true, tag:'Global Brand', img:'/images/products/kamagra100.jpg' },
@@ -81,14 +84,20 @@ const IcoCaret = () => <svg className="w-3 h-3 opacity-40" fill="none" stroke="c
 /* ─── Logo ───────────────────────────────────────────────────────────── */
 const Logo = ({ size = 36 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-    <rect width="40" height="40" rx="10" fill="#4361EE"/>
-    <ellipse cx="20" cy="20" rx="9" ry="9" stroke="rgba(255,255,255,0.4)" strokeWidth="1.2" fill="none"/>
-    <ellipse cx="20" cy="20" rx="5" ry="9" stroke="rgba(255,255,255,0.25)" strokeWidth="1" fill="none"/>
-    <line x1="11" y1="20" x2="29" y2="20" stroke="rgba(255,255,255,0.3)" strokeWidth="1"/>
+    <rect width="40" height="40" rx="10" fill="url(#logoGrad)"/>
+    <defs>
+      <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stopColor="#1E3A5F"/>
+        <stop offset="100%" stopColor="#0F2340"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="20" cy="20" rx="9" ry="9" stroke="rgba(255,255,255,0.3)" strokeWidth="1.2" fill="none"/>
+    <ellipse cx="20" cy="20" rx="5" ry="9" stroke="rgba(255,255,255,0.2)" strokeWidth="1" fill="none"/>
+    <line x1="11" y1="20" x2="29" y2="20" stroke="rgba(255,255,255,0.25)" strokeWidth="1"/>
     <rect x="18" y="13" width="4" height="14" rx="2" fill="white"/>
     <rect x="13" y="18" width="14" height="4" rx="2" fill="white"/>
-    <path d="M26 10.5L31 10.5L31 15.5" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" opacity="0.9"/>
-    <line x1="26" y1="15.5" x2="31" y2="10.5" stroke="white" strokeWidth="1.6" strokeLinecap="round" opacity="0.9"/>
+    <path d="M26 10.5L31 10.5L31 15.5" stroke="#60A5FA" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" opacity="0.9"/>
+    <line x1="26" y1="15.5" x2="31" y2="10.5" stroke="#60A5FA" strokeWidth="1.6" strokeLinecap="round" opacity="0.9"/>
   </svg>
 );
 
@@ -102,50 +111,47 @@ function Splash({ onDone }: { onDone: () => void }) {
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, []);
   return (
-    <div className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-white"
+    <div className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-[#0F1E35]"
       style={{ opacity: phase==='out'?0:1, transition: phase==='out'?'opacity 0.7s ease':'none', pointerEvents: phase==='out'?'none':'all' }}>
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-[#4361EE]/6"/>
-        <div className="absolute -bottom-16 -right-16 w-72 h-72 rounded-full bg-[#F7A614]/8"/>
+        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-500/10 blur-3xl"/>
+        <div className="absolute -bottom-16 -right-16 w-72 h-72 rounded-full bg-blue-400/8 blur-3xl"/>
       </div>
       <div style={{ transform: phase==='in'?'scale(0.85) translateY(12px)':'scale(1) translateY(0)', opacity: phase==='in'?0:1, transition:'transform 0.5s cubic-bezier(0.34,1.56,0.64,1),opacity 0.4s ease' }}
         className="relative flex flex-col items-center gap-4">
         <div className="flex items-center gap-3">
           <Logo size={52}/>
           <div>
-            <div className="text-[26px] font-black text-[#0A0A14] tracking-tight" style={{fontFamily:'"Plus Jakarta Sans",Inter,sans-serif'}}>AlphaVigor</div>
-            <div className="text-[10px] tracking-[0.25em] uppercase text-[#6B7280] font-semibold">Global Wellness Exports</div>
+            <div className="text-[26px] font-black text-white tracking-tight" style={{fontFamily:'"Plus Jakarta Sans",Inter,sans-serif'}}>TruePharma</div>
+            <div className="text-[10px] tracking-[0.25em] uppercase text-blue-300/70 font-semibold">Global Pharma Exports</div>
           </div>
         </div>
-        <div className="flex items-center gap-2 bg-[#4361EE]/8 rounded-full px-4 py-1.5 text-[11px] text-[#4361EE] font-semibold">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#4361EE]"/>B2B Pharma Exports · Serving 25+ Countries
+        <div className="flex items-center gap-2 bg-white/10 rounded-full px-4 py-1.5 text-[11px] text-blue-200 font-semibold border border-white/10">
+          <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"/>B2B Pharma Exports · Serving 25+ Countries
         </div>
-        <div className="w-28 h-0.5 bg-[#E8ECF5] rounded-full overflow-hidden mt-1">
-          <div className="h-full bg-[#4361EE] rounded-full" style={{ width:phase==='hold'?'100%':'0%', transition:phase==='hold'?'width 1.6s ease':'none' }}/>
+        <div className="w-28 h-0.5 bg-white/10 rounded-full overflow-hidden mt-1">
+          <div className="h-full bg-blue-400 rounded-full" style={{ width:phase==='hold'?'100%':'0%', transition:phase==='hold'?'width 1.6s ease':'none' }}/>
         </div>
       </div>
     </div>
   );
 }
 
-/* ─── Product Image Ticker (above navbar) ────────────────────────────── */
+/* ─── Product Ticker (compact, dark, minimalistic) ───────────────────── */
 function ProductTicker() {
   const doubled = [...PRODUCTS, ...PRODUCTS];
   return (
-    <div className="bg-[#F0F3FF] border-b border-[#DDE4FF] overflow-hidden py-2.5 relative select-none">
+    <div className="bg-[#0F1E35] overflow-hidden py-1.5 relative select-none" style={{borderBottom:'1px solid rgba(255,255,255,0.06)'}}>
       {/* fade edges */}
-      <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-[#F0F3FF] to-transparent z-10 pointer-events-none"/>
-      <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-[#F0F3FF] to-transparent z-10 pointer-events-none"/>
-      <div className="flex gap-3 w-max" style={{animation:'tickerImg 70s linear infinite'}}
+      <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#0F1E35] to-transparent z-10 pointer-events-none"/>
+      <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#0F1E35] to-transparent z-10 pointer-events-none"/>
+      <div className="flex gap-0 w-max items-center" style={{animation:'tickerImg 80s linear infinite'}}
         onMouseEnter={e=>(e.currentTarget.style.animationPlayState='paused')}
         onMouseLeave={e=>(e.currentTarget.style.animationPlayState='running')}>
         {doubled.map((item, i) => (
-          <div key={i} className="flex items-center gap-2.5 bg-white rounded-full px-3 py-1 shadow-sm border border-[#E8ECF5] shrink-0">
-            <div className="w-7 h-7 rounded-full overflow-hidden border border-[#E8ECF5] shrink-0 bg-gray-50">
-              <img src={item.img} alt={item.name} className="w-full h-full object-cover" loading="lazy"/>
-            </div>
-            <span className="text-[11px] font-bold text-[#0A0A14] whitespace-nowrap pr-1">{item.name}</span>
-            <span className="text-[9px] text-[#6B7280] whitespace-nowrap">{item.subtitle}</span>
+          <div key={i} className="flex items-center shrink-0">
+            <span className="text-[10.5px] font-semibold text-white/70 whitespace-nowrap px-3 tracking-wide">{item.name}</span>
+            <span className="text-white/20 text-[8px]">·</span>
           </div>
         ))}
       </div>
@@ -190,7 +196,7 @@ export default function App() {
 
   const buildMsg = () => {
     const prod = selectedProduct ? `${selectedProduct.name} (${selectedProduct.subtitle})` : 'General Export Enquiry';
-    return `Hello AlphaVigor Export Team 👋,%0A%0AI am interested in bulk supply of:%0A📦 Product: ${prod}%0A🔢 Quantity: ${quantity}%0A%0A💬 ${msg || 'Please share your best export price, MOQ, lead time and full product catalogue.'}%0A%0A✉️ Sent via AlphaVigor Export Portal`;
+    return `Hello TruePharma Export Team 👋,%0A%0AI am interested in bulk supply of:%0A📦 Product: ${prod}%0A🔢 Quantity: ${quantity}%0A%0A💬 ${msg || 'Please share your best export price, MOQ, lead time and full product catalogue.'}%0A%0A✉️ Sent via TruePharma Export Portal`;
   };
   const buildPlain = () => decodeURIComponent(buildMsg().replace(/%0A/g,'\n'));
   const doWA    = () => window.open(`https://wa.me/917622068016?text=${buildMsg()}`,'_blank');
@@ -213,6 +219,7 @@ export default function App() {
         @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
         @keyframes tickerImg{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
         @keyframes heroFadeIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
       `}</style>
 
       {splash && <Splash onDone={handleSplashDone}/>}
@@ -222,121 +229,118 @@ export default function App() {
         {/* ── PRODUCT TICKER ───────────────────────────────────────────── */}
         <ProductTicker />
 
+        {/* ── COUNTRIES BANNER (above navbar) ─────────────────────────── */}
+        <div className="bg-[#1E3A5F] py-1.5 text-center" style={{borderBottom:'1px solid rgba(255,255,255,0.08)'}}>
+          <span className="text-[11px] font-semibold text-blue-200/90 tracking-wide">✈️ Serving 25+ Countries Worldwide &nbsp;·&nbsp; B2B Pharma Exports &nbsp;·&nbsp; 24 hr Response</span>
+        </div>
+
         {/* ── NAVBAR ─────────────────────────────────────────────────── */}
-        <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-[#F0F3FF]" style={{boxShadow:'0 1px 0 #E8ECF5'}}>
-          <div className="max-w-[1280px] mx-auto flex items-center justify-between px-5 md:px-8 h-[66px]">
+        <header className="sticky top-0 z-40 bg-white/97 backdrop-blur-md border-b border-slate-100" style={{boxShadow:'0 1px 0 #E8ECF5'}}>
+          <div className="max-w-[1280px] mx-auto flex items-center justify-between px-5 md:px-8 h-[64px]">
 
             {/* Logo */}
             <div className="flex items-center gap-2.5 shrink-0">
               <Logo size={36}/>
               <div className="leading-tight">
-                <div className="font-black text-[17px] display text-[#0A0A14] tracking-tight">AlphaVigor</div>
-                <div className="text-[8.5px] tracking-[0.2em] uppercase text-[#6B7280] font-semibold -mt-0.5">Global Wellness Exports</div>
+                <div className="font-black text-[17px] display text-[#0F1E35] tracking-tight">TruePharma</div>
+                <div className="text-[8.5px] tracking-[0.2em] uppercase text-slate-400 font-semibold -mt-0.5">Global Pharma Exports</div>
               </div>
             </div>
 
             {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center gap-1">
+            <nav className="hidden lg:flex items-center gap-0.5">
               {NAV_BRANDS.map(brand => (
                 <div key={brand.label} className="relative group">
-                  <button className="flex items-center gap-1 px-3.5 py-2 rounded-lg text-[13px] font-semibold text-[#374151] hover:text-[#4361EE] hover:bg-[#F0F3FF] transition-all" onMouseEnter={playSound}>
+                  <button className="flex items-center gap-1 px-3.5 py-2 rounded-lg text-[13px] font-semibold text-slate-600 hover:text-[#1E3A5F] hover:bg-slate-50 transition-all" onMouseEnter={playSound}>
                     {brand.label}<IcoCaret/>
                   </button>
                   <div className="absolute top-full left-0 pt-2 hidden group-hover:block z-50 min-w-[256px]">
-                    <div className="bg-white rounded-2xl shadow-[0_8px_40px_rgba(67,97,238,0.12)] border border-[#E8ECF5] p-1.5">
+                    <div className="bg-white rounded-2xl shadow-[0_8px_40px_rgba(15,30,53,0.12)] border border-slate-100 p-1.5">
                       {brand.products.map(p => (
-                        <div key={p.id} onClick={() => openEnquiry(p)} className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-[#F0F3FF] cursor-pointer group/item transition-colors">
-                          <div className="w-10 h-7 rounded-lg overflow-hidden shrink-0 border border-[#E8ECF5] bg-gray-50">
+                        <div key={p.id} onClick={() => openEnquiry(p)} className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-50 cursor-pointer group/item transition-colors">
+                          <div className="w-10 h-7 rounded-lg overflow-hidden shrink-0 border border-slate-100 bg-slate-50">
                             <img src={p.img} alt={p.name} className="w-full h-full object-cover"/>
                           </div>
                           <div className="flex-1 min-w-0">
-                            <div className="text-[12px] font-bold text-[#0A0A14] group-hover/item:text-[#4361EE] leading-none truncate">{p.name}</div>
-                            <div className="text-[10px] text-[#9CA3AF] mt-0.5 truncate">{p.subtitle}</div>
+                            <div className="text-[12px] font-bold text-[#0F1E35] group-hover/item:text-[#1E3A5F] leading-none truncate">{p.name}</div>
+                            <div className="text-[10px] text-slate-400 mt-0.5 truncate">{p.subtitle}</div>
                           </div>
-                          {p.tag && <span className="text-[9px] font-bold bg-[#EEF2FF] text-[#4361EE] px-2 py-0.5 rounded-full shrink-0">{p.tag}</span>}
+                          {p.tag && <span className="text-[9px] font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full shrink-0">{p.tag}</span>}
                         </div>
                       ))}
                     </div>
                   </div>
                 </div>
               ))}
-              <a href="#contact" className="px-3.5 py-2 rounded-lg text-[13px] font-semibold text-[#374151] hover:text-[#4361EE] hover:bg-[#F0F3FF] transition-all">Contact</a>
+              <a href="#contact" className="px-3.5 py-2 rounded-lg text-[13px] font-semibold text-slate-600 hover:text-[#1E3A5F] hover:bg-slate-50 transition-all">Contact</a>
             </nav>
 
             <div className="flex items-center gap-2">
-              <button onClick={() => openEnquiry()} onMouseEnter={playSound} className="hidden md:inline-flex items-center gap-2 bg-[#4361EE] text-white rounded-xl px-4 py-2.5 text-[13px] font-bold hover:bg-[#3451D1] hover:shadow-[0_8px_24px_rgba(67,97,238,0.3)] transition-all">
+              <button onClick={() => openEnquiry()} onMouseEnter={playSound} className="hidden md:inline-flex items-center gap-2 bg-[#1E3A5F] text-white rounded-xl px-4 py-2.5 text-[13px] font-bold hover:bg-[#0F2340] hover:shadow-[0_8px_24px_rgba(15,30,53,0.25)] transition-all">
                 Get Export Quote →
               </button>
-              <button onClick={() => setMobileMenu(v=>!v)} className="lg:hidden w-9 h-9 grid place-items-center rounded-lg bg-[#F0F3FF] text-[#4361EE]">
+              <button onClick={() => setMobileMenu(v=>!v)} className="lg:hidden w-9 h-9 grid place-items-center rounded-lg bg-slate-100 text-[#1E3A5F]">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16"/></svg>
               </button>
             </div>
           </div>
 
           {mobileMenu && (
-            <div className="lg:hidden border-t border-[#F0F3FF] bg-white px-4 py-3 space-y-0.5">
+            <div className="lg:hidden border-t border-slate-100 bg-white px-4 py-3 space-y-0.5">
               {NAV_BRANDS.map(brand => (
                 <details key={brand.label} className="group/m">
-                  <summary className="flex items-center justify-between py-2.5 font-bold cursor-pointer list-none text-[#0A0A14] text-[14px]">
+                  <summary className="flex items-center justify-between py-2.5 font-bold cursor-pointer list-none text-[#0F1E35] text-[14px]">
                     {brand.label}
                     <svg className="w-4 h-4 opacity-40 group-open/m:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"/></svg>
                   </summary>
                   <div className="pl-3 pb-2 space-y-1">
                     {brand.products.map(p => (
-                      <div key={p.id} onClick={() => { openEnquiry(p); setMobileMenu(false); }} className="py-1.5 text-[12px] text-[#6B7280] cursor-pointer hover:text-[#4361EE]">
+                      <div key={p.id} onClick={() => { openEnquiry(p); setMobileMenu(false); }} className="py-1.5 text-[12px] text-slate-500 cursor-pointer hover:text-[#1E3A5F]">
                         {p.name} — {p.subtitle}
                       </div>
                     ))}
                   </div>
                 </details>
               ))}
-              <button onClick={() => { openEnquiry(); setMobileMenu(false); }} className="w-full mt-2 bg-[#4361EE] text-white rounded-xl py-3 font-bold text-[13px]">Get Export Quote →</button>
+              <button onClick={() => { openEnquiry(); setMobileMenu(false); }} className="w-full mt-2 bg-[#1E3A5F] text-white rounded-xl py-3 font-bold text-[13px]">Get Export Quote →</button>
             </div>
           )}
         </header>
 
         {/* ── HERO ─────────────────────────────────────────────────────── */}
         <section className="relative overflow-hidden bg-white">
-          {/* Background blobs */}
-          <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-[#4361EE]/5 blur-[80px] pointer-events-none"/>
-          <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-[#F7A614]/8 blur-[60px] pointer-events-none"/>
+          {/* Background */}
+          <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-[#1E3A5F]/4 blur-[80px] pointer-events-none"/>
+          <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-blue-400/6 blur-[60px] pointer-events-none"/>
 
           <div className="max-w-[1280px] mx-auto px-5 md:px-8 pt-14 pb-0 md:pt-20">
             <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-16 items-center">
 
               {/* Left: text */}
               <div style={{animation:'heroFadeIn .6s ease both'}}>
-                <div className="inline-flex items-center gap-2 bg-[#EEF2FF] text-[#4361EE] rounded-full px-4 py-1.5 text-[11.5px] font-bold mb-5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#4361EE] animate-pulse"/>
-                  ✈️ Serving 25+ Countries Worldwide
-                </div>
-
-                <h1 className="display text-[40px] md:text-[52px] font-[900] leading-[1.05] tracking-tight text-[#0A0A14]">
-                  Premium Men's<br/>
-                  <span className="text-[#4361EE]">Wellness</span>{' '}
+                <h1 className="display text-[40px] md:text-[52px] font-[900] leading-[1.05] tracking-tight text-[#0F1E35]">
+                  Trusted Global<br/>
+                  <span className="text-[#1E3A5F]">Pharma</span>{' '}
                   <span className="relative">
                     Exports
-                    <svg className="absolute -bottom-1 left-0 w-full" height="6" viewBox="0 0 200 6" fill="none" preserveAspectRatio="none"><path d="M0 5 Q50 0 100 5 Q150 0 200 5" stroke="#F7A614" strokeWidth="3" fill="none" strokeLinecap="round"/></svg>
+                    <svg className="absolute -bottom-1 left-0 w-full" height="6" viewBox="0 0 200 6" fill="none" preserveAspectRatio="none"><path d="M0 5 Q50 0 100 5 Q150 0 200 5" stroke="#60A5FA" strokeWidth="3" fill="none" strokeLinecap="round"/></svg>
                   </span>
                 </h1>
 
-                <p className="mt-5 text-[15px] leading-7 text-[#6B7280] max-w-[440px]">
-                  Your trusted B2B source for <span className="text-[#0A0A14] font-semibold">Sildenafil, Tadalafil & Vardenafil</span> formulations. Bulk supply, competitive pricing, global shipping.
+                <p className="mt-5 text-[15px] leading-7 text-slate-500 max-w-[440px]">
+                  Your trusted B2B source for <span className="text-[#0F1E35] font-semibold">Sildenafil, Tadalafil & Vardenafil</span> formulations. Bulk supply, competitive pricing, global shipping.
                 </p>
 
-                {/* Feature pills — inspired by Figma's icon cards */}
-                <div className="mt-7 grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-w-[440px]">
+                {/* Feature pills */}
+                <div className="mt-7 grid grid-cols-3 gap-2.5 max-w-[380px]">
                   {[
                     {i:'🌍', t:'25+ Countries'},
-                    {i:'💊', t:'23 Products'},
+                    {i:'💊', t:'27 Products'},
                     {i:'💰', t:'Bulk Pricing'},
-                    {i:'⚡', t:'48h Dispatch'},
-                    {i:'📋', t:'Full Docs'},
-                    {i:'🔬', t:'Genuine Molecules'},
                   ].map(f=>(
-                    <div key={f.t} className="flex items-center gap-2 bg-[#F8F9FF] border border-[#E8ECF5] rounded-xl px-3 py-2.5 hover:border-[#4361EE]/30 hover:bg-[#EEF2FF] transition-colors group">
+                    <div key={f.t} className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 hover:border-[#1E3A5F]/30 hover:bg-blue-50/50 transition-colors group">
                       <span className="text-[16px] shrink-0">{f.i}</span>
-                      <span className="text-[11.5px] font-semibold text-[#374151] group-hover:text-[#4361EE] transition-colors">{f.t}</span>
+                      <span className="text-[11.5px] font-semibold text-slate-600 group-hover:text-[#1E3A5F] transition-colors">{f.t}</span>
                     </div>
                   ))}
                 </div>
@@ -344,11 +348,11 @@ export default function App() {
                 {/* CTAs */}
                 <div className="mt-8 flex flex-wrap gap-3">
                   <button onClick={() => document.getElementById('products')?.scrollIntoView({behavior:'smooth'})} onMouseEnter={playSound}
-                    className="inline-flex items-center gap-2 bg-[#4361EE] text-white rounded-xl px-6 py-3.5 text-[14px] font-bold shadow-[0_8px_24px_rgba(67,97,238,0.3)] hover:bg-[#3451D1] hover:shadow-[0_12px_32px_rgba(67,97,238,0.38)] hover:-translate-y-0.5 transition-all">
+                    className="inline-flex items-center gap-2 bg-[#1E3A5F] text-white rounded-xl px-6 py-3.5 text-[14px] font-bold shadow-[0_8px_24px_rgba(15,30,53,0.2)] hover:bg-[#0F2340] hover:shadow-[0_12px_32px_rgba(15,30,53,0.28)] hover:-translate-y-0.5 transition-all">
                     View Product Catalogue →
                   </button>
                   <button onClick={doWA} onMouseEnter={playSound}
-                    className="inline-flex items-center gap-2 bg-white border-2 border-[#E8ECF5] text-[#0A0A14] rounded-xl px-5 py-3.5 text-[14px] font-bold hover:border-[#25D366] hover:text-[#25D366] hover:-translate-y-0.5 transition-all">
+                    className="inline-flex items-center gap-2 bg-white border-2 border-slate-200 text-[#0F1E35] rounded-xl px-5 py-3.5 text-[14px] font-bold hover:border-[#25D366] hover:text-[#25D366] hover:-translate-y-0.5 transition-all">
                     <IcoWA/> WhatsApp
                   </button>
                 </div>
@@ -356,59 +360,58 @@ export default function App() {
                 {/* Social proof row */}
                 <div className="mt-7 flex items-center gap-4">
                   <div className="flex -space-x-2">
-                    {['#4361EE','#F7A614','#10B981','#EF4444','#8B5CF6'].map(c=>(
+                    {['#1E3A5F','#2563EB','#0EA5E9','#6366F1','#8B5CF6'].map(c=>(
                       <div key={c} className="w-8 h-8 rounded-full border-2 border-white" style={{background:c}}/>
                     ))}
                   </div>
                   <div>
-                    <div className="text-[12px] font-bold text-[#0A0A14]">Trusted by global distributors</div>
-                    <div className="text-[11px] text-[#9CA3AF]">24 hr response · Genuine products</div>
+                    <div className="text-[12px] font-bold text-[#0F1E35]">Trusted by global distributors</div>
+                    <div className="text-[11px] text-slate-400">24 hr response · Genuine products</div>
                   </div>
                 </div>
               </div>
 
               {/* Right: hero image carousel */}
               <div className="relative" style={{animation:'heroFadeIn .7s .15s ease both'}}>
-                <div className="relative rounded-[20px] overflow-hidden shadow-[0_24px_60px_rgba(67,97,238,0.14)] border border-[#E8ECF5]" style={{height:420}}>
+                <div className="relative rounded-[20px] overflow-hidden shadow-[0_24px_60px_rgba(15,30,53,0.14)] border border-slate-100" style={{height:420}}>
                   {HERO_IMAGES.map((src,i)=>(
-                    <img key={src} src={src} alt="AlphaVigor products" className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000" style={{opacity:i===heroIdx?1:0}}/>
+                    <img key={src} src={src} alt="TruePharma products" className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000" style={{opacity:i===heroIdx?1:0}}/>
                   ))}
-                  {/* Dots */}
                   <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5">
                     {HERO_IMAGES.map((_,i)=>(
                       <button key={i} onClick={()=>setHeroIdx(i)} className={`h-1.5 rounded-full transition-all ${i===heroIdx?'bg-white w-6':'bg-white/50 w-1.5'}`}/>
                     ))}
                   </div>
                 </div>
-                {/* Floating stat card */}
-                <div className="absolute -bottom-5 -left-5 bg-white rounded-2xl border border-[#E8ECF5] shadow-[0_8px_32px_rgba(0,0,0,0.08)] p-3.5 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#EEF2FF] grid place-items-center text-[20px]">🌍</div>
+                {/* Floating stat cards */}
+                <div className="absolute -bottom-5 -left-5 bg-white rounded-2xl border border-slate-100 shadow-[0_8px_32px_rgba(0,0,0,0.08)] p-3.5 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-blue-50 grid place-items-center text-[20px]">🌍</div>
                   <div>
-                    <div className="text-[18px] font-black text-[#0A0A14] leading-none">25+</div>
-                    <div className="text-[10px] text-[#6B7280]">Countries</div>
+                    <div className="text-[18px] font-black text-[#0F1E35] leading-none">25+</div>
+                    <div className="text-[10px] text-slate-400">Countries</div>
                   </div>
                 </div>
-                <div className="absolute -top-4 -right-4 bg-white rounded-2xl border border-[#E8ECF5] shadow-[0_8px_32px_rgba(0,0,0,0.08)] p-3.5 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#FFF7ED] grid place-items-center text-[20px]">⚡</div>
+                <div className="absolute -top-4 -right-4 bg-white rounded-2xl border border-slate-100 shadow-[0_8px_32px_rgba(0,0,0,0.08)] p-3.5 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-amber-50 grid place-items-center text-[20px]">💊</div>
                   <div>
-                    <div className="text-[18px] font-black text-[#0A0A14] leading-none">48hr</div>
-                    <div className="text-[10px] text-[#6B7280]">Dispatch</div>
+                    <div className="text-[18px] font-black text-[#0F1E35] leading-none">27+</div>
+                    <div className="text-[10px] text-slate-400">Products</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Stats bar — directly from Figma design language */}
-            <div className="mt-14 mb-0 grid grid-cols-2 md:grid-cols-4 gap-0 border border-[#E8ECF5] rounded-2xl overflow-hidden divide-x divide-y divide-[#E8ECF5]">
+            {/* Stats bar */}
+            <div className="mt-14 mb-0 grid grid-cols-2 md:grid-cols-4 gap-0 border border-slate-200 rounded-2xl overflow-hidden divide-x divide-y divide-slate-200">
               {[
-                {k:'23+',  v:'Export Products'},
+                {k:'27+',  v:'Export Products'},
                 {k:'25+',  v:'Countries Served'},
                 {k:'48 hr',v:'Order Dispatch'},
                 {k:'24 hr',v:'Response Time'},
               ].map(s=>(
-                <div key={s.k} className="flex flex-col items-center justify-center py-5 bg-white hover:bg-[#F8F9FF] transition-colors">
-                  <div className="text-[26px] md:text-[30px] font-black display text-[#0A0A14]">{s.k}</div>
-                  <div className="text-[11px] text-[#9CA3AF] mt-0.5 font-medium">{s.v}</div>
+                <div key={s.k} className="flex flex-col items-center justify-center py-5 bg-white hover:bg-slate-50 transition-colors">
+                  <div className="text-[26px] md:text-[30px] font-black display text-[#0F1E35]">{s.k}</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5 font-medium">{s.v}</div>
                 </div>
               ))}
             </div>
@@ -420,14 +423,14 @@ export default function App() {
           {/* Section header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-8">
             <div>
-              <div className="inline-flex items-center gap-1.5 bg-[#EEF2FF] text-[#4361EE] rounded-full px-3 py-1 text-[11px] font-bold mb-2">
+              <div className="inline-flex items-center gap-1.5 bg-blue-50 text-[#1E3A5F] rounded-full px-3 py-1 text-[11px] font-bold mb-2 border border-blue-100">
                 💊 Export Product Catalogue
               </div>
-              <h2 className="display text-[26px] md:text-[32px] font-extrabold leading-tight text-[#0A0A14]">Men's Wellness Export Range</h2>
-              <p className="mt-1.5 text-[13px] text-[#6B7280]">Wholesale & bulk supply. Contact us for MOQ, pricing, and regulatory documentation.</p>
+              <h2 className="display text-[26px] md:text-[32px] font-extrabold leading-tight text-[#0F1E35]">Men's Wellness Export Range</h2>
+              <p className="mt-1.5 text-[13px] text-slate-400">Wholesale & bulk supply. Contact us for MOQ, pricing, and regulatory documentation.</p>
             </div>
             <a href="#" download onMouseEnter={playSound}
-              className="hidden md:inline-flex shrink-0 items-center gap-2 border-2 border-[#4361EE] text-[#4361EE] rounded-xl px-5 py-2.5 text-[13px] font-bold hover:bg-[#4361EE] hover:text-white transition-all">
+              className="hidden md:inline-flex shrink-0 items-center gap-2 border-2 border-[#1E3A5F] text-[#1E3A5F] rounded-xl px-5 py-2.5 text-[13px] font-bold hover:bg-[#1E3A5F] hover:text-white transition-all">
               <IcoDown/> Download Catalogue
             </a>
           </div>
@@ -437,17 +440,17 @@ export default function App() {
             {FILTER_BRANDS.map(f => (
               <button key={f} onClick={() => { setActiveFilter(f); setShowMore(false); }} onMouseEnter={playSound}
                 className={`whitespace-nowrap rounded-full px-4 py-1.5 text-[12px] font-bold border-2 transition-all
-                  ${activeFilter===f ? 'bg-[#4361EE] text-white border-[#4361EE] shadow-[0_4px_14px_rgba(67,97,238,0.25)]' : 'bg-white border-[#E8ECF5] text-[#6B7280] hover:border-[#4361EE] hover:text-[#4361EE]'}`}>
+                  ${activeFilter===f ? 'bg-[#1E3A5F] text-white border-[#1E3A5F] shadow-[0_4px_14px_rgba(15,30,53,0.2)]' : 'bg-white border-slate-200 text-slate-500 hover:border-[#1E3A5F] hover:text-[#1E3A5F]'}`}>
                 {f}
               </button>
             ))}
-            <a href="#" download className="md:hidden ml-auto inline-flex items-center gap-1 bg-[#EEF2FF] text-[#4361EE] rounded-full px-3 py-1.5 text-[11px] font-bold">
+            <a href="#" download className="md:hidden ml-auto inline-flex items-center gap-1 bg-blue-50 text-[#1E3A5F] rounded-full px-3 py-1.5 text-[11px] font-bold">
               <IcoDown/> Catalogue
             </a>
           </div>
 
           {activeFilter !== 'All' && (
-            <p className="mb-5 text-[12px] text-[#9CA3AF]">
+            <p className="mb-5 text-[12px] text-slate-400">
               Showing {Math.min(CAT_LIMIT, baseFiltered.length)} of {baseFiltered.length} {activeFilter} products
             </p>
           )}
@@ -456,14 +459,14 @@ export default function App() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
             {displayed.map(product => (
               <div key={product.id} onMouseEnter={playSound}
-                className="group relative bg-white rounded-2xl border border-[#E8ECF5] overflow-hidden hover:shadow-[0_12px_40px_rgba(67,97,238,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col">
+                className="group relative bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-[0_12px_40px_rgba(15,30,53,0.1)] hover:-translate-y-1 transition-all duration-300 flex flex-col">
 
                 {product.tag && (
-                  <div className="absolute top-2.5 left-2.5 z-10 bg-[#4361EE] text-white text-[9px] font-black px-2 py-0.5 rounded-full">{product.tag}</div>
+                  <div className="absolute top-2.5 left-2.5 z-10 bg-[#0F1E35] text-white text-[9px] font-black px-2 py-0.5 rounded-full">{product.tag}</div>
                 )}
 
                 {/* Product image */}
-                <div className="relative overflow-hidden bg-[#F8F9FF]" style={{aspectRatio:'4/3'}}>
+                <div className="relative overflow-hidden bg-slate-50" style={{aspectRatio:'4/3'}}>
                   <img src={product.img} alt={product.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"/>
@@ -472,11 +475,11 @@ export default function App() {
                 {/* Card body */}
                 <div className="p-3.5 flex flex-col gap-2.5 flex-1">
                   <div>
-                    <div className="text-[12px] font-extrabold text-[#0A0A14] leading-snug">{product.name}</div>
-                    <div className="text-[10.5px] text-[#9CA3AF] mt-0.5">{product.subtitle}</div>
+                    <div className="text-[12px] font-extrabold text-[#0F1E35] leading-snug">{product.name}</div>
+                    <div className="text-[10.5px] text-slate-400 mt-0.5">{product.subtitle}</div>
                   </div>
                   <button onClick={() => openEnquiry(product)}
-                    className="mt-auto w-full bg-[#F0F3FF] text-[#4361EE] rounded-xl py-2 text-[11.5px] font-bold hover:bg-[#4361EE] hover:text-white transition-all">
+                    className="mt-auto w-full bg-slate-50 text-[#1E3A5F] border border-slate-200 rounded-xl py-2 text-[11.5px] font-bold hover:bg-[#1E3A5F] hover:text-white hover:border-[#1E3A5F] transition-all">
                     Get Export Price →
                   </button>
                 </div>
@@ -489,13 +492,13 @@ export default function App() {
             <div className="flex justify-center mt-10">
               {hasMore ? (
                 <button onClick={() => setShowMore(true)} onMouseEnter={playSound}
-                  className="inline-flex items-center gap-2 border-2 border-[#4361EE] text-[#4361EE] rounded-xl px-7 py-3 text-[13px] font-bold hover:bg-[#4361EE] hover:text-white transition-all">
+                  className="inline-flex items-center gap-2 border-2 border-[#1E3A5F] text-[#1E3A5F] rounded-xl px-7 py-3 text-[13px] font-bold hover:bg-[#1E3A5F] hover:text-white transition-all">
                   Show More Products ({baseFiltered.length - ALL_INITIAL} more)
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-4 h-4" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7"/></svg>
                 </button>
               ) : showMore ? (
                 <button onClick={() => { setShowMore(false); document.getElementById('products')?.scrollIntoView({behavior:'smooth'}); }}
-                  className="inline-flex items-center gap-2 border border-[#E8ECF5] text-[#6B7280] rounded-xl px-7 py-3 text-[13px] font-bold hover:border-[#4361EE] hover:text-[#4361EE] transition-all">
+                  className="inline-flex items-center gap-2 border border-slate-200 text-slate-500 rounded-xl px-7 py-3 text-[13px] font-bold hover:border-[#1E3A5F] hover:text-[#1E3A5F] transition-all">
                   Show Less
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-4 h-4" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7"/></svg>
                 </button>
@@ -505,13 +508,13 @@ export default function App() {
         </section>
 
         {/* ── WHY CHOOSE ───────────────────────────────────────────────── */}
-        <section className="bg-[#F8F9FF] border-y border-[#E8ECF5] py-14">
+        <section className="bg-slate-50 border-y border-slate-100 py-14">
           <div className="max-w-[1280px] mx-auto px-5 md:px-8">
             <div className="text-center mb-10">
-              <div className="inline-flex items-center gap-1.5 bg-white border border-[#E8ECF5] rounded-full px-3 py-1 text-[11px] font-bold text-[#6B7280] mb-3">
+              <div className="inline-flex items-center gap-1.5 bg-white border border-slate-200 rounded-full px-3 py-1 text-[11px] font-bold text-slate-500 mb-3">
                 🤝 Why Partner With Us
               </div>
-              <h3 className="display text-[24px] md:text-[28px] font-extrabold text-[#0A0A14]">The Preferred Export Partner for Global Distributors</h3>
+              <h3 className="display text-[24px] md:text-[28px] font-extrabold text-[#0F1E35]">The Preferred Export Partner for Global Distributors</h3>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {[
@@ -522,10 +525,10 @@ export default function App() {
                 {i:'📋', t:'Regulatory Docs',    d:'COA, MSDS, product dossiers with every order'},
               ].map(c => (
                 <div key={c.t} onMouseEnter={playSound}
-                  className="bg-white border border-[#E8ECF5] rounded-2xl p-5 text-center hover:border-[#4361EE]/40 hover:shadow-[0_8px_28px_rgba(67,97,238,0.08)] hover:-translate-y-1 transition-all group">
-                  <div className="w-11 h-11 mx-auto rounded-xl bg-[#EEF2FF] group-hover:bg-[#4361EE] grid place-items-center text-[22px] transition-colors mb-3">{c.i}</div>
-                  <div className="text-[12.5px] font-bold text-[#0A0A14]">{c.t}</div>
-                  <div className="mt-1 text-[10.5px] leading-[1.5] text-[#9CA3AF]">{c.d}</div>
+                  className="bg-white border border-slate-100 rounded-2xl p-5 text-center hover:border-[#1E3A5F]/30 hover:shadow-[0_8px_28px_rgba(15,30,53,0.08)] hover:-translate-y-1 transition-all group">
+                  <div className="w-11 h-11 mx-auto rounded-xl bg-blue-50 group-hover:bg-[#1E3A5F] grid place-items-center text-[22px] transition-colors mb-3">{c.i}</div>
+                  <div className="text-[12.5px] font-bold text-[#0F1E35]">{c.t}</div>
+                  <div className="mt-1 text-[10.5px] leading-[1.5] text-slate-400">{c.d}</div>
                 </div>
               ))}
             </div>
@@ -535,44 +538,44 @@ export default function App() {
         {/* ── ABOUT ────────────────────────────────────────────────────── */}
         <section className="max-w-[1280px] mx-auto px-5 md:px-8 py-16 grid md:grid-cols-[1fr_1.1fr] gap-12 items-center">
           <div>
-            <div className="inline-flex items-center gap-1.5 bg-[#EEF2FF] text-[#4361EE] rounded-full px-3 py-1 text-[11px] font-bold mb-4">
-              About AlphaVigor
+            <div className="inline-flex items-center gap-1.5 bg-blue-50 text-[#1E3A5F] rounded-full px-3 py-1 text-[11px] font-bold mb-4 border border-blue-100">
+              About TruePharma
             </div>
-            <h3 className="display text-[24px] md:text-[30px] font-extrabold text-[#0A0A14] leading-tight">India's Premier Men's Wellness Export House</h3>
-            <p className="mt-4 text-[13.5px] leading-6 text-[#6B7280]">
-              AlphaVigor, powered by TruePharma, is a pharmaceutical exporter specialising in men's sexual health and wellness formulations. We supply bulk quantities of Sildenafil, Tadalafil, and Vardenafil-based products to distributors, wholesalers, and healthcare importers across 25+ countries.
+            <h3 className="display text-[24px] md:text-[30px] font-extrabold text-[#0F1E35] leading-tight">India's Premier Men's Wellness Export House</h3>
+            <p className="mt-4 text-[13.5px] leading-6 text-slate-500">
+              TruePharma is a pharmaceutical exporter specialising in men's sexual health and wellness formulations. We supply bulk quantities of Sildenafil, Tadalafil, and Vardenafil-based products to distributors, wholesalers, and healthcare importers across 25+ countries.
             </p>
-            <p className="mt-3 text-[13.5px] leading-6 text-[#6B7280]">
+            <p className="mt-3 text-[13.5px] leading-6 text-slate-500">
               Every shipment comes with a full Certificate of Analysis, regulatory dossier, and dedicated export support — so your customs clearance is seamless, every time.
             </p>
             <ul className="mt-6 space-y-3">
               {['Complete regulatory documentation (COA, MSDS)','Flexible MOQ — starting from 1,000 units','Discreet, secure international packaging','Dedicated export manager for every account','Fast international dispatch within 48 hrs'].map(li => (
                 <li key={li} className="flex gap-3 text-[13px]">
-                  <span className="w-5 h-5 rounded-full bg-[#EEF2FF] text-[#4361EE] grid place-items-center text-[10px] font-black shrink-0 mt-0.5">✔</span>
-                  <span className="text-[#374151]">{li}</span>
+                  <span className="w-5 h-5 rounded-full bg-blue-50 text-[#1E3A5F] grid place-items-center text-[10px] font-black shrink-0 mt-0.5 border border-blue-100">✔</span>
+                  <span className="text-slate-600">{li}</span>
                 </li>
               ))}
             </ul>
             <div className="flex gap-3 mt-8">
               <button onClick={() => openEnquiry()} onMouseEnter={playSound}
-                className="inline-flex items-center gap-2 bg-[#4361EE] text-white rounded-xl px-5 py-3 text-[13px] font-bold hover:bg-[#3451D1] hover:shadow-[0_8px_24px_rgba(67,97,238,0.3)] transition-all">
+                className="inline-flex items-center gap-2 bg-[#1E3A5F] text-white rounded-xl px-5 py-3 text-[13px] font-bold hover:bg-[#0F2340] hover:shadow-[0_8px_24px_rgba(15,30,53,0.25)] transition-all">
                 Request Product List →
               </button>
-              <a href="#" download className="inline-flex items-center gap-2 border-2 border-[#E8ECF5] text-[#374151] rounded-xl px-4 py-3 text-[13px] font-bold hover:border-[#4361EE] hover:text-[#4361EE] transition-all">
+              <a href="#" download className="inline-flex items-center gap-2 border-2 border-slate-200 text-slate-600 rounded-xl px-4 py-3 text-[13px] font-bold hover:border-[#1E3A5F] hover:text-[#1E3A5F] transition-all">
                 <IcoDown/> Catalogue PDF
               </a>
             </div>
           </div>
 
           <div className="relative">
-            <div className="rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(67,97,238,0.1)] border border-[#E8ECF5]">
-              <img src="/images/hero3.png" alt="AlphaVigor Export Products" className="w-full h-[320px] md:h-[400px] object-cover"/>
+            <div className="rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(15,30,53,0.1)] border border-slate-100">
+              <img src="/images/hero3.png" alt="TruePharma Export Products" className="w-full h-[320px] md:h-[400px] object-cover"/>
             </div>
-            <div className="absolute -bottom-5 left-5 right-5 bg-white rounded-2xl border border-[#E8ECF5] shadow-[0_12px_40px_rgba(0,0,0,0.08)] grid grid-cols-3 divide-x divide-[#E8ECF5] p-4">
-              {[{k:'🌍 25+',v:'Countries',bg:'#EEF2FF'},{k:'B2B',v:'Specialists',bg:'#FFF7ED'},{k:'48 hr',v:'Dispatch',bg:'#F0FDF4'}].map(b=>(
+            <div className="absolute -bottom-5 left-5 right-5 bg-white rounded-2xl border border-slate-100 shadow-[0_12px_40px_rgba(0,0,0,0.08)] grid grid-cols-3 divide-x divide-slate-100 p-4">
+              {[{k:'🌍 25+',v:'Countries',bg:'#EFF6FF'},{k:'B2B',v:'Specialists',bg:'#F8FAFC'},{k:'48 hr',v:'Dispatch',bg:'#F0FDF4'}].map(b=>(
                 <div key={b.k} className="flex gap-2.5 items-center justify-center px-2">
                   <div className="w-8 h-8 rounded-xl grid place-items-center text-[14px]" style={{background:b.bg}}>{b.k.includes('🌍')?'🌍':b.k.includes('B2B')?'💼':'⚡'}</div>
-                  <div><div className="text-[12px] font-black leading-none text-[#0A0A14]">{b.k.replace('🌍 ','')}</div><div className="text-[9px] text-[#9CA3AF]">{b.v}</div></div>
+                  <div><div className="text-[12px] font-black leading-none text-[#0F1E35]">{b.k.replace('🌍 ','')}</div><div className="text-[9px] text-slate-400">{b.v}</div></div>
                 </div>
               ))}
             </div>
@@ -580,14 +583,14 @@ export default function App() {
         </section>
 
         {/* ── CONTACT ──────────────────────────────────────────────────── */}
-        <section id="contact" className="bg-[#F8F9FF] border-y border-[#E8ECF5] py-14">
+        <section id="contact" className="bg-slate-50 border-y border-slate-100 py-14">
           <div className="max-w-[1280px] mx-auto px-5 md:px-8 grid md:grid-cols-2 gap-10">
             <div>
-              <div className="inline-flex items-center gap-1.5 bg-white border border-[#E8ECF5] rounded-full px-3 py-1 text-[11px] font-bold text-[#6B7280] mb-4">
+              <div className="inline-flex items-center gap-1.5 bg-white border border-slate-200 rounded-full px-3 py-1 text-[11px] font-bold text-slate-500 mb-4">
                 📬 Export Enquiries
               </div>
-              <h3 className="display text-[24px] md:text-[28px] font-extrabold text-[#0A0A14]">Talk to Our Export Team</h3>
-              <p className="mt-2 text-[13px] text-[#6B7280]">Our dedicated export managers are available 6 days a week. We respond to all enquiries within 24 hours.</p>
+              <h3 className="display text-[24px] md:text-[28px] font-extrabold text-[#0F1E35]">Talk to Our Export Team</h3>
+              <p className="mt-2 text-[13px] text-slate-400">Our dedicated export managers are available 6 days a week. We respond to all enquiries within 24 hours.</p>
               <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
                   {i:'📍', t:'Manufacturing & Export HQ', d:'G-5 & G-6, Industrial Estate\nGorwa, Vadodara – 390016\nGujarat, India'},
@@ -595,37 +598,37 @@ export default function App() {
                   {i:'✉️', t:'Export Email', d:'export@truepharma.co.in\ninfo@truepharma.co.in'},
                   {i:'🕒', t:'Business Hours', d:'Mon – Sat: 9:00 AM – 6:30 PM IST\nSunday: Closed'},
                 ].map(c => (
-                  <div key={c.t} className="bg-white border border-[#E8ECF5] rounded-xl p-4 flex gap-3 hover:border-[#4361EE]/30 hover:shadow-[0_4px_16px_rgba(67,97,238,0.06)] transition">
-                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] grid place-items-center text-[16px] shrink-0">{c.i}</div>
+                  <div key={c.t} className="bg-white border border-slate-100 rounded-xl p-4 flex gap-3 hover:border-[#1E3A5F]/30 hover:shadow-[0_4px_16px_rgba(15,30,53,0.06)] transition">
+                    <div className="w-9 h-9 rounded-xl bg-blue-50 grid place-items-center text-[16px] shrink-0">{c.i}</div>
                     <div>
-                      <div className="text-[11.5px] font-bold text-[#0A0A14]">{c.t}</div>
-                      <div className="text-[10.5px] text-[#6B7280] leading-4 mt-0.5 whitespace-pre-line">{c.d}</div>
+                      <div className="text-[11.5px] font-bold text-[#0F1E35]">{c.t}</div>
+                      <div className="text-[10.5px] text-slate-500 leading-4 mt-0.5 whitespace-pre-line">{c.d}</div>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-[#4361EE] rounded-2xl p-8 flex flex-col items-center justify-center text-center text-white relative overflow-hidden">
+            <div className="bg-[#0F1E35] rounded-2xl p-8 flex flex-col items-center justify-center text-center text-white relative overflow-hidden">
               <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-white/5"/>
-              <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-white/5"/>
+              <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-blue-500/10"/>
               <div className="relative flex flex-col items-center">
-                <div className="w-14 h-14 rounded-2xl bg-white/15 border border-white/20 grid place-items-center text-[28px] mb-5">💊</div>
+                <div className="w-14 h-14 rounded-2xl bg-white/10 border border-white/15 grid place-items-center text-[28px] mb-5">💊</div>
                 <h4 className="display text-[22px] font-extrabold">Ready to Order?</h4>
-                <p className="mt-2 text-[13px] text-white/75 max-w-[280px] leading-6">
+                <p className="mt-2 text-[13px] text-white/70 max-w-[280px] leading-6">
                   Send us your product list and required quantities. We'll respond with pricing, lead time and documentation within 24 hours.
                 </p>
                 <div className="mt-6 flex flex-col sm:flex-row gap-3 w-full justify-center">
                   <button onClick={doWA} onMouseEnter={playSound}
-                    className="inline-flex items-center justify-center gap-2 bg-[#25D366] text-white rounded-xl px-5 py-3 text-[13px] font-bold shadow-[0_8px_24px_rgba(37,211,102,0.4)] hover:scale-[1.02] transition">
+                    className="inline-flex items-center justify-center gap-2 bg-[#25D366] text-white rounded-xl px-5 py-3 text-[13px] font-bold shadow-[0_8px_24px_rgba(37,211,102,0.35)] hover:scale-[1.02] transition">
                     <IcoWA/> WhatsApp
                   </button>
                   <button onClick={doTG} onMouseEnter={playSound}
-                    className="inline-flex items-center justify-center gap-2 bg-white/15 border border-white/30 text-white rounded-xl px-5 py-3 text-[13px] font-bold hover:bg-white/25 hover:scale-[1.02] transition">
+                    className="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/20 text-white rounded-xl px-5 py-3 text-[13px] font-bold hover:bg-white/20 hover:scale-[1.02] transition">
                     <IcoTG/> Telegram
                   </button>
                 </div>
-                <p className="mt-4 text-[10px] text-white/50">Average response time: under 30 minutes</p>
+                <p className="mt-4 text-[10px] text-white/40">Average response time: under 30 minutes</p>
               </div>
             </div>
           </div>
@@ -634,30 +637,30 @@ export default function App() {
         {/* ── PAYMENTS ─────────────────────────────────────────────────── */}
         <section className="max-w-[1280px] mx-auto px-5 md:px-8 py-14">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-1.5 bg-[#EEF2FF] text-[#4361EE] rounded-full px-3 py-1 text-[11px] font-bold mb-3">
+            <div className="inline-flex items-center gap-1.5 bg-blue-50 text-[#1E3A5F] rounded-full px-3 py-1 text-[11px] font-bold mb-3 border border-blue-100">
               🔒 Secure Payments
             </div>
-            <div className="display text-[22px] font-extrabold text-[#0A0A14]">We Accept International Payments</div>
-            <p className="mt-1.5 text-[12.5px] text-[#6B7280]">All transactions are 100% secure and confidential.</p>
+            <div className="display text-[22px] font-extrabold text-[#0F1E35]">We Accept International Payments</div>
+            <p className="mt-1.5 text-[12.5px] text-slate-400">All transactions are 100% secure and confidential.</p>
           </div>
           <div className="flex flex-wrap justify-center gap-4 max-w-[680px] mx-auto">
             {[
               {name:'PayPal',        icon:'🅿',  col:'#003087', bg:'#EFF6FF', note:'Business accounts'},
               {name:'USDT (TRC-20)', icon:'₮',  col:'#26A17B', bg:'#F0FDF4', note:'Tether stablecoin'},
               {name:'Bitcoin',       icon:'₿',  col:'#F7931A', bg:'#FFFBEB', note:'BTC accepted'},
-              {name:'Bank Transfer', icon:'🏦', col:'#4361EE', bg:'#EEF2FF', note:'SWIFT / Wire'},
+              {name:'Bank Transfer', icon:'🏦', col:'#1E3A5F', bg:'#EFF6FF', note:'SWIFT / Wire'},
             ].map(p => (
-              <div key={p.name} className="rounded-2xl border border-[#E8ECF5] px-6 py-5 flex flex-col items-center gap-1.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:-translate-y-0.5 transition-all min-w-[150px] bg-white">
+              <div key={p.name} className="rounded-2xl border border-slate-100 px-6 py-5 flex flex-col items-center gap-1.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:-translate-y-0.5 transition-all min-w-[150px] bg-white">
                 <span className="text-[30px]" style={{color:p.col}}>{p.icon}</span>
                 <span className="text-[14px] font-black" style={{color:p.col}}>{p.name}</span>
-                <span className="text-[9.5px] text-[#9CA3AF]">{p.note}</span>
+                <span className="text-[9.5px] text-slate-400">{p.note}</span>
               </div>
             ))}
           </div>
         </section>
 
         {/* ── FOOTER ───────────────────────────────────────────────────── */}
-        <footer className="bg-[#0A0A14] text-[#9CA3AF]">
+        <footer className="bg-[#0F1E35] text-slate-400">
           <div className="max-w-[1280px] mx-auto px-5 md:px-8">
             {/* Main footer grid */}
             <div className="grid md:grid-cols-[1.6fr_1fr_1fr_1.2fr] gap-10 pt-12 pb-10">
@@ -667,19 +670,19 @@ export default function App() {
                 <div className="flex items-center gap-3 mb-5">
                   <Logo size={36}/>
                   <div>
-                    <div className="font-black text-[17px] display leading-none text-white">AlphaVigor</div>
-                    <div className="text-[9px] opacity-40 tracking-[0.22em] uppercase mt-0.5">Global Wellness Exports</div>
+                    <div className="font-black text-[17px] display leading-none text-white">TruePharma</div>
+                    <div className="text-[9px] opacity-40 tracking-[0.22em] uppercase mt-0.5">Global Pharma Exports</div>
                   </div>
                 </div>
                 <p className="text-[12.5px] leading-[1.6] max-w-[260px]">
-                  India's premier export house for men's wellness pharmaceuticals. Serving global distributors with genuine, high-quality formulations since 2009.
+                  India's premier export house for men's wellness pharmaceuticals. Serving global distributors with genuine, high-quality formulations.
                 </p>
                 <div className="mt-5 flex gap-2">
                   {[
                     {href:'https://t.me/AlphaVigor', bg:'#229ED9', icon:<IcoTG/>, title:'Telegram'},
                     {href:'https://instagram.com', bg:'linear-gradient(135deg,#f09433,#dc2743,#bc1888)', icon:<IcoIG/>, title:'Instagram'},
                     {href:'https://wa.me/917622068016', bg:'#25D366', icon:<IcoWA/>, title:'WhatsApp'},
-                    {href:'mailto:export@truepharma.co.in', bg:'#4361EE', icon:<IcoMail/>, title:'Email'},
+                    {href:'mailto:export@truepharma.co.in', bg:'#1E3A5F', icon:<IcoMail/>, title:'Email'},
                   ].map(s=>(
                     <a key={s.title} href={s.href} target={s.href.startsWith('http')?'_blank':undefined} rel="noopener noreferrer" title={s.title}
                       className="w-9 h-9 rounded-xl text-white grid place-items-center hover:scale-110 transition shadow-lg"
@@ -695,7 +698,7 @@ export default function App() {
                   {[['Products','#products'],['About Us','#'],['Contact','#contact'],['Download Catalogue','#'],['Wholesale Enquiry','#']].map(([l,h])=>(
                     <li key={l}>
                       <a href={h} className="hover:text-white transition flex items-center gap-2">
-                        <span className="w-1 h-1 rounded-full bg-[#4361EE]"/>
+                        <span className="w-1 h-1 rounded-full bg-blue-400"/>
                         {l}
                       </a>
                     </li>
@@ -709,7 +712,7 @@ export default function App() {
                 <ul className="space-y-2.5 text-[12.5px]">
                   {PRODUCTS.filter(p=>p.popular).map(p=>(
                     <li key={p.id} onClick={()=>openEnquiry(p)} className="hover:text-white cursor-pointer transition flex items-center gap-2">
-                      <span className="w-1 h-1 rounded-full bg-[#4361EE]"/>
+                      <span className="w-1 h-1 rounded-full bg-blue-400"/>
                       {p.name}
                     </li>
                   ))}
@@ -721,24 +724,24 @@ export default function App() {
                 <div className="text-white text-[12px] font-bold mb-4 uppercase tracking-wider">Export Contact</div>
                 <div className="space-y-3 text-[12.5px]">
                   <div className="flex gap-2.5 items-start">
-                    <span className="shrink-0 text-[#4361EE] mt-0.5">📍</span>
+                    <span className="shrink-0 text-blue-400 mt-0.5">📍</span>
                     <span>Gorwa Industrial Estate, Vadodara 390016, Gujarat, India</span>
                   </div>
                   <div className="flex gap-2.5">
-                    <span className="text-[#4361EE]">📞</span>
+                    <span className="text-blue-400">📞</span>
                     <a href="tel:+917622068016" className="hover:text-white transition">+91 76220 68016</a>
                   </div>
                   <div className="flex gap-2.5">
-                    <span className="text-[#4361EE]">✉️</span>
+                    <span className="text-blue-400">✉️</span>
                     <a href="mailto:export@truepharma.co.in" className="hover:text-white transition break-all">export@truepharma.co.in</a>
                   </div>
                   <div className="flex gap-2.5">
-                    <span className="text-[#4361EE]">🕒</span>
+                    <span className="text-blue-400">🕒</span>
                     <span>Mon – Sat, 9 AM – 6:30 PM IST</span>
                   </div>
                 </div>
                 <button onClick={()=>openEnquiry()} onMouseEnter={playSound}
-                  className="mt-5 w-full bg-[#4361EE] text-white rounded-xl py-2.5 text-[12px] font-bold inline-flex items-center justify-center gap-2 hover:bg-[#3451D1] transition">
+                  className="mt-5 w-full bg-blue-500 text-white rounded-xl py-2.5 text-[12px] font-bold inline-flex items-center justify-center gap-2 hover:bg-blue-600 transition">
                   Get Export Quote →
                 </button>
               </div>
@@ -746,13 +749,13 @@ export default function App() {
 
             {/* Bottom bar */}
             <div className="border-t border-white/8 py-5 flex flex-col md:flex-row items-center justify-between gap-2 text-[11px]">
-              <div className="text-[#6B7280]">© {new Date().getFullYear()} AlphaVigor / TruePharma. All Rights Reserved.</div>
-              <div className="flex gap-5 text-[#6B7280]">
+              <div className="text-slate-500">© {new Date().getFullYear()} TruePharma. All Rights Reserved.</div>
+              <div className="flex gap-5 text-slate-500">
                 {['Privacy Policy','Terms & Conditions','Export Policy'].map(t=>(
                   <span key={t} className="cursor-pointer hover:text-white transition">{t}</span>
                 ))}
               </div>
-              <div className="text-[#4D5562] flex items-center gap-1">Made with <span className="text-[#F7A614] mx-0.5">❤</span> in India, for the world</div>
+              <div className="text-slate-600 flex items-center gap-1">Made with <span className="text-blue-400 mx-0.5">❤</span> in India, for the world</div>
             </div>
           </div>
         </footer>
@@ -765,7 +768,7 @@ export default function App() {
               <IcoWA/>
             </button>
           </div>
-          <span className="text-[8px] font-black text-[#25D366] bg-white rounded-full px-2 py-0.5 shadow-sm border border-[#E8ECF5]">WhatsApp</span>
+          <span className="text-[8px] font-black text-[#25D366] bg-white rounded-full px-2 py-0.5 shadow-sm border border-slate-100">WhatsApp</span>
         </div>
         <div className="fixed bottom-2 right-4 z-50 flex flex-col items-center gap-1">
           <div className="relative">
@@ -774,31 +777,31 @@ export default function App() {
               <IcoTG/>
             </button>
           </div>
-          <span className="text-[8px] font-black text-[#229ED9] bg-white rounded-full px-2 py-0.5 shadow-sm border border-[#E8ECF5]">Telegram</span>
+          <span className="text-[8px] font-black text-[#229ED9] bg-white rounded-full px-2 py-0.5 shadow-sm border border-slate-100">Telegram</span>
         </div>
 
         {/* ── ENQUIRY MODAL ─────────────────────────────────────────────── */}
         {enquiryOpen && (
           <div className="fixed inset-0 z-[200] flex items-end md:items-center justify-center p-0 md:p-4">
-            <div className="absolute inset-0 bg-[#0A0A14]/60 backdrop-blur-sm" onClick={()=>setEnquiryOpen(false)} style={{animation:'fadeIn .2s ease'}}/>
+            <div className="absolute inset-0 bg-[#0F1E35]/60 backdrop-blur-sm" onClick={()=>setEnquiryOpen(false)} style={{animation:'fadeIn .2s ease'}}/>
             <div className="relative w-full md:max-w-[520px] bg-white rounded-t-[24px] md:rounded-[24px] shadow-[0_32px_80px_rgba(0,0,0,0.3)] overflow-hidden" style={{animation:'slideUp .3s cubic-bezier(0.16,1,0.3,1)'}}>
-              <div className="bg-[#4361EE] p-5 text-white flex items-center justify-between">
+              <div className="bg-[#0F1E35] p-5 text-white flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <Logo size={34}/>
                   <div>
                     <div className="font-black text-[15px] leading-tight">Request Export Price</div>
-                    <div className="text-[10.5px] opacity-60 mt-0.5">Best price · Fast reply · Bulk supply</div>
+                    <div className="text-[10.5px] opacity-50 mt-0.5">Best price · Fast reply · Bulk supply</div>
                   </div>
                 </div>
-                <button onClick={()=>setEnquiryOpen(false)} className="w-8 h-8 rounded-xl bg-white/15 grid place-items-center hover:bg-white/25 text-[14px] transition">✕</button>
+                <button onClick={()=>setEnquiryOpen(false)} className="w-8 h-8 rounded-xl bg-white/10 grid place-items-center hover:bg-white/20 text-[14px] transition">✕</button>
               </div>
 
               <div className="p-5 space-y-4 max-h-[78vh] overflow-auto">
                 <div className="grid grid-cols-1 md:grid-cols-[1.3fr_.7fr] gap-3">
                   <div>
-                    <label className="text-[11px] font-bold text-[#374151]">Select Product</label>
+                    <label className="text-[11px] font-bold text-slate-600">Select Product</label>
                     <select value={selectedProduct?.id||''} onChange={e=>setSelectedProduct(PRODUCTS.find(p=>p.id===e.target.value)||null)}
-                      className="mt-1 w-full rounded-xl border border-[#E8ECF5] bg-[#F8F9FF] px-3 py-2.5 text-[12px] font-medium outline-none focus:border-[#4361EE] transition">
+                      className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-[12px] font-medium outline-none focus:border-[#1E3A5F] transition">
                       <option value="">Choose product…</option>
                       {['Vidalista','Fildena','Vilitra','Cenforce','Kamagra'].map(brand=>(
                         <optgroup key={brand} label={`── ${brand} ──`}>
@@ -808,32 +811,32 @@ export default function App() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-[11px] font-bold text-[#374151]">Order Quantity</label>
+                    <label className="text-[11px] font-bold text-slate-600">Order Quantity</label>
                     <select value={quantity} onChange={e=>setQuantity(e.target.value)}
-                      className="mt-1 w-full rounded-xl border border-[#E8ECF5] bg-[#F8F9FF] px-3 py-2.5 text-[12px] outline-none focus:border-[#4361EE] transition">
+                      className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-[12px] outline-none focus:border-[#1E3A5F] transition">
                       {['500 Units','1,000 Units','2,000 Units','5,000 Units','10,000+ Units','Custom Qty'].map(q=><option key={q}>{q}</option>)}
                     </select>
                   </div>
                 </div>
 
                 {selectedProduct && (
-                  <div className="flex items-center gap-3 bg-[#F0F3FF] border border-[#DDE4FF] rounded-xl p-3">
-                    <div className="w-14 h-9 rounded-lg overflow-hidden shrink-0 border border-[#DDE4FF]">
+                  <div className="flex items-center gap-3 bg-blue-50 border border-blue-100 rounded-xl p-3">
+                    <div className="w-14 h-9 rounded-lg overflow-hidden shrink-0 border border-blue-100">
                       <img src={selectedProduct.img} alt={selectedProduct.name} className="w-full h-full object-cover"/>
                     </div>
                     <div className="flex-1">
-                      <div className="text-[13px] font-black text-[#0A0A14]">{selectedProduct.name}</div>
-                      <div className="text-[10px] text-[#6B7280]">{selectedProduct.subtitle} · {quantity}</div>
+                      <div className="text-[13px] font-black text-[#0F1E35]">{selectedProduct.name}</div>
+                      <div className="text-[10px] text-slate-500">{selectedProduct.subtitle} · {quantity}</div>
                     </div>
-                    <div className="text-[10px] px-2.5 py-1 rounded-full bg-[#D1FAE5] text-[#065F46] font-bold shrink-0">✅ In Stock</div>
+                    <div className="text-[10px] px-2.5 py-1 rounded-full bg-green-100 text-green-700 font-bold shrink-0">✅ In Stock</div>
                   </div>
                 )}
 
                 <div>
-                  <label className="text-[11px] font-bold text-[#374151]">Message / Requirements</label>
+                  <label className="text-[11px] font-bold text-slate-600">Message / Requirements</label>
                   <textarea value={msg} onChange={e=>setMsg(e.target.value)}
                     placeholder="e.g. Need CIF pricing for export to UK, share product dossier and COA. Also interested in Fildena range…"
-                    rows={3} className="mt-1 w-full rounded-xl border border-[#E8ECF5] px-3 py-2.5 text-[12px] outline-none focus:border-[#4361EE] resize-none transition"/>
+                    rows={3} className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-[12px] outline-none focus:border-[#1E3A5F] resize-none transition"/>
                 </div>
 
                 <div className="grid grid-cols-3 gap-2 pt-1">
@@ -843,11 +846,11 @@ export default function App() {
                   <button onClick={doTG} className="inline-flex items-center justify-center gap-1.5 bg-[#229ED9] text-white rounded-xl py-3 text-[12px] font-bold hover:scale-[1.02] active:scale-[0.98] transition">
                     <IcoTG/> Telegram
                   </button>
-                  <button onClick={doEmail} className="inline-flex items-center justify-center gap-1.5 bg-[#4361EE] text-white rounded-xl py-3 text-[12px] font-bold hover:scale-[1.02] active:scale-[0.98] transition">
+                  <button onClick={doEmail} className="inline-flex items-center justify-center gap-1.5 bg-[#1E3A5F] text-white rounded-xl py-3 text-[12px] font-bold hover:scale-[1.02] active:scale-[0.98] transition">
                     <IcoMail/> Email
                   </button>
                 </div>
-                <p className="text-center text-[10px] text-[#9CA3AF]">🔒 Confidential · Reply within 30 min · Genuine products</p>
+                <p className="text-center text-[10px] text-slate-400">🔒 Confidential · Reply within 30 min · Genuine products</p>
               </div>
             </div>
           </div>
